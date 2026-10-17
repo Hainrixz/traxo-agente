@@ -3754,3 +3754,45 @@ body.touring .sheet .body {
 .chip-tabs-wrap {
   min-width: 0;
 }
+
+/* ---------- Páginas construidas ---------- */
+.built-list {
+  display: grid;
+  gap: 16px;
+}
+.built-card {
+  display: grid;
+  grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.built-shot {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  display: block;
+}
+.page-fallback {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  text-align: center;
+  padding: 8px;
+}
+.page-fallback img {
+  max-width: 100%;
+  max-height: 560px;
+  border-radius: var(--r-sm);
+}
+.btn.primary,
+a.btn {
+  text-decoration: none;
+}
+@media (max-width: 700px) {
+  .built-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

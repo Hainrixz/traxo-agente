@@ -420,3 +420,14 @@ export type SiteProject = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type BuiltPage = {
+  id: string;
+  name: string;
+  description: string;
+  url: string;
+  repo?: string;
+  shots: { pc: string; mobile: string };
+  tools: string[];
+  kind: "referencia";
+};

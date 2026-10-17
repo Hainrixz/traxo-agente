@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { del, download, getText, post, useResource } from "./api.ts";
+import { useEffect, useRef, useState } from "react";
+import { del, download, get, getText, post, useResource } from "./api.ts";
 import { EmptyState } from "./components.tsx";
 import { dateEs } from "./format.ts";
-import type { SiteDesign, SiteProject, StoreStatus } from "./types.ts";
+import type { BuiltPage, SiteDesign, SiteProject, StoreStatus } from "./types.ts";
 import { Banner, Button, Icon, Tabs, type Tone, ToneBadge } from "./ui.tsx";
 import type { Ctx } from "./views.tsx";
 
@@ -129,6 +129,7 @@ export function Constructor({ ctx }: { ctx: Ctx }) {
           }}
         />
       )}
+      <PaginasConstruidas ctx={ctx} />
       {!list.data && !list.error && <div className="skel" style={{ height: 240 }} />}
       {list.error && (
         <section className="card">
@@ -629,5 +630,150 @@ function Detalle({
         </section>
       </div>
     </div>
+  );
+}
+
+/** Marco con la página publicada. Si no carga en unos segundos (o el sitio no permite iframe), deja la captura y el enlace. */
+function PageViewer({ page, device }: { page: BuiltPage; device: string }) {
+  const [state, setState] = useState<"cargando" | "listo" | "falla">("cargando");
+  const timer = useRef<number | undefined>(undefined);
+  // Chromium dispara «load» aunque el sitio rechace el marco: por eso se le pregunta antes al servidor.
+  useEffect(() => {
+    let off = false;
+    get<{ embeddable: boolean }>(`/api/builder/pages/${page.id}/embeddable`)
+      .then((r) => !off && !r.embeddable && setState("falla"))
+      .catch(() => {});
+    fetch(page.url, { mode: "no-cors", referrerPolicy: "no-referrer" }).catch(
+      () => !off && setState("falla"),
+    );
+    return () => {
+      off = true;
+    };
+  }, [page.id, page.url]);
+  useEffect(() => {
+    setState("cargando");
+    timer.current = window.setTimeout(() => setState((s) => (s === "listo" ? s : "falla")), 8000);
+    return () => window.clearTimeout(timer.current);
+  }, [page.url]);
+  return (
+    <div className={`preview-stage ${device}`}>
+      {state === "falla" ? (
+        <div className="page-fallback">
+          <img
+            src={device === "phone" ? page.shots.mobile : page.shots.pc}
+            alt={`Captura de ${page.name}`}
+            loading="lazy"
+          />
+          <p className="caption">
+            No pude mostrar la página aquí. Esta es una captura;{" "}
+            <a href={page.url} target="_blank" rel="noopener noreferrer">
+              ábrela en una pestaña nueva
+            </a>
+            .
+          </p>
+        </div>
+      ) : (
+        <iframe
+          title={`Vista previa de ${page.name}`}
+          className="preview-frame"
+          src={page.url}
+          loading="lazy"
+          referrerPolicy="no-referrer"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          onLoad={() => {
+            window.clearTimeout(timer.current);
+            setState((s) => (s === "falla" ? s : "listo"));
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+/** Páginas ya construidas y publicadas. En la demo trae una de referencia; en una cuenta nueva sale vacío. */
+function PaginasConstruidas({ ctx }: { ctx: Ctx }) {
+  const pages = useResource<BuiltPage[]>("/api/builder/pages", ctx.tick).data;
+  const [open, setOpen] = useState<string | null>(null);
+  const [device, setDevice] = useState("pc");
+  if (!pages) return null;
+  const current = pages.find((p) => p.id === open);
+  return (
+    <section className="card stack" aria-labelledby="pc-h" data-tour="built-pages">
+      <div className="row between">
+        <h2 id="pc-h">Páginas construidas</h2>
+        <span className="caption">
+          {pages.length} {pages.length === 1 ? "página" : "páginas"}
+        </span>
+      </div>
+      {pages.length === 0 ? (
+        <EmptyState
+          icon="layout"
+          title="Aún no has construido páginas"
+          text="Cuando construyas una landing o una tienda con el Constructor y Claude, la verás aquí con su vista previa."
+        />
+      ) : (
+        <div className="built-list">
+          {pages.map((p) => (
+            <article key={p.id} className="built-card">
+              <img
+                className="built-shot"
+                src={p.shots.pc}
+                alt={`Captura de ${p.name}`}
+                loading="lazy"
+              />
+              <div className="stack tight">
+                <div className="row" style={{ gap: 8, flexWrap: "wrap" }}>
+                  <h3 style={{ margin: 0 }}>{p.name}</h3>
+                  <ToneBadge tone="agent">Referencia</ToneBadge>
+                </div>
+                <p style={{ margin: 0 }}>{p.description}</p>
+                <span className="chips-static" aria-label="Herramientas usadas">
+                  {p.tools.map((t) => (
+                    <span key={t} className="tool">
+                      {t}
+                    </span>
+                  ))}
+                </span>
+                <div className="row" style={{ gap: 8, flexWrap: "wrap" }}>
+                  <a className="btn primary" href={p.url} target="_blank" rel="noopener noreferrer">
+                    Abrir página
+                  </a>
+                  <Button onClick={() => setOpen(open === p.id ? null : p.id)}>
+                    {open === p.id ? "Ocultar vista previa" : "Ver vista previa"}
+                  </Button>
+                  {p.repo && (
+                    <a
+                      className="btn ghost"
+                      href={p.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Código
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+      {current && (
+        <div className="stack tight">
+          <div className="row between">
+            <h3 style={{ margin: 0 }}>Vista previa · {current.name}</h3>
+            <Tabs
+              label="Dispositivo"
+              value={device}
+              onChange={setDevice}
+              items={[
+                ["pc", "Computador"],
+                ["phone", "Celular"],
+              ]}
+            />
+          </div>
+          <PageViewer page={current} device={device} />
+        </div>
+      )}
+    </section>
   );
 }
