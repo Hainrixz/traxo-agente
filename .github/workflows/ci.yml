@@ -41,7 +41,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Configurar como lo haría el asistente
-        run: node scripts/setup.mjs --answers '{"adminEmail":"ci@example.co","platform":"shopify","storeDomain":"tienda.myshopify.com"}'
+        run: node scripts/setup.mjs --answers '{"adminEmail":"ci@example.co","platform":"none"}'
       - name: Doctor (sin red)
         run: node scripts/doctor.mjs --offline
       - name: Arrancar y comprobar
