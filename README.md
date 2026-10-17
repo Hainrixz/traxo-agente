@@ -237,3 +237,8 @@ pnpm demo:media https://tu-app.up.railway.app
 ```
 
 Es idempotente (repetirlo no duplica), entra con la cuenta admin de ejemplo y no llama a Higgsfield ni gasta créditos. En la demo la conexión con Higgsfield es **simulada** y se rotula así en pantalla; con una cuenta real se conecta desde Claude (`/traxo:campana`). En Railway, monta un volumen en `/data` para que los archivos sobrevivan a los redeploys (`TRAXO_MEDIA_DIR=/data/media`).
+
+## Páginas construidas (Constructor)
+La sección «Páginas construidas» del Constructor muestra páginas ya hechas y publicadas, con captura, herramientas usadas, enlace y vista previa en un marco (con respaldo a la captura si el sitio no permite iframe). En la demo trae una de **referencia** (Claudio Dogs); una cuenta nueva la ve vacía.
+
+Para sumar otra: (1) deja su captura de escritorio y de celular en `apps/dashboard/public/paginas/`; (2) agrega un objeto a `BUILT_PAGES` en `apps/worker/src/built-pages.ts` (`id`, `name`, `description`, `url` https, `repo`, `shots`, `tools`). Es el único lugar que hay que tocar. El panel no define CSP, así que no hay que abrir ningún dominio.
