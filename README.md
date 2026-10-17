@@ -227,3 +227,13 @@ MIT licensed.
 
 - **Uso agéntico** (panel): cuántas acciones hizo el agente solo, cuántas horas de trabajo manual evitó (estimado), gasto en IA y créditos, mensajes por canal y creativos. Costos ajustables: `TRAXO_AI_USD_PER_MTOK_IN/OUT`, `TRAXO_USD_COP`, `TRAXO_HOUR_COP`, `TRAXO_AI_BUDGET_USD_MONTH`.
 - **Constructor** (panel y `/traxo:constructor`): genera un tema de Shopify (Online Store 2.0, español, accesible) con tu catálogo, vista previa, descarga en .zip y flujo hacia GitHub privado y Shopify sin publicar. Otras plataformas reciben un sitio estático y el diseño en JSON.
+
+## Material de demo para la Biblioteca (solo modo demo)
+Para ver la Biblioteca de creativos llena, deja tus archivos en `demo-media/` (imágenes y videos más un `catalogo.json` con `archivo`, `tipo`, `titulo`, `rol`, `producto` y `fuente`). Esa carpeta está en `.gitignore`: **no se sube al repositorio** (suelen ser marcas de terceros). Luego, con el servidor en modo demo (`TRAXO_DEMO=1`):
+
+```bash
+pnpm demo:media                      # contra http://localhost:8787
+pnpm demo:media https://tu-app.up.railway.app
+```
+
+Es idempotente (repetirlo no duplica), entra con la cuenta admin de ejemplo y no llama a Higgsfield ni gasta créditos. En la demo la conexión con Higgsfield es **simulada** y se rotula así en pantalla; con una cuenta real se conecta desde Claude (`/traxo:campana`). En Railway, monta un volumen en `/data` para que los archivos sobrevivan a los redeploys (`TRAXO_MEDIA_DIR=/data/media`).
