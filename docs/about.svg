@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 560" width="1280" height="560" role="img" aria-labelledby="t d">
+  <title id="t">Qué hace Traxo</title>
+  <desc id="d">Seis capacidades: logística, tracking, marketing con tus propios creativos, mensajes en WhatsApp, Instagram y Messenger, uso agéntico y constructor de tienda.</desc>
+  <style>
+    text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .rise { opacity: 0; animation: rise .8s cubic-bezier(.23,1,.32,1) forwards; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .c1 { animation-delay: .05s } .c2 { animation-delay: .15s } .c3 { animation-delay: .25s } .c4 { animation-delay: .35s } .c5 { animation-delay: .45s } .c6 { animation-delay: .55s }
+    .ico { animation: pulse 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .p1 { animation-delay: 0s } .p2 { animation-delay: -.7s } .p3 { animation-delay: -1.4s } .p4 { animation-delay: -2.1s } .p5 { animation-delay: -2.8s } .p6 { animation-delay: -3.4s }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    .flow { stroke-dasharray: 6 8; animation: flow 1.6s linear infinite; }
+    @keyframes flow { to { stroke-dashoffset: -28; } }
+    @media (prefers-reduced-motion: reduce) { .rise, .ico, .flow { animation: none !important; opacity: 1; } }
+  </style>
+  <rect width="1280" height="560" rx="28" fill="#111"/>
+  <rect x=".5" y=".5" width="1279" height="559" rx="28" fill="none" stroke="#2c2c2c"/>
+  <text x="64" y="84" font-size="15" font-weight="700" fill="#FFC800" letter-spacing="2">QUÉ HACE TRAXO</text>
+  <text x="64" y="132" font-size="38" font-weight="800" fill="#F5F2EA" letter-spacing="-1">Todo el ciclo de tu tienda, en un solo lugar.</text>
+
+  <g transform="translate(64 168)">
+    <g transform="translate(0 0)"><g class="rise c1"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
+      <g transform="translate(26 26)"><g class="ico p1"><rect width="44" height="44" rx="12" fill="#FFC800"/><path d="M12 24h20M26 17l7 7-7 7" stroke="#111" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Logística</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Cotiza, elige transportadora y genera la guía.</text></g></g>
+    <g transform="translate(392 0)"><g class="rise c2"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
+      <g transform="translate(26 26)"><g class="ico p2"><rect width="44" height="44" rx="12" fill="#FFC800"/><circle cx="22" cy="22" r="8" fill="none" stroke="#111" stroke-width="3"/><path d="M22 6v6M22 32v6M6 22h6M32 22h6" stroke="#111" stroke-width="3" stroke-linecap="round"/></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Tracking y novedades</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Vigila cada guía y resuelve lo que falla.</text></g></g>
+    <g transform="translate(784 0)"><g class="rise c3"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
+      <g transform="translate(26 26)"><g class="ico p3"><rect width="44" height="44" rx="12" fill="#FFC800"/><path d="M11 29V15l22-5v24z" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Marketing con lo tuyo</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Anuncios con tus videos UGC. Nacen en pausa.</text></g></g>
+    <g transform="translate(0 174)"><g class="rise c4"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
+      <g transform="translate(26 26)"><g class="ico p4"><rect width="44" height="44" rx="12" fill="#FFC800"/><path d="M11 12h22v16H20l-7 5v-5h-2z" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Mensajes</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">WhatsApp, Instagram y Messenger juntos.</text></g></g>
+    <g transform="translate(392 174)"><g class="rise c5"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
+      <g transform="translate(26 26)"><g class="ico p5"><rect width="44" height="44" rx="12" fill="#FFC800"/><path d="M24 8L13 25h8l-2 11 11-17h-8z" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Uso agéntico</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Cuánto trabajó el agente y cuánto costó.</text></g></g>
+    <g transform="translate(784 174)"><g class="rise c6"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
+      <g transform="translate(26 26)"><g class="ico p6"><rect width="44" height="44" rx="12" fill="#FFC800"/><path d="M10 12h24v20H10zM10 19h24M18 19v13" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Constructor de tienda</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Un tema de Shopify con tu catálogo real.</text></g></g>
+  </g>
+  <line class="flow" x1="64" y1="524" x2="1216" y2="524" stroke="#FFC800" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
+</svg>

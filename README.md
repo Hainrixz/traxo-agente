@@ -1,8 +1,34 @@
-# Traxo
+<p align="center">
+  <img src="docs/hero.svg" alt="Traxo: tu e-commerce en Colombia, operado desde Claude" width="100%">
+</p>
 
-**ES** · [English below](#english)
+<p align="center">
+  <a href="https://github.com/Hainrixz/traxo-agente/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Hainrixz/traxo-agente/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="Licencia MIT" src="https://img.shields.io/badge/licencia-MIT-FFC800"></a>
+  <img alt="Node 24" src="https://img.shields.io/badge/node-%E2%89%A524-111111">
+  <img alt="Plugin de Claude Code" src="https://img.shields.io/badge/plugin-Claude%20Code-111111">
+  <img alt="PRs bienvenidos" src="https://img.shields.io/badge/PRs-bienvenidos-FFC800">
+</p>
 
-Traxo es un agente open source que opera tu e-commerce en Colombia desde Claude. Cuando entra un pedido cotiza entre transportadoras, elige la mejor (y te explica por qué), confirma por WhatsApp las contraentregas de riesgo, genera la guía, la escribe en tu tienda, vigila el envío y atiende las novedades. También audita tu tienda, arma anuncios con tus propios videos UGC y fotos de producto, te dice qué anuncio trajo qué venta y cuida a tus clientes con su consentimiento. **Todo lo que pasa en tu negocio queda en un solo lugar, y tiene un agente al que le puedes preguntar.**
+<p align="center">
+  <b>ES</b> · <a href="#english">English</a> ·
+  <a href="#instálalo-con-un-asistente-2-comandos-y-una-conversación">Instalar</a> ·
+  <a href="#qué-hay-en-el-panel">Panel</a> ·
+  <a href="#en-la-nube-railway--postgres">Railway</a> ·
+  <a href="CONTRIBUTING.md">Contribuir</a>
+</p>
+
+## Acerca de Traxo
+
+<p align="center">
+  <img src="docs/about.svg" alt="Qué hace Traxo: logística, tracking, marketing, mensajes, uso agéntico y constructor de tienda" width="100%">
+</p>
+
+Traxo es un agente **open source** que opera tu e-commerce en Colombia desde Claude. Cuando entra un pedido cotiza entre transportadoras, elige la mejor (y te explica por qué), confirma por WhatsApp las contraentregas de riesgo, genera la guía, la escribe en tu tienda, vigila el envío y atiende las novedades. También audita tu tienda, arma anuncios con tus propios videos UGC y fotos de producto, te dice qué anuncio trajo qué venta, cuida a tus clientes con su consentimiento y te muestra cuánto trabajó el agente y cuánto costó. **Todo lo que pasa en tu negocio queda en un solo lugar, y tiene un agente al que le puedes preguntar.**
+
+- **Es tuyo:** corre en tu computador o en tu Railway. Tus datos y tus llaves no salen de tu servidor.
+- **Es honesto:** lo que no se puede medir sale como `N/A`; lo que gasta, publica o borra espera tu sí; las campañas nacen en pausa.
+- **Es para la comunidad:** MIT, sin cuentas ni servicios propios que pagar. [Contribuye](CONTRIBUTING.md), abre un issue o cuéntanos cómo lo usas.
 
 ## Instálalo con un asistente (2 comandos y una conversación)
 
@@ -63,6 +89,8 @@ El menú de la izquierda tiene lo que usas a diario. Lo que se configura vive en
 | **Marketing** | Campañas con ROAS real, creativos, **biblioteca de tus videos UGC y fotos de producto**, asistente de campañas (copy dentro de los límites de cada plataforma) y qué empujar según margen |
 | **Tienda y SEO** | Auditoría de SEO, visibilidad en IA y diseño. El puntaje se calcula **sobre los checks que se pudieron medir** (los N/A no cuentan) |
 | **Reportes** | Ventas, qué anuncio trajo qué venta, logística por transportadora y recaudo |
+| **Constructor** | Diseña tu tienda: genera un **tema de Shopify** (Online Store 2.0, en español, accesible) con tu catálogo real, vista previa en computador y celular, descarga en .zip y flujo hacia GitHub privado y Shopify **sin publicar** |
+| **Uso agéntico** | Cuánto trabajó el agente (acciones, horas de trabajo manual evitadas, estimadas), cuánto costó (IA y créditos) y por canal de mensajes; con presupuesto opcional |
 | **Más → Actividad y Conexiones** | Todo lo que hace el agente, en orden, y qué está conectado (tienda, transportadoras, Zernio, anuncios) |
 
 ## Cómo funciona el seguimiento
@@ -92,7 +120,7 @@ Los mensajes aparecen en **Mensajes** y el agente los atiende. Traxo también es
 
 ## Úsalo dentro de Claude
 
-Con el plugin instalado tienes **12 skills** (`instalar`, `constructor`, `start`, `conectar`, `pedidos`, `envios`, `seguimiento`, `marketing`, `campana`, `clientes`, `tienda`, `reportes`), **4 agentes** y un servidor MCP con **41 herramientas** en español. Las que escriben, gastan o borran piden `confirm: true`; sin él devuelven un borrador. Pídele lo que quieras: «audita mi tienda», «qué anuncio funciona», «arma una campaña con mis videos UGC».
+Con el plugin instalado tienes **12 skills** (`instalar`, `constructor`, `start`, `conectar`, `pedidos`, `envios`, `seguimiento`, `marketing`, `campana`, `clientes`, `tienda`, `reportes`), **4 agentes** y un servidor MCP con **41 herramientas** en español. Las que escriben, gastan o borran piden `confirm: true`; sin él devuelven un borrador. Pídele lo que quieras: «audita mi tienda», «qué anuncio funciona», «arma una campaña con mis videos UGC», «diseña mi tienda» (`/traxo:constructor`), «cuánto ha trabajado el agente».
 
 ## IA con tu llave de Claude (opcional) y seguridad
 
@@ -161,15 +189,17 @@ claude mcp add --transport http traxo https://TU-DOMINIO/mcp --header "Authoriza
 | `ORIGIN_*` | Dirección de origen de los envíos |
 | `ANTHROPIC_API_KEY`, `TRAXO_AGENT_MODEL` | Opcional: IA para el agente, las respuestas de clientes y el copy de campañas |
 | `TRAXO_AI`, `TRAXO_AI_PER_MIN`, `TRAXO_AI_PER_STORE_DAILY`, `TRAXO_AI_GLOBAL_DAILY` | Frenos de gasto de la IA |
+| `TRAXO_AI_USD_PER_MTOK_IN`, `TRAXO_AI_USD_PER_MTOK_OUT`, `TRAXO_USD_PER_CREDIT`, `TRAXO_USD_COP`, `TRAXO_HOUR_COP`, `TRAXO_AI_BUDGET_USD_MONTH` | Estimados del panel de Uso agéntico: precios de IA, créditos, dólar, valor de la hora y presupuesto mensual opcional |
 | `TRAXO_RATE_PER_MIN` | Peticiones por minuto y por IP |
 | `TRAXO_MEDIA_DIR` | Dónde se guardan los archivos de la biblioteca |
 | `TRAXO_AUDIT_LIVE=1` | Permite auditar URLs públicas reales |
+| `TRAXO_DEMO=1` | **Solo pruebas**: datos de ejemplo y registro abierto ([`docs/modo-demo.md`](docs/modo-demo.md)). No lo uses con datos reales |
 
 Lo que falta probar contra servicios reales está en [`docs/credenciales-pendientes.md`](docs/credenciales-pendientes.md).
 
 ## Qué funciona hoy y qué depende de tus credenciales
 
-**Funciona sin credenciales:** el pipeline de pedidos, el selector de transportadora, la confirmación de contraentrega con prepago, el seguimiento y las novedades, las aprobaciones, el agente del panel, la bandeja de mensajes, la biblioteca de creativos, el asistente de campañas, audiencias, las auditorías (con protección contra SSRF), los reportes, el plugin y el servidor MCP.
+**Funciona sin credenciales:** el pipeline de pedidos, el Constructor de tienda (genera el tema de Shopify), el panel de Uso agéntico, el selector de transportadora, la confirmación de contraentrega con prepago, el seguimiento y las novedades, las aprobaciones, el agente del panel, la bandeja de mensajes, la biblioteca de creativos, el asistente de campañas, audiencias, las auditorías (con protección contra SSRF), los reportes, el plugin y el servidor MCP.
 
 **El código existe pero falta probarlo contra el servicio real** (necesita tus credenciales): Shopify, Tiendanube, WooCommerce, Envia.com (sandbox), Zernio y Wompi.
 
@@ -191,13 +221,18 @@ scripts/                                    setup, doctor y railway-vars (sin im
 apps/worker        API, sesiones, webhooks, agente del panel, tracking, /mcp  (Hono)
 apps/mcp-server    Herramientas MCP
 apps/dashboard     Panel (Vite + React)
-packages/          core · db (Prisma 7) · commerce · carriers · messaging · payments · audit · geo-co
+packages/          core · db (Prisma 7) · commerce · carriers · messaging · payments · audit · storefront · geo-co
 docs/              integraciones, credenciales pendientes, arquitectura
 ```
 
 Desarrollo: `pnpm test` · `pnpm lint` · `pnpm typecheck` · `pnpm dev` (API) y `pnpm dev:ui` (panel con recarga).
 
-Licencia MIT.
+## Contribuir, seguridad y licencia
+
+- [`CONTRIBUTING.md`](CONTRIBUTING.md): entorno de desarrollo y reglas. [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
+- Vulnerabilidades: [`SECURITY.md`](SECURITY.md) (en privado, no en un issue).
+- Cambios: [`CHANGELOG.md`](CHANGELOG.md). Modo demo y material de ejemplo: [`docs/modo-demo.md`](docs/modo-demo.md).
+- Licencia [MIT](LICENSE).
 
 ---
 
@@ -215,30 +250,10 @@ claude        # then type: /traxo:instalar
 
 The wizard asks where to run it (your computer or Railway), which store platform you use, your carriers, WhatsApp/Instagram/Messenger (Zernio), Wompi and an optional Claude key. It writes your `.env`, generates the internal secrets, tells you where to get each third-party key (you paste them into `.env` yourself: secrets never go through the chat), runs `pnpm doctor`, starts or deploys it, and gives you the webhook URLs. Manual install is in the Spanish section above.
 
-**Panel:** Home, Agent (chat with your business data), Orders, Shipments, Approvals, Messages (WhatsApp, Instagram and Messenger in one inbox), Customers, Marketing (campaigns, creatives, UGC library), Store & SEO, Reports. Settings, limits and connections live in the profile menu (bottom left).
+**Panel:** Home, Agent (chat with your business data), Orders, Shipments, Approvals, Messages (WhatsApp, Instagram and Messenger in one inbox), Customers, Marketing (campaigns, creatives, UGC library), Store & SEO, Reports, **Builder** (generates a Shopify theme from your catalog; never publishes it) and **Agent usage** (what the agent did, what it cost, hours saved: estimates). Settings, limits and connections live in the profile menu (bottom left).
 
 **Cloud:** Railway + Postgres (`railway.json`); `node scripts/railway-vars.mjs` pushes your `.env` without printing values. **AI:** optional `ANTHROPIC_API_KEY`, server-side only, with spend limits. **Security:** security headers, per-IP rate limits, 1 MB body cap, `/mcp` closed without a token, signed webhooks, per-store isolation.
 
 **Status:** works without credentials: the order pipeline, carrier selection, COD confirmation, tracking, approvals, the panel agent, the inbox, the creative library, campaigns, audits and reports. Code exists but is untested against live services: Shopify, Tiendanube, WooCommerce, Envia.com, Zernio, Wompi. No real adapter yet: 99envios and direct Coordinadora / Servientrega / Interrapidísimo / Envía (simulators).
 
-MIT licensed.
-
-## Uso agéntico y constructor de tienda
-
-- **Uso agéntico** (panel): cuántas acciones hizo el agente solo, cuántas horas de trabajo manual evitó (estimado), gasto en IA y créditos, mensajes por canal y creativos. Costos ajustables: `TRAXO_AI_USD_PER_MTOK_IN/OUT`, `TRAXO_USD_COP`, `TRAXO_HOUR_COP`, `TRAXO_AI_BUDGET_USD_MONTH`.
-- **Constructor** (panel y `/traxo:constructor`): genera un tema de Shopify (Online Store 2.0, español, accesible) con tu catálogo, vista previa, descarga en .zip y flujo hacia GitHub privado y Shopify sin publicar. Otras plataformas reciben un sitio estático y el diseño en JSON.
-
-## Material de demo para la Biblioteca (solo modo demo)
-Para ver la Biblioteca de creativos llena, deja tus archivos en `demo-media/` (imágenes y videos más un `catalogo.json` con `archivo`, `tipo`, `titulo`, `rol`, `producto` y `fuente`). Esa carpeta está en `.gitignore`: **no se sube al repositorio** (suelen ser marcas de terceros). Luego, con el servidor en modo demo (`TRAXO_DEMO=1`):
-
-```bash
-pnpm demo:media                      # contra http://localhost:8787
-pnpm demo:media https://tu-app.up.railway.app
-```
-
-Es idempotente (repetirlo no duplica), entra con la cuenta admin de ejemplo y no llama a Higgsfield ni gasta créditos. En la demo la conexión con Higgsfield es **simulada** y se rotula así en pantalla; con una cuenta real se conecta desde Claude (`/traxo:campana`). En Railway, monta un volumen en `/data` para que los archivos sobrevivan a los redeploys (`TRAXO_MEDIA_DIR=/data/media`).
-
-## Páginas construidas (Constructor)
-La sección «Páginas construidas» del Constructor muestra páginas ya hechas y publicadas, con captura, herramientas usadas, enlace y vista previa en un marco (con respaldo a la captura si el sitio no permite iframe). En la demo trae una de **referencia** (Claudio Dogs); una cuenta nueva la ve vacía.
-
-Para sumar otra: (1) deja su captura de escritorio y de celular en `apps/dashboard/public/paginas/`; (2) agrega un objeto a `BUILT_PAGES` en `apps/worker/src/built-pages.ts` (`id`, `name`, `description`, `url` https, `repo`, `shots`, `tools`). Es el único lugar que hay que tocar. El panel no define CSP, así que no hay que abrir ningún dominio.
+**Contributing:** see [CONTRIBUTING.md](CONTRIBUTING.md) · **Security:** [SECURITY.md](SECURITY.md) · MIT licensed.
