@@ -5,6 +5,13 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   checks:
     name: Lint, tipos, tests y build
@@ -21,3 +28,25 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm build
+
+  instalacion:
+    name: Instalación desde cero (asistente, doctor y arranque)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Configurar como lo haría el asistente
+        run: node scripts/setup.mjs --answers '{"adminEmail":"ci@example.co","platform":"shopify","storeDomain":"tienda.myshopify.com"}'
+      - name: Doctor (sin red)
+        run: node scripts/doctor.mjs --offline
+      - name: Arrancar y comprobar
+        run: |
+          PORT=8799 pnpm start > /tmp/traxo.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf http://localhost:8799/health && break; sleep 1; done
+          curl -sf http://localhost:8799/health | grep '"ok":true'
+          test "$(curl -s -o /dev/null -w '%{http_code}' -X POST http://localhost:8799/api/auth/signup -H 'content-type: application/json' -d '{}')" = "403"

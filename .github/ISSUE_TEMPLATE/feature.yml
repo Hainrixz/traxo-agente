@@ -1,0 +1,24 @@
+name: Proponer una mejora
+description: Una idea para Traxo (integración, pantalla, herramienta…)
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Qué problema resuelve y para quién
+    validations: { required: true }
+  - type: textarea
+    id: idea
+    attributes:
+      label: Cómo imaginas que funcione
+    validations: { required: true }
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas que consideraste
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Participación
+      options:
+        - label: Me gustaría implementarlo yo

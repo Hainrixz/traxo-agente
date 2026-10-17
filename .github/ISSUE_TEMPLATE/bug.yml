@@ -1,0 +1,37 @@
+name: Reportar un fallo
+description: Algo no funciona como dice la documentación
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "No pegues llaves, tokens ni datos de clientes. `pnpm doctor` no imprime valores y es seguro compartirlo."
+  - type: textarea
+    id: que
+    attributes:
+      label: Qué pasó y qué esperabas
+    validations: { required: true }
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos para reproducirlo
+      placeholder: "1. ...\n2. ..."
+    validations: { required: true }
+  - type: dropdown
+    id: donde
+    attributes:
+      label: Dónde lo corres
+      options: [Local (PGlite), Local (Postgres), Railway, Otro]
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes:
+      label: Commit o versión y sistema (Node, SO)
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Salida de `pnpm doctor`
+      render: text
+  - type: textarea
+    id: logs
+    attributes:
+      label: Registros o capturas (sin secretos)
