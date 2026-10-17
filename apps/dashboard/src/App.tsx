@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { get, post, useAgentFeed, useResource } from "./api.ts";
 import { AuthScreen } from "./auth.tsx";
 import { LoadingShell, Sheet } from "./components.tsx";
@@ -529,20 +530,37 @@ function ProfileMenu({
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState<React.CSSProperties>({});
   const box = useRef<HTMLDivElement>(null);
+  const menu = useRef<HTMLDivElement>(null);
   const first = useRef<HTMLButtonElement>(null);
+
+  // El menú vive en <body> (portal): dentro de la barra lateral, que es sticky y crea su propio contexto de apilamiento,
+  // el contenido de la página lo tapaba y el riel de íconos lo recortaba. Se coloca junto al botón y siempre dentro de la ventana.
+  const place = useCallback(() => {
+    const r = box.current?.getBoundingClientRect();
+    if (!r) return;
+    const margin = 12;
+    const rail = r.width < 120;
+    const width = Math.min(rail ? 296 : Math.max(r.width, 264), innerWidth - margin * 2);
+    const left = Math.min(
+      Math.max(margin, rail ? r.right + margin : r.left),
+      innerWidth - margin - width,
+    );
+    const bottom = rail
+      ? Math.max(margin, innerHeight - r.bottom)
+      : Math.max(margin, innerHeight - r.top + 8);
+    setPos({ left, width, bottom, maxHeight: innerHeight - bottom - margin });
+  }, []);
+
+  useLayoutEffect(() => {
+    if (open) place();
+  }, [open, place]);
+
   useEffect(() => {
     if (!open) return;
-    // La barra lateral recorta lo que se sale de ella: el menú se coloca con position: fixed junto al botón.
-    const r = box.current?.getBoundingClientRect();
-    if (r)
-      setPos(
-        r.width < 120
-          ? { left: r.right + 12, bottom: Math.max(12, innerHeight - r.bottom) }
-          : { left: r.left, width: Math.max(r.width, 264), bottom: innerHeight - r.top + 8 },
-      );
     first.current?.focus();
     const away = (e: PointerEvent) => {
-      if (!box.current?.contains(e.target as Node)) setOpen(false);
+      const t = e.target as Node;
+      if (!box.current?.contains(t) && !menu.current?.contains(t)) setOpen(false);
     };
     const key = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -552,11 +570,13 @@ function ProfileMenu({
     };
     document.addEventListener("pointerdown", away);
     document.addEventListener("keydown", key);
+    addEventListener("resize", place);
     return () => {
       document.removeEventListener("pointerdown", away);
       document.removeEventListener("keydown", key);
+      removeEventListener("resize", place);
     };
-  }, [open]);
+  }, [open, place]);
   const pick = (fn: () => void) => () => {
     setOpen(false);
     fn();
@@ -568,84 +588,87 @@ function ProfileMenu({
     : "Administrador";
   return (
     <div className="profile" ref={box}>
-      {open && (
-        <div
-          className="profile-menu"
-          role="menu"
-          aria-label="Cuenta y configuración"
-          style={pos}
-          data-tour="profile-menu"
-        >
-          <div className="pm-head">
-            <span className="avatar" aria-hidden="true">
-              {initials}
-            </span>
-            <span className="pm-who">
-              <strong className="break">{account.name}</strong>
-              <span className="caption break">{account.email}</span>
-            </span>
-          </div>
-          <button
-            type="button"
-            role="menuitem"
-            className="pm-limits"
-            ref={first}
-            onClick={pick(() => go("ajustes"))}
+      {open &&
+        createPortal(
+          <div
+            className="profile-menu"
+            ref={menu}
+            role="menu"
+            aria-label="Cuenta y configuración"
+            style={pos}
+            data-tour="profile-menu"
           >
-            <span className="row between" style={{ flexWrap: "nowrap" }}>
-              <span className="row" style={{ gap: 6 }}>
-                <Icon name="spark" size={14} />
-                <strong>Autonomía {settings?.autonomy ?? "—"}</strong>
+            <div className="pm-head">
+              <span className="avatar" aria-hidden="true">
+                {initials}
               </span>
-              <span className="caption">Ajustar</span>
-            </span>
-            <span className="caption">
-              {settings
-                ? settings.autonomy === 1
-                  ? `Guías automáticas hasta ${cop(settings.maxAutoShipmentCost)}`
-                  : "Todo con tu aprobación"
-                : ""}
-            </span>
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            className="pm-item"
-            aria-current={view === "ajustes" ? "page" : undefined}
-            onClick={pick(() => go("ajustes"))}
-          >
-            <Icon name="settings" size={18} />
-            Ajustes y límites
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            className="pm-item"
-            aria-current={view === "conexiones" ? "page" : undefined}
-            onClick={pick(() => go("conexiones"))}
-          >
-            <Icon name="plug" size={18} />
-            Conexiones
-          </button>
-          <div className="pm-sep" role="separator" />
-          <button type="button" role="menuitem" className="pm-item" onClick={toggleTheme}>
-            <Icon name={theme === "dark" ? "sun" : "moon"} size={18} />
-            {theme === "dark" ? "Tema claro" : "Tema oscuro"}
-          </button>
-          {demo && (
-            <button type="button" role="menuitem" className="pm-item" onClick={pick(startTour)}>
-              <Icon name="play" size={18} />
-              Ver el recorrido guiado
+              <span className="pm-who">
+                <strong className="break">{account.name}</strong>
+                <span className="caption break">{account.email}</span>
+              </span>
+            </div>
+            <button
+              type="button"
+              role="menuitem"
+              className="pm-limits"
+              ref={first}
+              onClick={pick(() => go("ajustes"))}
+            >
+              <span className="row between" style={{ flexWrap: "nowrap" }}>
+                <span className="row" style={{ gap: 6 }}>
+                  <Icon name="spark" size={14} />
+                  <strong>Autonomía {settings?.autonomy ?? "—"}</strong>
+                </span>
+                <span className="caption">Ajustar</span>
+              </span>
+              <span className="caption">
+                {settings
+                  ? settings.autonomy === 1
+                    ? `Guías automáticas hasta ${cop(settings.maxAutoShipmentCost)}`
+                    : "Todo con tu aprobación"
+                  : ""}
+              </span>
             </button>
-          )}
-          {info.login && (
-            <button type="button" role="menuitem" className="pm-item" onClick={pick(onLogout)}>
-              <Icon name="logout" size={18} />
-              Cerrar sesión
+            <button
+              type="button"
+              role="menuitem"
+              className="pm-item"
+              aria-current={view === "ajustes" ? "page" : undefined}
+              onClick={pick(() => go("ajustes"))}
+            >
+              <Icon name="settings" size={18} />
+              Ajustes y límites
             </button>
-          )}
-        </div>
-      )}
+            <button
+              type="button"
+              role="menuitem"
+              className="pm-item"
+              aria-current={view === "conexiones" ? "page" : undefined}
+              onClick={pick(() => go("conexiones"))}
+            >
+              <Icon name="plug" size={18} />
+              Conexiones
+            </button>
+            <div className="pm-sep" role="separator" />
+            <button type="button" role="menuitem" className="pm-item" onClick={toggleTheme}>
+              <Icon name={theme === "dark" ? "sun" : "moon"} size={18} />
+              {theme === "dark" ? "Tema claro" : "Tema oscuro"}
+            </button>
+            {demo && (
+              <button type="button" role="menuitem" className="pm-item" onClick={pick(startTour)}>
+                <Icon name="play" size={18} />
+                Ver el recorrido guiado
+              </button>
+            )}
+            {info.login && (
+              <button type="button" role="menuitem" className="pm-item" onClick={pick(onLogout)}>
+                <Icon name="logout" size={18} />
+                Cerrar sesión
+              </button>
+            )}
+          </div>,
+          document.body,
+        )}
       <button
         type="button"
         className="profile-btn"
