@@ -5,6 +5,8 @@
  *  - interruptor: TRAXO_AI=off apaga todo.
  * Si algo falla o se agota el cupo, quien llama usa su respuesta de reglas: la IA suma, nunca es imprescindible.
  */
+import { reportUsage } from "./usage.ts";
+
 const MIN = 60_000;
 const DAY = 86_400_000;
 
@@ -64,6 +66,8 @@ export type ClaudeOpts = {
   user: string;
   history?: Array<{ role: "user" | "assistant"; content: string }>;
   maxTokens?: number;
+  /** Para qué se usa, para el panel de uso agéntico. */
+  feature?: string;
 };
 
 /** Una llamada a Claude. null si no hay cupo o falla (el llamador usa su plan B). */
@@ -90,7 +94,16 @@ export async function askClaude(storeId: string, o: ClaudeOpts): Promise<string 
       signal: AbortSignal.timeout(15_000),
     });
     if (!res.ok) return null;
-    const j = (await res.json()) as { content?: Array<{ type: string; text?: string }> };
+    const j = (await res.json()) as {
+      content?: Array<{ type: string; text?: string }>;
+      usage?: { input_tokens?: number; output_tokens?: number };
+    };
+    reportUsage(storeId, {
+      kind: "ia",
+      feature: o.feature ?? "Otros",
+      tokensIn: j.usage?.input_tokens,
+      tokensOut: j.usage?.output_tokens,
+    });
     return j.content?.find((b) => b.type === "text")?.text?.trim() || null;
   } catch {
     return null;

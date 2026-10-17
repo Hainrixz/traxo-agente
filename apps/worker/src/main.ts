@@ -5,6 +5,7 @@ import { registerApi } from "./api.ts";
 import { createApp } from "./app.ts";
 import { registerAssistantApi } from "./assistant.ts";
 import { mountAuth } from "./auth.ts";
+import { registerBuilderApi } from "./builder.ts";
 import { checkConfirmationTimeouts, markPaid } from "./confirmation.ts";
 import { registerGrowthApi } from "./growth.ts";
 import { handleInbound } from "./inbound.ts";
@@ -15,6 +16,7 @@ import { createRuntime } from "./runtime.ts";
 import { hardenApp } from "./security.ts";
 import { mountDashboard } from "./static.ts";
 import { ingestCarrierEvent, pollTracking } from "./tracking.ts";
+import { registerUsageApi } from "./usage-api.ts";
 
 // Los datos de ejemplo solo se cargan en modo demo (TRAXO_DEMO=1). Una instalación normal arranca limpia.
 const demo = isDemo();
@@ -65,6 +67,8 @@ registerApi(app, rt);
 registerGrowthApi(app, rt);
 registerAssistantApi(app, rt);
 registerMediaApi(app, rt);
+registerUsageApi(app, rt);
+registerBuilderApi(app, rt);
 mountMcp(app);
 mountDashboard(app);
 

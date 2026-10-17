@@ -1,3 +1,5 @@
+import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
+import { dirname, isAbsolute, join, relative, resolve } from "node:path";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { formatCOP } from "@traxo/core";
 import { z } from "zod";
@@ -50,6 +52,171 @@ export function registerGrowthTools(server: McpServer, api: TraxoClient): void {
   );
 
   server.registerTool(
+    "uso_agentico",
+    {
+      title: "Uso agéntico",
+      description:
+        "Resume cuánto trabajó el agente en un periodo: acciones automáticas, horas de trabajo manual evitadas (estimadas), llamadas a IA con su costo, mensajes por canal y creativos generados. Costos y horas son estimados; el retorno sale N/A si no hubo gasto.",
+      inputSchema: { dias: z.number().int().min(1).max(90).default(30).optional() },
+    },
+    wrap(async ({ dias }: { dias?: number }) => {
+      const u = await api.get<Json>(`/api/usage?days=${dias ?? 30}`);
+      const v = u.value as Json;
+      const c = u.cost as Json;
+      const ai = u.ai as Json;
+      const msgs = u.messages as Json;
+      return [
+        `Últimos ${u.days} días (estimado):`,
+        `- El agente hizo ${v.automatedActions} acciones solo (${pct(v.automationPct)} de automatización; ${v.humanSteps} pasos pidieron aprobación) y evitó unas ${v.hoursSaved} h de trabajo manual (${formatCOP(v.savedCop)}).`,
+        `- Gasto: ${formatCOP(c.totalCop)} (IA ${formatCOP(c.aiCop)}, créditos ${formatCOP(c.creditsCop)})${c.perOrderCop == null ? "" : `, ${formatCOP(c.perOrderCop)} por pedido`}. Retorno: ${v.returnPerPeso == null ? "N/A" : `${v.returnPerPeso}×`}.`,
+        `- IA: ${ai.calls} llamadas, ${pct(v.withoutAiPct)} de las decisiones sin IA.`,
+        `- Mensajes: ${msgs.total} (${(msgs.byChannel as Json[]).map((m) => `${m.channel} ${m.sent}`).join(", ") || "ninguno"}).`,
+        ...((u.tips as string[]) ?? []).map((t) => `- ${t}`),
+      ].join("\n");
+    }),
+  );
+
+  server.registerTool(
+    "disenar_tienda",
+    {
+      title: "Diseñar una tienda (constructor)",
+      description:
+        "Crea un diseño de tienda e-commerce listo para vender, a partir del catálogo real y el nombre de la tienda: portada, beneficios, productos, preguntas frecuentes, contraentrega y WhatsApp. Para Shopify genera un tema Online Store 2.0 completo en español; para otras plataformas, un sitio estático y el diseño en JSON. No publica nada: el diseño queda como borrador en Traxo (sección Constructor). No inventa reseñas ni cifras.",
+      inputSchema: {
+        estilo: z.enum(["calido", "limpio", "audaz", "premium"]).default("limpio").optional(),
+        tono: z.enum(["cercano", "profesional", "divertido"]).optional(),
+        plataforma: z.enum(["shopify", "tiendanube", "woocommerce", "otra"]).optional(),
+        marca: z.string().max(60).optional(),
+        eslogan: z.string().max(120).optional(),
+        whatsapp: z
+          .string()
+          .max(20)
+          .optional()
+          .describe("Solo números con indicativo, ej. 573001112233."),
+        contraentrega: z.boolean().optional(),
+      },
+    },
+    wrap(
+      async (a: {
+        estilo?: string;
+        tono?: string;
+        plataforma?: string;
+        marca?: string;
+        eslogan?: string;
+        whatsapp?: string;
+        contraentrega?: boolean;
+      }) => {
+        const r = await api.post<Json>("/api/builder", {
+          style: a.estilo,
+          tone: a.tono,
+          platform: a.plataforma,
+          brand: a.marca,
+          tagline: a.eslogan,
+          whatsapp: a.whatsapp,
+          cod: a.contraentrega,
+        });
+        if (!r.ok) return r.message as string;
+        const p = r.project as Json;
+        const d = p.design as Json;
+        return `Listo: creé el diseño «${p.name}» (${p.platform}, estilo ${d.style}) con ${(d.sections as string[]).length} secciones y ${(d.products as unknown[]).length} productos reales. Id: ${p.id}. Míralo en Traxo → Constructor, o exporta los archivos con exportar_tema.`;
+      },
+    ),
+  );
+
+  server.registerTool(
+    "listar_disenos",
+    {
+      title: "Listar diseños de tienda",
+      description:
+        "Lista los diseños del constructor con su plataforma y estado (borrador, generado, en GitHub o subido).",
+      inputSchema: {},
+    },
+    wrap(async () => {
+      const rows = await api.get<Json[]>("/api/builder");
+      if (!rows.length) return "Todavía no hay diseños. Crea uno con disenar_tienda.";
+      return rows
+        .map(
+          (p) =>
+            `- ${p.id} · ${p.name} · ${p.platform} · ${p.status}${p.githubUrl ? ` · ${p.githubUrl}` : ""}`,
+        )
+        .join("\n");
+    }),
+  );
+
+  server.registerTool(
+    "exportar_tema",
+    {
+      title: "Exportar el tema a una carpeta",
+      description:
+        "Escribe los archivos del diseño (tema de Shopify o sitio estático) en una carpeta NUEVA o vacía dentro del directorio actual, y los revisa. Después se puede refinar con las skills de diseño, subir a GitHub (privado) y a Shopify SIN publicar. No sobrescribe nada existente.",
+      inputSchema: {
+        diseno_id: z.string(),
+        carpeta: z.string().default("tienda-traxo").optional(),
+        confirm: z.boolean().default(false).optional(),
+      },
+    },
+    wrap(
+      async ({
+        diseno_id,
+        carpeta,
+        confirm,
+      }: {
+        diseno_id: string;
+        carpeta?: string;
+        confirm?: boolean;
+      }) => {
+        const b = await api.get<{
+          name: string;
+          platform: string;
+          files: Record<string, string>;
+          problems: string[];
+        }>(`/api/builder/${encodeURIComponent(diseno_id)}/bundle`);
+        const root = resolve(process.cwd());
+        const dest = resolve(root, carpeta ?? "tienda-traxo");
+        const rel = relative(root, dest);
+        if (!rel || rel.startsWith("..") || isAbsolute(rel))
+          return "Esa carpeta queda fuera del directorio actual. Usa una carpeta dentro del proyecto, por ejemplo «tienda-traxo».";
+        if (existsSync(dest) && readdirSync(dest).length > 0)
+          return `La carpeta «${rel}» ya tiene archivos y no la sobrescribo. Elige otro nombre.`;
+        const names = Object.keys(b.files);
+        if (names.some((n) => isAbsolute(n) || n.split("/").includes("..")))
+          return "El servidor devolvió una ruta no válida; no escribí nada.";
+        if (!confirm)
+          return `Borrador: escribiría ${names.length} archivos (${b.platform}) en «${rel}». Revisión del tema: ${b.problems.length ? b.problems.join(" | ") : "sin problemas"}. Confirma con confirm: true.`;
+        for (const n of names) {
+          const f = join(dest, n);
+          mkdirSync(dirname(f), { recursive: true });
+          writeFileSync(f, b.files[n] as string);
+        }
+        return `Listo: escribí ${names.length} archivos en «${rel}». Revisión: ${b.problems.length ? b.problems.join(" | ") : "sin problemas"}.${b.platform === "shopify" ? " Para probarlo: comprime la carpeta y súbela en Tienda online → Temas → Subir zip (queda sin publicar), o usa «shopify theme push --unpublished»." : ""}`;
+      },
+    ),
+  );
+
+  server.registerTool(
+    "actualizar_diseno",
+    {
+      title: "Actualizar el estado de un diseño",
+      description:
+        "Anota en Traxo en qué punto va un diseño: en-github (con el enlace del repositorio) o subido (ya está en la tienda, sin publicar).",
+      inputSchema: {
+        diseno_id: z.string(),
+        estado: z.enum(["borrador", "generado", "en-github", "subido"]),
+        github: z.string().url().optional(),
+        nota: z.string().max(300).optional(),
+      },
+    },
+    wrap(async (a: { diseno_id: string; estado: string; github?: string; nota?: string }) => {
+      const r = await api.post<Json>(`/api/builder/${encodeURIComponent(a.diseno_id)}`, {
+        status: a.estado,
+        githubUrl: a.github,
+        note: a.nota,
+      });
+      return r.ok ? `Anotado: el diseño quedó «${a.estado}».` : (r.message as string);
+    }),
+  );
+
+  server.registerTool(
     "listar_biblioteca",
     {
       title: "Listar la biblioteca de creativos",
@@ -82,6 +249,12 @@ export function registerGrowthTools(server: McpServer, api: TraxoClient): void {
         tipo: z.enum(["ugc", "producto", "lifestyle", "referencia"]).default("ugc"),
         producto: z.string().optional(),
         origen: z.enum(["higgsfield", "generado", "subido"]).default("higgsfield"),
+        creditos: z
+          .number()
+          .int()
+          .min(0)
+          .optional()
+          .describe("Créditos que costó generarlo, para el panel de uso agéntico."),
       },
     },
     wrap(
@@ -91,6 +264,7 @@ export function registerGrowthTools(server: McpServer, api: TraxoClient): void {
         tipo: string;
         producto?: string;
         origen: string;
+        creditos?: number;
       }) => {
         const r = await api.post<Json>("/api/media/link", {
           url: a.url,
@@ -98,6 +272,7 @@ export function registerGrowthTools(server: McpServer, api: TraxoClient): void {
           role: a.tipo,
           product: a.producto,
           source: a.origen,
+          credits: a.creditos,
         });
         return r.ok ? `Listo: «${a.titulo}» quedó en la biblioteca.` : (r.message as string);
       },

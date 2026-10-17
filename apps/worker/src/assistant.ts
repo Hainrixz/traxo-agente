@@ -435,6 +435,7 @@ async function withClaude(
 ): Promise<AssistantReply> {
   const text = await askClaude(storeId, {
     system: AGENT_SYSTEM,
+    feature: "Asistente del panel",
     history,
     user: `Pregunta de la persona: ${question}\n\n<datos>\n${JSON.stringify(contextOf(s, base))}\n</datos>`,
     maxTokens: 500,

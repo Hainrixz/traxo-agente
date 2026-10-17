@@ -335,3 +335,88 @@ export type Settings = {
   riskThreshold: number;
   prepaidDiscountPct: number;
 };
+
+export type UsageReport = {
+  days: number;
+  orders: number;
+  cost: {
+    totalCop: number;
+    aiCop: number;
+    creditsCop: number;
+    perOrderCop: number | null;
+    budgetCop: number | null;
+    budgetUsedPct: number | null;
+  };
+  value: {
+    automatedActions: number;
+    hoursSaved: number;
+    savedCop: number;
+    returnPerPeso: number | null;
+    automationPct: number | null;
+    humanSteps: number;
+    approvals: number;
+    withoutAiPct: number | null;
+  };
+  ai: {
+    calls: number;
+    tokensIn: number;
+    tokensOut: number;
+    byFeature: Array<{ feature: string; calls: number; tokens: number; cop: number }>;
+    today: {
+      enabled: boolean;
+      usedToday: number;
+      perStoreDay: number;
+      perStoreMinute: number;
+      globalDay: number;
+    };
+  };
+  messages: {
+    total: number;
+    simulated: number;
+    byChannel: Array<{ channel: string; sent: number; simulated: number }>;
+  };
+  creatives: { imagenes: number; videos: number; credits: number; cop: number };
+  actions: Array<{ kind: string; label: string; count: number; minutes: number }>;
+  assumptions: { hourCop: number; minutesPerAction: Record<string, number> };
+  series: Array<{ date: string; ai: number; actions: number; messages: number; costCop: number }>;
+  tips: string[];
+};
+
+export type SiteDesign = {
+  brand: string;
+  tagline: string;
+  tone: string;
+  style: string;
+  palette: {
+    bg: string;
+    surface: string;
+    text: string;
+    muted: string;
+    accent: string;
+    accentText: string;
+  };
+  fonts: { heading: string; body: string };
+  sections: string[];
+  copy: {
+    headline: string;
+    sub: string;
+    cta: string;
+    story: string;
+    benefits: Array<{ title: string; text: string }>;
+    faq: Array<{ q: string; a: string }>;
+  };
+  products: Array<{ title: string; price: number; image?: string }>;
+  contact: { whatsapp?: string };
+  cod: boolean;
+};
+export type SiteProject = {
+  id: string;
+  name: string;
+  platform: string;
+  status: "borrador" | "generado" | "en-github" | "subido";
+  design: SiteDesign;
+  githubUrl: string | null;
+  note: string | null;
+  createdAt: string;
+  updatedAt: string;
+};

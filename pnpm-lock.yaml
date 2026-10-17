@@ -260,12 +260,18 @@ importers:
       '@traxo/payments':
         specifier: workspace:*
         version: link:../../packages/payments
+      '@traxo/storefront':
+        specifier: workspace:*
+        version: link:../../packages/storefront
       hono:
         specifier: ^4.13.13
         version: 4.13.13
       tsx:
         specifier: ^4.23.15
         version: 4.23.15
+      zod:
+        specifier: ^4.6.7
+        version: 4.6.7
 
   packages/audit: {}
 
@@ -350,6 +356,12 @@ importers:
       '@traxo/core':
         specifier: workspace:*
         version: link:../core
+
+  packages/storefront:
+    dependencies:
+      zod:
+        specifier: ^4.6.7
+        version: 4.6.7
 
 packages:
 

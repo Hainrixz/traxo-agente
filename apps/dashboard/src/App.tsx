@@ -8,12 +8,14 @@ import type { Account, AuthInfo, OrderRow, State, StoreStatus } from "./types.ts
 import { Icon, Logo, ToneBadge } from "./ui.tsx";
 import { Actividad, Aprobaciones, type Ctx, Inicio, OrderSheet, Pedidos } from "./views.tsx";
 import { Agente } from "./views-agent.tsx";
+import { Constructor } from "./views-builder.tsx";
 import { Clientes, Marketing } from "./views-growth.tsx";
 import { Mensajes } from "./views-messages.tsx";
 import { Reportes } from "./views-reports.tsx";
 import { Ajustes, Conexiones } from "./views-settings.tsx";
 import { Envios } from "./views-ship.tsx";
 import { TiendaSeo } from "./views-store.tsx";
+import { UsoAgentico } from "./views-usage.tsx";
 
 type Item = [id: string, label: string, icon: string];
 const SECTIONS: Array<[string, Item[]]> = [
@@ -35,6 +37,8 @@ const SECTIONS: Array<[string, Item[]]> = [
       ["marketing", "Marketing", "megaphone"],
       ["tienda", "Tienda y SEO", "search"],
       ["reportes", "Reportes", "chart"],
+      ["constructor", "Constructor", "layout"],
+      ["uso", "Uso agéntico", "bolt"],
     ],
   ],
 ];
@@ -375,6 +379,8 @@ function Shell({
               {view === "marketing" && <Marketing ctx={ctx} />}
               {view === "tienda" && <TiendaSeo ctx={ctx} />}
               {view === "reportes" && <Reportes ctx={ctx} />}
+              {view === "uso" && <UsoAgentico ctx={ctx} />}
+              {view === "constructor" && <Constructor ctx={ctx} />}
               {view === "conexiones" && <Conexiones ctx={ctx} state={state} />}
               {view === "ajustes" && <Ajustes ctx={ctx} />}
             </>

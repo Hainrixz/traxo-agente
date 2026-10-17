@@ -25,6 +25,30 @@ export async function get<T>(path: string): Promise<T> {
   return r.json() as Promise<T>;
 }
 
+export async function getText(path: string): Promise<string> {
+  const r = await fetch(path, { headers: auth(), credentials: "same-origin" });
+  if (r.status === 401) unauth();
+  if (!r.ok) throw new Error(`${path}: ${r.status}`);
+  return r.text();
+}
+
+/** Descarga un archivo con la misma sesión del panel (un enlace simple no lleva el token). */
+export async function download(path: string, fallbackName: string): Promise<void> {
+  const r = await fetch(path, { headers: auth(), credentials: "same-origin" });
+  if (r.status === 401) unauth();
+  if (!r.ok) throw new Error(`${path}: ${r.status}`);
+  const name =
+    /filename="([^"]+)"/.exec(r.headers.get("content-disposition") ?? "")?.[1] ?? fallbackName;
+  const url = URL.createObjectURL(await r.blob());
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+}
+
 export async function post<T = unknown>(path: string, body: unknown = {}): Promise<T> {
   const r = await fetch(path, {
     method: "POST",

@@ -189,6 +189,7 @@ export function registerGrowthApi(app: Hono, rt: Runtime): void {
       return c.json({ ok: false, message: "Faltan datos del copy." }, 400);
     const lim = COPY_LIMITS[platform.data];
     const out = await askClaude(sid(c), {
+      feature: "Copy de anuncios",
       system:
         "Eres redactor publicitario para e-commerce en Colombia. Reescribes el copy de un anuncio: gancho claro, beneficio concreto, tono cercano, sin promesas falsas ni cifras inventadas. " +
         `Límites estrictos de caracteres (${platform.data}): título ${lim.headline}, texto principal ${lim.primaryText}, descripción ${lim.description}. ` +

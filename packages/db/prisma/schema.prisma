@@ -274,3 +274,32 @@ model MediaAsset {
 
   @@index([storeId, createdAt])
 }
+
+model UsageEvent {
+  id        String   @id
+  storeId   String
+  kind      String
+  feature   String
+  tokensIn  Int      @default(0)
+  tokensOut Int      @default(0)
+  credits   Int      @default(0)
+  costUsd   Float    @default(0)
+  at        DateTime @default(now())
+
+  @@index([storeId, at])
+}
+
+model SiteProject {
+  id        String   @id
+  storeId   String
+  name      String
+  platform  String
+  status    String   @default("borrador")
+  design    Json
+  githubUrl String?
+  note      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@index([storeId, updatedAt])
+}

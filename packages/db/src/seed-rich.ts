@@ -159,7 +159,7 @@ export type RichSeedResult = {
 };
 
 /** Sube cuando cambian los datos de ejemplo: las bases que ya existen (p. ej. en Railway) se vuelven a sembrar solas. */
-export const RICH_VERSION = 4;
+export const RICH_VERSION = 5;
 
 /**
  * Cuenta admin de la demo: 90 días de operación de "Café de Origen". TODO es de ejemplo y la interfaz lo dice.
@@ -186,6 +186,7 @@ export async function seedRich(
   await p.campaignDraft.deleteMany({ where: { storeId } });
   await p.audience.deleteMany({ where: { storeId } });
   await p.mediaAsset.deleteMany({ where: { storeId } });
+  await p.usageEvent.deleteMany({ where: { storeId } });
   await p.storeAudit.deleteMany({ where: { storeId } });
   await p.order.deleteMany({ where: { storeId } });
   await p.customer.deleteMany({ where: { storeId } });
@@ -1084,6 +1085,47 @@ export async function seedRich(
     db.prisma.approval.createMany({ data: c as never }),
   );
   await chunk(store.runs as never[], (c) => db.prisma.agentRun.createMany({ data: c as never }));
+
+  // Uso de IA y créditos de ejemplo: pocas llamadas por día y casi todo resuelto con reglas (así se ve el panel de uso agéntico).
+  const FEATURES = [
+    { name: "Asistente del panel", inTok: 1500, outTok: 330 },
+    { name: "Respuesta de cliente", inTok: 420, outTok: 110 },
+    { name: "Copy de anuncios", inTok: 900, outTok: 520 },
+  ];
+  const usage: Array<Record<string, unknown>> = [];
+  for (let d = 59; d >= 0; d--) {
+    const calls = 1 + ((d * 7 + 3) % 5);
+    for (let i = 0; i < calls; i++) {
+      const f = FEATURES[(d + i * 2) % 3] as (typeof FEATURES)[number];
+      const jitter = 0.8 + (((d * 13 + i * 5) % 9) / 9) * 0.5;
+      const tokensIn = Math.round(f.inTok * jitter);
+      const tokensOut = Math.round(f.outTok * jitter);
+      usage.push({
+        id: `use_rich_${d}_${i}`,
+        storeId,
+        kind: "ia",
+        feature: f.name,
+        tokensIn,
+        tokensOut,
+        credits: 0,
+        costUsd: (tokensIn * 3 + tokensOut * 15) / 1_000_000,
+        at: at(d * DAY + (i + 1) * 2.1 * 3_600_000),
+      });
+    }
+    if (d % 11 === 4)
+      usage.push({
+        id: `use_rich_cr_${d}`,
+        storeId,
+        kind: d % 22 === 4 ? "video" : "imagen",
+        feature: d % 22 === 4 ? "Higgsfield · video UGC" : "Higgsfield · foto de producto",
+        tokensIn: 0,
+        tokensOut: 0,
+        credits: d % 22 === 4 ? 40 : 6,
+        costUsd: (d % 22 === 4 ? 40 : 6) * 0.05,
+        at: at(d * DAY + 5 * 3_600_000),
+      });
+  }
+  await db.prisma.usageEvent.createMany({ data: usage as never });
 
   // ---------- Campañas con métricas de ejemplo (el gasto sale de la plataforma, no de Traxo) ----------
   // El gasto sale de la plataforma, no de Traxo: lo fijamos para que el ROAS (ventas ÷ gasto) cuente una historia coherente

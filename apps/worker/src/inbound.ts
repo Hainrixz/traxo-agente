@@ -233,6 +233,7 @@ async function classifyReply(
   orderNumber: string,
 ): Promise<Classified | null> {
   const out = await askClaude(storeId, {
+    feature: "Respuesta de cliente",
     system:
       "Clasificas la respuesta de un cliente colombiano a un aviso de novedad de entrega. " +
       'Responde SOLO un JSON: {"intent":"reschedule|cancel|question|other","confidence":0-1,"draft":"respuesta corta y amable en español, solo si intent es question"}. ' +

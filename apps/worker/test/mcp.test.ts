@@ -1,14 +1,19 @@
+import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 import { buildDemoOrder, type MockCommerce } from "@traxo/commerce";
 import { type Db, openDb, saveOrder } from "@traxo/db";
 import { createTraxoMcp, inProcessClient } from "@traxo/mcp-server";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { registerApi } from "../src/api.ts";
 import { createApp } from "../src/app.ts";
+import { registerBuilderApi } from "../src/builder.ts";
 import { registerGrowthApi } from "../src/growth.ts";
 import { mountMcp } from "../src/mcp.ts";
 import { createRuntime, type Runtime } from "../src/runtime.ts";
+import { registerUsageApi } from "../src/usage-api.ts";
 
 let db: Db;
 let rt: Runtime;
@@ -29,6 +34,8 @@ beforeEach(async () => {
   app = createApp({ db, bus: rt.bus, commerce: rt.commerceMap });
   registerApi(app, rt);
   registerGrowthApi(app, rt);
+  registerBuilderApi(app, rt);
+  registerUsageApi(app, rt);
   const [a, b] = InMemoryTransport.createLinkedPair();
   await createTraxoMcp(inProcessClient(app)).connect(a);
   client = new Client({ name: "test", version: "0" });
@@ -275,5 +282,53 @@ describe("herramientas de crecimiento por MCP", () => {
     expect((await call("reporte_atribucion")).text).toContain("Por canal");
     expect((await call("reporte_logistica")).text).toContain("Recaudo");
     expect((await call("reporte_ventas", { dias: 30 })).text).toMatch(/Últimos 30 días/);
+  });
+  it("uso_agentico resume sin inventar cuando no hay gasto", async () => {
+    const { text } = await call("uso_agentico", { dias: 7 });
+    expect(text).toContain("Últimos 7 días");
+    expect(text).toContain("Retorno: N/A");
+  });
+
+  it("disenar_tienda crea un borrador y exportar_tema escribe solo con confirm, sin sobrescribir ni salir de la carpeta", async () => {
+    const made = await call("disenar_tienda", { estilo: "calido", plataforma: "shopify" });
+    expect(made.text).toMatch(/Listo: creé el diseño/);
+    const id = /Id: (site_[\w-]+)/.exec(made.text)?.[1] as string;
+    expect((await call("listar_disenos")).text).toContain(id);
+
+    const dir = mkdtempSync(join(tmpdir(), "traxo-export-"));
+    const spy = vi.spyOn(process, "cwd").mockReturnValue(dir);
+    try {
+      const draft = await call("exportar_tema", { diseno_id: id, carpeta: "mi-tema" });
+      expect(draft.text).toContain("confirm: true");
+      expect(existsSync(join(dir, "mi-tema"))).toBe(false);
+
+      const out = await call("exportar_tema", { diseno_id: id, carpeta: "mi-tema", confirm: true });
+      expect(out.text).toMatch(/escribí \d+ archivos/);
+      expect(out.text).toContain("sin problemas");
+      expect(readFileSync(join(dir, "mi-tema", "layout", "theme.liquid"), "utf8")).toContain(
+        "content_for_header",
+      );
+
+      const again = await call("exportar_tema", {
+        diseno_id: id,
+        carpeta: "mi-tema",
+        confirm: true,
+      });
+      expect(again.text).toContain("no la sobrescribo");
+
+      const escape = await call("exportar_tema", {
+        diseno_id: id,
+        carpeta: "../fuera",
+        confirm: true,
+      });
+      expect(escape.text).toContain("fuera del directorio");
+      expect(existsSync(join(dir, "..", "fuera"))).toBe(false);
+
+      const upd = await call("actualizar_diseno", { diseno_id: id, estado: "subido" });
+      expect(upd.text).toContain("subido");
+    } finally {
+      spy.mockRestore();
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });

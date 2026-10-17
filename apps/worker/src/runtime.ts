@@ -15,6 +15,7 @@ import { messagingFromEnv } from "@traxo/messaging";
 import { paymentsFromEnv } from "@traxo/payments";
 import type { AgentDeps } from "./agent.ts";
 import { isDemo } from "./mode.ts";
+import { attachUsage } from "./usage.ts";
 
 export type Runtime = AgentDeps & {
   /** Restaura los datos de ejemplo de la tienda demo (solo cuando hay semilla rica). */
@@ -37,6 +38,7 @@ export async function createRuntime(
   opts: { db?: Db; rich?: boolean } = {},
 ): Promise<Runtime> {
   const db = opts.db ?? (await openDb());
+  attachUsage(db);
   const storeCount = await db.prisma.store.count();
   if (storeCount === 0) {
     // Solo el modo demo (TRAXO_DEMO=1) arranca con la tienda de ejemplo; una instalación normal arranca con tu tienda vacía.

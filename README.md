@@ -92,7 +92,7 @@ Los mensajes aparecen en **Mensajes** y el agente los atiende. Traxo también es
 
 ## Úsalo dentro de Claude
 
-Con el plugin instalado tienes **11 skills** (`instalar`, `start`, `conectar`, `pedidos`, `envios`, `seguimiento`, `marketing`, `campana`, `clientes`, `tienda`, `reportes`), **4 agentes** y un servidor MCP con **36 herramientas** en español. Las que escriben, gastan o borran piden `confirm: true`; sin él devuelven un borrador. Pídele lo que quieras: «audita mi tienda», «qué anuncio funciona», «arma una campaña con mis videos UGC».
+Con el plugin instalado tienes **12 skills** (`instalar`, `constructor`, `start`, `conectar`, `pedidos`, `envios`, `seguimiento`, `marketing`, `campana`, `clientes`, `tienda`, `reportes`), **4 agentes** y un servidor MCP con **41 herramientas** en español. Las que escriben, gastan o borran piden `confirm: true`; sin él devuelven un borrador. Pídele lo que quieras: «audita mi tienda», «qué anuncio funciona», «arma una campaña con mis videos UGC».
 
 ## IA con tu llave de Claude (opcional) y seguridad
 
@@ -222,3 +222,8 @@ The wizard asks where to run it (your computer or Railway), which store platform
 **Status:** works without credentials: the order pipeline, carrier selection, COD confirmation, tracking, approvals, the panel agent, the inbox, the creative library, campaigns, audits and reports. Code exists but is untested against live services: Shopify, Tiendanube, WooCommerce, Envia.com, Zernio, Wompi. No real adapter yet: 99envios and direct Coordinadora / Servientrega / Interrapidísimo / Envía (simulators).
 
 MIT licensed.
+
+## Uso agéntico y constructor de tienda
+
+- **Uso agéntico** (panel): cuántas acciones hizo el agente solo, cuántas horas de trabajo manual evitó (estimado), gasto en IA y créditos, mensajes por canal y creativos. Costos ajustables: `TRAXO_AI_USD_PER_MTOK_IN/OUT`, `TRAXO_USD_COP`, `TRAXO_HOUR_COP`, `TRAXO_AI_BUDGET_USD_MONTH`.
+- **Constructor** (panel y `/traxo:constructor`): genera un tema de Shopify (Online Store 2.0, español, accesible) con tu catálogo, vista previa, descarga en .zip y flujo hacia GitHub privado y Shopify sin publicar. Otras plataformas reciben un sitio estático y el diseño en JSON.

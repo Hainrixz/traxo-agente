@@ -22,7 +22,8 @@ export function hardenApp(
   app.use("*", async (c, next) => {
     await next();
     c.header("X-Content-Type-Options", "nosniff");
-    c.header("X-Frame-Options", "DENY");
+    // La vista previa del constructor se muestra en un marco del mismo sitio y fija su propia regla.
+    if (!c.res.headers.has("X-Frame-Options")) c.header("X-Frame-Options", "DENY");
     c.header("Referrer-Policy", "strict-origin-when-cross-origin");
     c.header("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
     c.header("Cross-Origin-Opener-Policy", "same-origin");

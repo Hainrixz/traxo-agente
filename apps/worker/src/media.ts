@@ -13,6 +13,7 @@ import type { Context, Hono } from "hono";
 import { storeOf } from "./auth.ts";
 import { isDemo } from "./mode.ts";
 import type { Runtime } from "./runtime.ts";
+import { reportUsage } from "./usage.ts";
 
 const MAX_BYTES = 60 * 1024 * 1024;
 const TYPES: Record<string, { kind: "image" | "video"; mime: string }> = {
@@ -140,6 +141,13 @@ export function registerMediaApi(app: Hono, rt: Runtime): void {
         durationS: typeof b.durationS === "number" ? b.durationS : null,
       },
     });
+    const credits = Number(b.credits);
+    if (source !== "subido" && Number.isFinite(credits) && credits > 0)
+      reportUsage(sid(c), {
+        kind: row.kind === "video" ? "video" : "imagen",
+        feature: `Higgsfield · ${row.title}`.slice(0, 60),
+        credits,
+      });
     return c.json({ ok: true, asset: view(row) });
   });
 

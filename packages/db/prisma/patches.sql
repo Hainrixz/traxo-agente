@@ -60,3 +60,30 @@ CREATE TABLE IF NOT EXISTS "MediaAsset" (
 CREATE INDEX IF NOT EXISTS "MediaAsset_storeId_createdAt_idx" ON "MediaAsset"("storeId", "createdAt");
 ALTER TABLE "MediaAsset" ADD COLUMN IF NOT EXISTS "externalUrl" TEXT;
 ALTER TABLE "Order" ADD COLUMN IF NOT EXISTS "paymentLinkId" TEXT;
+CREATE TABLE IF NOT EXISTS "UsageEvent" (
+  "id" TEXT NOT NULL,
+  "storeId" TEXT NOT NULL,
+  "kind" TEXT NOT NULL,
+  "feature" TEXT NOT NULL,
+  "tokensIn" INTEGER NOT NULL DEFAULT 0,
+  "tokensOut" INTEGER NOT NULL DEFAULT 0,
+  "credits" INTEGER NOT NULL DEFAULT 0,
+  "costUsd" DOUBLE PRECISION NOT NULL DEFAULT 0,
+  "at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT "UsageEvent_pkey" PRIMARY KEY ("id")
+);
+CREATE INDEX IF NOT EXISTS "UsageEvent_storeId_at_idx" ON "UsageEvent"("storeId", "at");
+CREATE TABLE IF NOT EXISTS "SiteProject" (
+  "id" TEXT NOT NULL,
+  "storeId" TEXT NOT NULL,
+  "name" TEXT NOT NULL,
+  "platform" TEXT NOT NULL,
+  "status" TEXT NOT NULL DEFAULT 'borrador',
+  "design" JSONB NOT NULL,
+  "githubUrl" TEXT,
+  "note" TEXT,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT "SiteProject_pkey" PRIMARY KEY ("id")
+);
+CREATE INDEX IF NOT EXISTS "SiteProject_storeId_updatedAt_idx" ON "SiteProject"("storeId", "updatedAt");

@@ -261,6 +261,37 @@ CREATE TABLE "MediaAsset" (
     CONSTRAINT "MediaAsset_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "UsageEvent" (
+    "id" TEXT NOT NULL,
+    "storeId" TEXT NOT NULL,
+    "kind" TEXT NOT NULL,
+    "feature" TEXT NOT NULL,
+    "tokensIn" INTEGER NOT NULL DEFAULT 0,
+    "tokensOut" INTEGER NOT NULL DEFAULT 0,
+    "credits" INTEGER NOT NULL DEFAULT 0,
+    "costUsd" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "UsageEvent_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "SiteProject" (
+    "id" TEXT NOT NULL,
+    "storeId" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "platform" TEXT NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'borrador',
+    "design" JSONB NOT NULL,
+    "githubUrl" TEXT,
+    "note" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "SiteProject_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE INDEX "Product_storeId_idx" ON "Product"("storeId");
 
@@ -314,6 +345,12 @@ CREATE INDEX "StoreAudit_storeId_kind_createdAt_idx" ON "StoreAudit"("storeId", 
 
 -- CreateIndex
 CREATE INDEX "MediaAsset_storeId_createdAt_idx" ON "MediaAsset"("storeId", "createdAt");
+
+-- CreateIndex
+CREATE INDEX "UsageEvent_storeId_at_idx" ON "UsageEvent"("storeId", "at");
+
+-- CreateIndex
+CREATE INDEX "SiteProject_storeId_updatedAt_idx" ON "SiteProject"("storeId", "updatedAt");
 
 -- AddForeignKey
 ALTER TABLE "Product" ADD CONSTRAINT "Product_storeId_fkey" FOREIGN KEY ("storeId") REFERENCES "Store"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -46,6 +46,8 @@ const PATHS: Record<string, ReactNode> = {
     <path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11zM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
   ),
   list: <path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01" />,
+  bolt: <path d="M13 3L5 13.5h6L10 21l8-10.5h-6L13 3z" />,
+  layout: <path d="M4 5h16v14H4zM4 10h16M10 10v9" />,
 };
 
 export function Icon({ name, size = 18 }: { name: keyof typeof PATHS | string; size?: number }) {

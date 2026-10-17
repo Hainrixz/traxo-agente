@@ -3618,3 +3618,132 @@ body.touring .sheet .body {
     padding-bottom: 62vh;
   }
 }
+
+/* ---------- Constructor de tienda ---------- */
+.builder-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.builder-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: start;
+}
+.preview-card {
+  position: sticky;
+  top: 16px;
+}
+.preview-stage {
+  display: flex;
+  justify-content: center;
+  background: var(--surface-2, var(--bg));
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 8px;
+  overflow: hidden;
+}
+.preview-frame {
+  width: 100%;
+  height: 560px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: #fff;
+  transition: max-width 220ms var(--ease-out);
+}
+.preview-stage.phone .preview-frame {
+  max-width: 390px;
+}
+.swatches {
+  display: inline-flex;
+}
+.swatches i {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--line-control);
+  margin-right: -4px;
+}
+.style-grid {
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+.plain {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.plain > legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.checks {
+  display: grid;
+  gap: 4px 16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.steps {
+  list-style: none;
+  counter-reset: s;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+.steps li {
+  counter-increment: s;
+  display: grid;
+  gap: 6px;
+  padding-left: 40px;
+  position: relative;
+}
+.steps li::before {
+  content: counter(s);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  background: var(--agent-soft);
+  color: var(--ink);
+  border: 1px solid var(--agent-line);
+}
+.chips-static {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tool {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line-control);
+  font-size: 13px;
+}
+@media (max-width: 1100px) {
+  .builder-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .preview-card {
+    position: static;
+  }
+  .preview-frame {
+    height: 440px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preview-frame {
+    transition: none;
+  }
+}
+.style-grid .seg {
+  align-content: start;
+}
+.swatches {
+  margin-bottom: 4px;
+}

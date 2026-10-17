@@ -24,6 +24,8 @@
     "@traxo/mcp-server": "workspace:*",
     "@modelcontextprotocol/sdk": "1.32.1",
     "@traxo/payments": "workspace:*",
-    "@traxo/audit": "workspace:*"
+    "@traxo/audit": "workspace:*",
+    "@traxo/storefront": "workspace:*",
+    "zod": "^4.6.7"
   }
 }
