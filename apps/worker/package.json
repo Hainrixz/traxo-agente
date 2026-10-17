@@ -18,7 +18,7 @@
     "@traxo/carriers": "workspace:*",
     "@traxo/messaging": "workspace:*",
     "@traxo/geo-co": "workspace:*",
-    "@hono/node-server": "^1.14.0",
+    "@hono/node-server": "^2.1.5",
     "hono": "^4.13.13",
     "tsx": "^4.23.15",
     "@traxo/mcp-server": "workspace:*",
