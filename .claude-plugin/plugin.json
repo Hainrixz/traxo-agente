@@ -1,0 +1,16 @@
+{
+  "name": "traxo",
+  "version": "0.1.0",
+  "description": "Traxo: asistente logístico con IA para tiendas en Colombia. Cotiza y elige transportadora, genera guías, hace tracking, atiende novedades y prepara marketing y seguimiento de clientes. Open source.",
+  "author": { "name": "Traxo contributors" },
+  "license": "MIT",
+  "keywords": [
+    "ecommerce",
+    "colombia",
+    "logistica",
+    "shopify",
+    "tiendanube",
+    "contraentrega",
+    "whatsapp"
+  ]
+}

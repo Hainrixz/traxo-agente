@@ -1,0 +1,17 @@
+node_modules
+dist
+.env
+.env.*
+!.env.example
+.traxo-data
+**/generated
+*.log
+.DS_Store
+
+# Herramientas de desarrollo locales y notas internas
+/e2e
+/vitest.e2e.config.ts
+/ESTADO.md
+/docs/plan*.md
+/docs/diseno-plan.md
+/demo-media

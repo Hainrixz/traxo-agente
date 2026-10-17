@@ -1,0 +1,16 @@
+{
+  "name": "@traxo/mcp-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/server.ts"
+  },
+  "scripts": {},
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "@traxo/core": "workspace:*",
+    "zod": "^4.6.7",
+    "tsx": "^4.23.15"
+  }
+}

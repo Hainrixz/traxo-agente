@@ -1,0 +1,16 @@
+{
+  "name": "traxo",
+  "owner": {
+    "name": "Traxo contributors"
+  },
+  "plugins": [
+    {
+      "name": "traxo",
+      "source": "./",
+      "description": "Agente open source que opera tu e-commerce en Colombia: envíos, tracking, marketing y clientes."
+    }
+  ],
+  "metadata": {
+    "description": "Traxo: agente open source que opera tu e-commerce en Colombia (envíos, tracking, marketing y clientes) dentro de Claude."
+  }
+}

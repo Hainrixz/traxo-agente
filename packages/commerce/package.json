@@ -1,0 +1,13 @@
+{
+  "name": "@traxo/commerce",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@traxo/core": "workspace:*",
+    "@traxo/geo-co": "workspace:*"
+  }
+}

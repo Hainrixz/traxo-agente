@@ -1,0 +1,29 @@
+{
+  "name": "@traxo/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "generate": "prisma generate",
+    "seed": "tsx src/seed-cli.ts"
+  },
+  "dependencies": {
+    "@traxo/core": "workspace:*",
+    "@traxo/commerce": "workspace:*",
+    "@electric-sql/pglite": "^0.5.10",
+    "@prisma/client": "7.10.1",
+    "@prisma/adapter-pg": "7.10.1",
+    "pglite-prisma-adapter": "^0.7.2",
+    "pg": "^8.13.0",
+    "@traxo/carriers": "workspace:*",
+    "@traxo/audit": "workspace:*",
+    "@traxo/geo-co": "workspace:*"
+  },
+  "devDependencies": {
+    "prisma": "7.10.1",
+    "@types/pg": "^8.11.0"
+  }
+}

@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1070" width="1700" height="1070" font-family="Geist, Helvetica, Arial, sans-serif">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#141414"/></marker>
+<marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d99a1e"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity=".10"/></filter>
+</defs>
+<rect width="100%" height="100%" fill="#f4f3ef"/>
+<text x="48" y="58" font-size="30" font-weight="800" fill="#141414" font-family="Archivo, Helvetica, Arial, sans-serif">Traxo · arquitectura del sistema</text>
+<text x="48" y="84" font-size="15" fill="#6b6b68">Un agente que opera tu e-commerce en Colombia: pedidos, envíos, mensajes, anuncios y clientes en un solo lugar.</text>
+<rect x="40" y="110" width="420" height="880" rx="24" fill="#ecebe6" opacity=".55"/>
+<text x="62" y="140" font-size="13" font-weight="700" letter-spacing="1.6" fill="#6b6b68">PERSONAS</text>
+<rect x="500" y="110" width="740" height="880" rx="24" fill="#fff7dc" opacity=".55"/>
+<text x="522" y="140" font-size="13" font-weight="700" letter-spacing="1.6" fill="#6b6b68">TRAXO  ·  tu servidor (local con PGlite o Railway con Postgres)</text>
+<rect x="1280" y="110" width="380" height="880" rx="24" fill="#ecebe6" opacity=".55"/>
+<text x="1302" y="140" font-size="13" font-weight="700" letter-spacing="1.6" fill="#6b6b68">SERVICIOS EXTERNOS</text>
+<rect x="64" y="150" width="372" height="150" rx="16" fill="#fff" stroke="#c9c9c5" stroke-width="1.5" filter="url(#sh)"/>
+<text x="82" y="180" font-size="18" font-weight="700" fill="#141414">Dueño de la tienda</text>
+<text x="82" y="204" font-size="13.5" fill="#3d3d3a">Abre el panel en el navegador</text>
+<text x="82" y="225" font-size="13.5" fill="#3d3d3a">(computador o teléfono)</text>
+<text x="82" y="246" font-size="13.5" fill="#3d3d3a">Aprueba lo importante y pregunta</text>
+<rect x="64" y="330" width="372" height="190" rx="16" fill="#fff" stroke="#c9c9c5" stroke-width="1.5" filter="url(#sh)"/>
+<text x="82" y="360" font-size="18" font-weight="700" fill="#141414">Claude (Claude Code)</text>
+<text x="82" y="384" font-size="13.5" fill="#3d3d3a">Plugin de Traxo:</text>
+<text x="82" y="405" font-size="13.5" fill="#3d3d3a">11 skills · 4 agentes · /traxo:…</text>
+<text x="82" y="426" font-size="13.5" fill="#3d3d3a">Conectores propios de Claude:</text>
+<text x="82" y="447" font-size="13.5" fill="#3d3d3a">Higgsfield · Meta Ads · Google · TikTok</text>
+<rect x="64" y="550" width="372" height="150" rx="16" fill="#fff" stroke="#c9c9c5" stroke-width="1.5" filter="url(#sh)"/>
+<text x="82" y="580" font-size="18" font-weight="700" fill="#141414">Cliente final</text>
+<text x="82" y="604" font-size="13.5" fill="#3d3d3a">Escribe por WhatsApp, Instagram</text>
+<text x="82" y="625" font-size="13.5" fill="#3d3d3a">o Messenger. Recibe avisos,</text>
+<text x="82" y="646" font-size="13.5" fill="#3d3d3a">confirma contraentrega, reprograma</text>
+<rect x="64" y="730" width="372" height="230" rx="16" fill="#fff7dc" stroke="#d99a1e" stroke-width="1.5" filter="url(#sh)"/>
+<text x="82" y="760" font-size="18" font-weight="700" fill="#141414">Lo que NO sale de tu control</text>
+<text x="82" y="784" font-size="13.5" fill="#3d3d3a">• Las llaves viven en .env o en las</text>
+<text x="82" y="805" font-size="13.5" fill="#3d3d3a">  variables de Railway; nunca en pantalla</text>
+<text x="82" y="826" font-size="13.5" fill="#3d3d3a">• Campañas siempre en pausa o borrador</text>
+<text x="82" y="847" font-size="13.5" fill="#3d3d3a">• Gastar, publicar o borrar pide tu sí</text>
+<text x="82" y="868" font-size="13.5" fill="#3d3d3a">• Creativos: se cotiza antes de generar</text>
+<rect x="530" y="150" width="330" height="180" rx="16" fill="#fff" stroke="#141414" stroke-width="1.5" filter="url(#sh)"/>
+<text x="548" y="180" font-size="18" font-weight="700" fill="#141414">Panel web</text>
+<text x="548" y="200" font-size="12.5" fill="#6b6b68">apps/dashboard</text>
+<text x="548" y="222" font-size="13.5" fill="#3d3d3a">React + Vite · claro/oscuro · responsive</text>
+<text x="548" y="243" font-size="13.5" fill="#3d3d3a">Inicio · Agente · Pedidos · Envíos</text>
+<text x="548" y="264" font-size="13.5" fill="#3d3d3a">Mensajes · Clientes · Marketing</text>
+<text x="548" y="285" font-size="13.5" fill="#3d3d3a">Tienda y SEO · Reportes · Perfil</text>
+<rect x="890" y="150" width="320" height="180" rx="16" fill="#fff" stroke="#141414" stroke-width="1.5" filter="url(#sh)"/>
+<text x="908" y="180" font-size="18" font-weight="700" fill="#141414">Servidor MCP</text>
+<text x="908" y="200" font-size="12.5" fill="#6b6b68">apps/mcp-server</text>
+<text x="908" y="222" font-size="13.5" fill="#3d3d3a">36 herramientas en español</text>
+<text x="908" y="243" font-size="13.5" fill="#3d3d3a">stdio (local) o HTTP /mcp (nube)</text>
+<text x="908" y="264" font-size="13.5" fill="#3d3d3a">Lo que escribe, gasta o borra</text>
+<text x="908" y="285" font-size="13.5" fill="#3d3d3a">pide confirm: true</text>
+<rect x="530" y="380" width="680" height="290" rx="20" fill="#141414" filter="url(#sh)"/>
+<text x="552" y="412" font-size="20" font-weight="800" fill="#ffc805">Worker · el cerebro</text>
+<text x="552" y="433" font-size="12.5" fill="#a3a39f">apps/worker · Hono + Node 24</text>
+<rect x="552" y="452" width="196" height="84" rx="12" fill="#2b2b29" stroke="#ffc805" stroke-opacity=".5"/>
+<text x="566" y="482" font-size="15" font-weight="700" fill="#fff">API + sesiones</text>
+<text x="566" y="506" font-size="11.5" fill="#c9c9c5">cuentas, aislamiento por tienda</text>
+<rect x="764" y="452" width="196" height="84" rx="12" fill="#2b2b29" stroke="#ffc805" stroke-opacity=".5"/>
+<text x="778" y="482" font-size="15" font-weight="700" fill="#fff">Bucle del agente</text>
+<text x="778" y="506" font-size="11.5" fill="#c9c9c5">valida · cotiza · elige · guía</text>
+<rect x="976" y="452" width="196" height="84" rx="12" fill="#2b2b29" stroke="#ffc805" stroke-opacity=".5"/>
+<text x="990" y="482" font-size="15" font-weight="700" fill="#fff">Confirmación COD</text>
+<text x="990" y="506" font-size="11.5" fill="#c9c9c5">riesgo, prepago, 24 h</text>
+<rect x="552" y="552" width="196" height="84" rx="12" fill="#2b2b29" stroke="#ffc805" stroke-opacity=".5"/>
+<text x="566" y="582" font-size="15" font-weight="700" fill="#fff">Seguimiento</text>
+<text x="566" y="606" font-size="11.5" fill="#c9c9c5">webhooks + consulta, novedades</text>
+<rect x="764" y="552" width="196" height="84" rx="12" fill="#2b2b29" stroke="#ffc805" stroke-opacity=".5"/>
+<text x="778" y="582" font-size="15" font-weight="700" fill="#fff">Agente del panel</text>
+<text x="778" y="606" font-size="11.5" fill="#c9c9c5">responde con tus datos</text>
+<rect x="976" y="552" width="196" height="84" rx="12" fill="#2b2b29" stroke="#ffc805" stroke-opacity=".5"/>
+<text x="990" y="582" font-size="15" font-weight="700" fill="#fff">Biblioteca</text>
+<text x="990" y="606" font-size="11.5" fill="#c9c9c5">UGC y fotos de producto</text>
+<text x="668" y="712" font-size="12.5" font-weight="700" letter-spacing="1.2" fill="#6b6b68">PAQUETES · adapters intercambiables, simulado o real</text>
+<rect x="530" y="726" width="110" height="60" rx="12" fill="#fff" stroke="#c9c9c5"/>
+<text x="542" y="751" font-size="14" font-weight="700" fill="#141414">core</text><text x="542" y="771" font-size="11" fill="#6b6b68">dominio y políticas</text>
+<rect x="648" y="726" width="110" height="60" rx="12" fill="#fff" stroke="#c9c9c5"/>
+<text x="660" y="751" font-size="14" font-weight="700" fill="#141414">carriers</text><text x="660" y="771" font-size="11" fill="#6b6b68">6 vías + selector</text>
+<rect x="766" y="726" width="110" height="60" rx="12" fill="#fff" stroke="#c9c9c5"/>
+<text x="778" y="751" font-size="14" font-weight="700" fill="#141414">commerce</text><text x="778" y="771" font-size="11" fill="#6b6b68">tiendas</text>
+<rect x="884" y="726" width="110" height="60" rx="12" fill="#fff" stroke="#c9c9c5"/>
+<text x="896" y="751" font-size="14" font-weight="700" fill="#141414">messaging</text><text x="896" y="771" font-size="11" fill="#6b6b68">Zernio</text>
+<rect x="530" y="796" width="110" height="60" rx="12" fill="#fff" stroke="#c9c9c5"/>
+<text x="542" y="821" font-size="14" font-weight="700" fill="#141414">payments</text><text x="542" y="841" font-size="11" fill="#6b6b68">Wompi</text>
+<rect x="648" y="796" width="110" height="60" rx="12" fill="#fff" stroke="#c9c9c5"/>
+<text x="660" y="821" font-size="14" font-weight="700" fill="#141414">audit</text><text x="660" y="841" font-size="11" fill="#6b6b68">SEO y diseño</text>
+<rect x="766" y="796" width="110" height="60" rx="12" fill="#fff" stroke="#c9c9c5"/>
+<text x="778" y="821" font-size="14" font-weight="700" fill="#141414">geo-co</text><text x="778" y="841" font-size="11" fill="#6b6b68">DANE y teléfonos</text>
+<rect x="1020" y="726" width="190" height="130" rx="16" fill="#fff" stroke="#141414" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1036" y="756" font-size="16" font-weight="700" fill="#141414">Base de datos</text>
+<text x="1036" y="780" font-size="12.5" fill="#3d3d3a">PGlite en tu computador</text>
+<text x="1036" y="799" font-size="12.5" fill="#3d3d3a">Postgres en Railway</text>
+<text x="1036" y="818" font-size="12.5" fill="#3d3d3a">Prisma 7 · una tienda</text>
+<text x="1036" y="837" font-size="12.5" fill="#3d3d3a">por cuenta</text>
+<rect x="1020" y="878" width="190" height="82" rx="16" fill="#fff" stroke="#c9c9c5" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1036" y="908" font-size="16" font-weight="700" fill="#141414">Archivos</text><text x="1036" y="930" font-size="12.5" fill="#3d3d3a">videos y fotos (UGC)</text><text x="1036" y="950" font-size="12.5" fill="#3d3d3a">volumen en Railway</text>
+<rect x="530" y="878" width="470" height="82" rx="16" fill="#fff" stroke="#d99a1e" stroke-width="1.5" filter="url(#sh)"/>
+<text x="548" y="908" font-size="16" font-weight="700" fill="#141414">Eventos en vivo (SSE)</text><text x="548" y="930" font-size="12.5" fill="#3d3d3a">cada decisión del agente se registra y llega al panel</text><text x="548" y="950" font-size="12.5" fill="#3d3d3a">al instante: Actividad, Mensajes y Pedidos al día</text>
+<rect x="1304" y="150" width="332" height="117" rx="16" fill="#fff" stroke="#c9c9c5" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1322" y="180" font-size="18" font-weight="700" fill="#141414">Tienda online</text>
+<text x="1322" y="204" font-size="13.5" fill="#3d3d3a">Shopify · Tiendanube · WooCommerce</text>
+<text x="1322" y="225" font-size="13.5" fill="#3d3d3a">Los pedidos entran por webhook;</text>
+<text x="1322" y="246" font-size="13.5" fill="#3d3d3a">la guía se escribe de vuelta</text>
+<rect x="1304" y="283" width="332" height="117" rx="16" fill="#fff" stroke="#c9c9c5" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1322" y="313" font-size="18" font-weight="700" fill="#141414">Transportadoras</text>
+<text x="1322" y="337" font-size="13.5" fill="#3d3d3a">Envia.com (agregador) · 99envios</text>
+<text x="1322" y="358" font-size="13.5" fill="#3d3d3a">Coordinadora · Servientrega</text>
+<text x="1322" y="379" font-size="13.5" fill="#3d3d3a">Interrapidísimo · Envía</text>
+<rect x="1304" y="416" width="332" height="117" rx="16" fill="#fff7dc" stroke="#d99a1e" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1322" y="446" font-size="18" font-weight="700" fill="#141414">Zernio</text>
+<text x="1322" y="470" font-size="13.5" fill="#3d3d3a">Un solo conector para</text>
+<text x="1322" y="491" font-size="13.5" fill="#3d3d3a">WhatsApp · Instagram · Messenger</text>
+<text x="1322" y="512" font-size="13.5" fill="#3d3d3a">y cuentas de anuncios</text>
+<rect x="1304" y="549" width="332" height="96" rx="16" fill="#fff" stroke="#c9c9c5" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1322" y="579" font-size="18" font-weight="700" fill="#141414">Wompi</text>
+<text x="1322" y="603" font-size="13.5" fill="#3d3d3a">Link de pago para el</text>
+<text x="1322" y="624" font-size="13.5" fill="#3d3d3a">prepago de contraentrega</text>
+<rect x="1304" y="661" width="332" height="117" rx="16" fill="#fff" stroke="#c9c9c5" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1322" y="691" font-size="18" font-weight="700" fill="#141414">Anuncios</text>
+<text x="1322" y="715" font-size="13.5" fill="#3d3d3a">Meta · Google Ads · TikTok</text>
+<text x="1322" y="736" font-size="13.5" fill="#3d3d3a">vía Zernio o conectores de Claude</text>
+<text x="1322" y="757" font-size="13.5" fill="#3d3d3a">Campañas siempre en pausa</text>
+<rect x="1304" y="794" width="332" height="96" rx="16" fill="#fff" stroke="#c9c9c5" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1322" y="824" font-size="18" font-weight="700" fill="#141414">Higgsfield</text>
+<text x="1322" y="848" font-size="13.5" fill="#3d3d3a">Videos UGC y fotos de producto</text>
+<text x="1322" y="869" font-size="13.5" fill="#3d3d3a">Cotiza créditos antes de generar</text>
+<rect x="1304" y="905" width="332" height="40" rx="20" fill="#fff" stroke="#c9c9c5" stroke-dasharray="5 4"/><text x="1470" y="930" font-size="13" text-anchor="middle" font-weight="600" fill="#3d3d3a">Anthropic API · agente en lenguaje libre (opcional)</text>
+<path d="M1210 520 L1258 520" fill="none" stroke="#141414" stroke-width="2" />
+<path d="M1258 208.5 L1258 842.0" fill="none" stroke="#141414" stroke-width="2" />
+<path d="M1258 208.5 L1304 208.5" fill="none" stroke="#141414" stroke-width="2" marker-end="url(#ar)" marker-start="url(#ar)" />
+<path d="M1258 341.5 L1304 341.5" fill="none" stroke="#141414" stroke-width="2" marker-end="url(#ar)" marker-start="url(#ar)" />
+<path d="M1258 474.5 L1304 474.5" fill="none" stroke="#141414" stroke-width="2" marker-end="url(#ar)" marker-start="url(#ar)" />
+<path d="M1258 597.0 L1304 597.0" fill="none" stroke="#141414" stroke-width="2" marker-end="url(#ar)" marker-start="url(#ar)" />
+<path d="M1258 719.5 L1304 719.5" fill="none" stroke="#141414" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)" marker-start="url(#ar)" />
+<path d="M1258 842.0 L1304 842.0" fill="none" stroke="#141414" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)" marker-start="url(#ar)" />
+<text x="1233" y="545" font-size="11.5" text-anchor="middle" fill="#6b6b68" font-style="italic">API y webhooks</text>
+<path d="M1210 640 L1235 640 L1235 925 L1304 925" fill="none" stroke="#141414" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#ar)" />
+<path d="M436 225 L530 225" fill="none" stroke="#141414" stroke-width="2" marker-end="url(#ar)" marker-start="url(#ar)" />
+<text x="483" y="214" font-size="12.5" text-anchor="middle" fill="#6b6b68" font-style="italic">navega</text>
+<path d="M436 440 L500 440 L500 352 L1050 352 L1050 330" fill="none" stroke="#d99a1e" stroke-width="2" marker-end="url(#am)" marker-start="url(#am)" />
+<text x="560" y="344" font-size="12.5" text-anchor="start" fill="#b04a12" font-style="italic">herramientas MCP</text>
+<path d="M700 330 L700 380" fill="none" stroke="#141414" stroke-width="2" marker-end="url(#ar)" marker-start="url(#ar)" />
+<text x="712" y="360" font-size="12.5" text-anchor="start" fill="#6b6b68" font-style="italic">API</text>
+<path d="M1100 330 L1100 380" fill="none" stroke="#141414" stroke-width="2" marker-end="url(#ar)" marker-start="url(#ar)" />
+<text x="1112" y="360" font-size="12.5" text-anchor="start" fill="#6b6b68" font-style="italic">API</text>
+<path d="M1115 670 L1115 726" fill="none" stroke="#141414" stroke-width="2" marker-end="url(#ar)" marker-start="url(#ar)" />
+<path d="M640 670 L640 712" fill="none" stroke="#141414" stroke-width="2" marker-end="url(#ar)" marker-start="url(#ar)" />
+<path d="M436 625 L470 625 L470 1030 L1648 1030 L1648 470 L1636 470" fill="none" stroke="#d99a1e" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#am)" marker-start="url(#am)" />
+<text x="1050" y="1022" font-size="12.5" text-anchor="middle" fill="#b04a12" font-style="italic">el cliente conversa por sus canales; todo pasa por Zernio</text>
+</svg>

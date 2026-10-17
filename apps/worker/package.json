@@ -1,0 +1,29 @@
+{
+  "name": "@traxo/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/app.ts"
+  },
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "start": "tsx src/main.ts",
+    "mcp": "tsx src/mcp-stdio.ts"
+  },
+  "dependencies": {
+    "@traxo/core": "workspace:*",
+    "@traxo/db": "workspace:*",
+    "@traxo/commerce": "workspace:*",
+    "@traxo/carriers": "workspace:*",
+    "@traxo/messaging": "workspace:*",
+    "@traxo/geo-co": "workspace:*",
+    "@hono/node-server": "^1.14.0",
+    "hono": "^4.13.13",
+    "tsx": "^4.23.15",
+    "@traxo/mcp-server": "workspace:*",
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "@traxo/payments": "workspace:*",
+    "@traxo/audit": "workspace:*"
+  }
+}

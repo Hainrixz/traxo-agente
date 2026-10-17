@@ -1,0 +1,36 @@
+{
+  "name": "traxo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Traxo: agente open source que opera tu e-commerce en Colombia (envíos, tracking, marketing y clientes) dentro de Claude.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "lint": "biome check .",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "db:generate": "pnpm --filter @traxo/db generate",
+    "db:seed": "pnpm --filter @traxo/db seed",
+    "dev": "pnpm --filter @traxo/worker dev",
+    "start": "tsx --env-file-if-exists=.env apps/worker/src/main.ts",
+    "build": "pnpm db:generate && pnpm --filter @traxo/dashboard build",
+    "dev:ui": "pnpm --filter @traxo/dashboard dev",
+    "doctor": "node scripts/doctor.mjs",
+    "railway:vars": "node scripts/railway-vars.mjs",
+    "serve": "pnpm build && pnpm start",
+    "configurar": "node scripts/setup.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@biomejs/biome": "2.5.15",
+    "@types/node": "^24.0.0",
+    "playwright": "^1.64.1",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.5"
+  }
+}

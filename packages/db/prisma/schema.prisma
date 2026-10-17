@@ -1,0 +1,276 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Store {
+  id        String   @id
+  tenantId  String   @default("tenant_default")
+  name      String
+  platform  String
+  url       String
+  settings  Json
+  profile   Json?
+  createdAt DateTime @default(now())
+
+  products  Product[]
+  customers Customer[]
+  orders    Order[]
+}
+
+model Product {
+  id          String  @id
+  storeId     String
+  externalId  String
+  title       String
+  price       Int
+  cost        Int?
+  weightGrams Int     @default(500)
+  imageUrl    String?
+  description String?
+
+  store Store @relation(fields: [storeId], references: [id])
+
+  @@index([storeId])
+}
+
+model Customer {
+  id              String   @id
+  storeId         String
+  externalId      String?
+  name            String
+  phone           String
+  email           String?
+  city            String?
+  whatsappConsent Boolean  @default(false)
+  optOutAt        DateTime?
+  createdAt       DateTime @default(now())
+
+  store         Store          @relation(fields: [storeId], references: [id])
+  orders        Order[]
+  conversations Conversation[]
+
+  @@index([storeId])
+}
+
+model Order {
+  id              String   @id
+  storeId         String
+  customerId      String?
+  externalId      String
+  number          String
+  address         Json
+  lines           Json
+  subtotal        Int
+  shippingCharged Int      @default(0)
+  total           Int
+  payment         String
+  utm             Json?
+  status          String   @default("received")
+  confirmAt       DateTime?
+  paymentLinkId   String?
+  createdAt       DateTime @default(now())
+
+  store     Store      @relation(fields: [storeId], references: [id])
+  customer  Customer?  @relation(fields: [customerId], references: [id])
+  shipments Shipment[]
+  quotes    CarrierQuote[]
+
+  @@unique([storeId, externalId])
+  @@index([storeId, createdAt])
+}
+
+model CarrierQuote {
+  id      String  @id
+  orderId String
+  provider String
+  carrier String
+  service String
+  freight Int
+  codCommission Int @default(0)
+  supportsCod Boolean
+  businessDays Int
+  simulated Boolean @default(false)
+  chosen  Boolean @default(false)
+  score   Float?
+  createdAt DateTime @default(now())
+
+  order Order @relation(fields: [orderId], references: [id])
+
+  @@index([orderId])
+}
+
+model Shipment {
+  id             String   @id
+  orderId        String
+  provider       String
+  carrier        String
+  service        String
+  trackingNumber String
+  labelUrl       String
+  trackUrl       String
+  total          Int
+  status         String   @default("created")
+  simulated      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  deliveredAt    DateTime?
+
+  order  Order           @relation(fields: [orderId], references: [id])
+  events TrackingEventRow[]
+
+  @@unique([carrier, trackingNumber])
+  @@index([orderId])
+}
+
+model TrackingEventRow {
+  id          String   @id
+  shipmentId  String
+  status      String
+  description String
+  location    String?
+  at          DateTime
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id])
+
+  @@index([shipmentId, at])
+}
+
+model Conversation {
+  id         String   @id
+  storeId    String
+  customerId String
+  channel    String   @default("whatsapp")
+  createdAt  DateTime @default(now())
+
+  customer Customer  @relation(fields: [customerId], references: [id])
+  messages Message[]
+
+  @@index([storeId])
+}
+
+model Message {
+  id             String   @id
+  conversationId String
+  direction      String
+  text           String
+  template       String?
+  simulated      Boolean  @default(false)
+  at             DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+
+  @@index([conversationId, at])
+}
+
+model AgentRun {
+  id       String   @id
+  storeId  String
+  orderId  String?
+  kind     String
+  summary  String
+  data     Json?
+  at       DateTime @default(now())
+
+  @@index([storeId, at])
+}
+
+model Approval {
+  id         String    @id
+  storeId    String
+  orderId    String?
+  kind       String
+  title      String
+  detail     String
+  payload    Json
+  status     String    @default("pending")
+  createdAt  DateTime  @default(now())
+  resolvedAt DateTime?
+
+  @@index([storeId, status])
+}
+
+model WebhookEvent {
+  id         String   @id
+  source     String
+  eventId    String
+  receivedAt DateTime @default(now())
+
+  @@unique([source, eventId])
+}
+
+model CampaignDraft {
+  id        String   @id
+  storeId   String
+  platform  String
+  product   String
+  status    String   @default("DRAFT")
+  externalId String?
+  payload   Json
+  metrics   Json?
+  sample    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([storeId, createdAt])
+}
+
+model Account {
+  id           String   @id
+  email        String   @unique
+  name         String
+  role         String   @default("owner")
+  storeId      String
+  passwordHash String
+  tourDone     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+}
+
+model Audience {
+  id        String   @id
+  storeId   String
+  name      String
+  segment   String
+  size      Int
+  status    String   @default("DRAFT")
+  createdAt DateTime @default(now())
+
+  @@index([storeId, createdAt])
+}
+
+model StoreAudit {
+  id        String   @id
+  storeId   String
+  kind      String
+  source    String
+  score     Int?
+  evaluated Int
+  total     Int
+  url       String?
+  payload   Json
+  createdAt DateTime @default(now())
+
+  @@index([storeId, kind, createdAt])
+}
+
+model MediaAsset {
+  id        String   @id
+  storeId   String
+  kind      String
+  title     String
+  source    String
+  role      String   @default("producto")
+  product   String?
+  seed      String?
+  file      String?
+  externalUrl String?
+  mime      String?
+  bytes     Int?
+  durationS Int?
+  sample    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([storeId, createdAt])
+}
