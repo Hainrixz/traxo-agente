@@ -31,6 +31,31 @@ Traxo es un agente **open source** que opera tu e-commerce desde Claude. Hoy sop
 - **Es global por diseño:** Colombia primero, y cualquiera puede [sumar su país](docs/mercados.md).
 - **Es para la comunidad:** MIT, sin cuentas ni servicios propios que pagar. [Contribuye](CONTRIBUTING.md), abre un issue o cuéntanos cómo lo usas.
 
+## Capturas
+
+Datos de ejemplo del modo demo incluido.
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/capturas/01-inicio.jpg" alt="Inicio"><br><sub>Inicio</sub></td>
+    <td width="50%"><img src="docs/capturas/02-agente.jpg" alt="Agente: chat con tu negocio"><br><sub>Agente: chat con tu negocio</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/capturas/04-detalle-pedido.jpg" alt="Detalle del pedido y elección de transportadora"><br><sub>Detalle del pedido y elección de transportadora</sub></td>
+    <td width="50%"><img src="docs/capturas/05-mensajes.jpg" alt="Mensajes: WhatsApp, Instagram, Messenger"><br><sub>Mensajes: WhatsApp, Instagram, Messenger</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/capturas/06-marketing.jpg" alt="Marketing: campañas y ROAS real"><br><sub>Marketing: campañas y ROAS real</sub></td>
+    <td width="50%"><img src="docs/capturas/08-uso-agentico.jpg" alt="Uso agéntico"><br><sub>Uso agéntico</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/capturas/09-constructor.jpg" alt="Constructor: tema de Shopify"><br><sub>Constructor: tema de Shopify</sub></td>
+    <td width="50%"><img src="docs/capturas/07-reportes.jpg" alt="Reportes"><br><sub>Reportes</sub></td>
+  </tr>
+</table>
+
+<p align="center"><img src="docs/capturas/11-movil-inicio.jpg" alt="En tu celular" width="260"> <img src="docs/capturas/12-movil-mensajes.jpg" alt="En tu celular" width="260"></p>
+
 ## Instálalo con un asistente (2 comandos y una conversación)
 
 Necesitas [Claude Code](https://claude.com/claude-code), [Node 24](https://nodejs.org) y [git](https://git-scm.com). El resto lo hace el asistente.

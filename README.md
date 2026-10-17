@@ -32,6 +32,31 @@ Traxo is an **open-source agent that runs your e-commerce from inside Claude**. 
 - **Global by design, Colombia first:** the first fully supported market is Colombia (COP, DANE codes, Colombian carriers). The architecture is built so anyone can add their country: see [Supported markets](#supported-markets).
 - **Community-owned:** MIT, no paid service of ours in the middle. [Contribute](CONTRIBUTING.md), open an issue, or tell us how you use it.
 
+## Screenshots
+
+Sample data from the built-in demo mode (the panel is in Spanish today).
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/capturas/01-inicio.jpg" alt="Home"><br><sub>Home</sub></td>
+    <td width="50%"><img src="docs/capturas/02-agente.jpg" alt="Agent: chat with your business"><br><sub>Agent: chat with your business</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/capturas/04-detalle-pedido.jpg" alt="Order detail and carrier choice"><br><sub>Order detail and carrier choice</sub></td>
+    <td width="50%"><img src="docs/capturas/05-mensajes.jpg" alt="Messages: WhatsApp, Instagram, Messenger"><br><sub>Messages: WhatsApp, Instagram, Messenger</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/capturas/06-marketing.jpg" alt="Marketing: campaigns and real ROAS"><br><sub>Marketing: campaigns and real ROAS</sub></td>
+    <td width="50%"><img src="docs/capturas/08-uso-agentico.jpg" alt="Agent usage"><br><sub>Agent usage</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/capturas/09-constructor.jpg" alt="Store builder: Shopify theme"><br><sub>Store builder: Shopify theme</sub></td>
+    <td width="50%"><img src="docs/capturas/07-reportes.jpg" alt="Reports"><br><sub>Reports</sub></td>
+  </tr>
+</table>
+
+<p align="center"><img src="docs/capturas/11-movil-inicio.jpg" alt="On your phone" width="260"> <img src="docs/capturas/12-movil-mensajes.jpg" alt="On your phone" width="260"></p>
+
 ## Install with the guided wizard
 
 You need [Claude Code](https://claude.com/claude-code), [Node 24](https://nodejs.org) and [git](https://git-scm.com). The wizard does the rest.
