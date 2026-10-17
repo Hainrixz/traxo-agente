@@ -159,7 +159,9 @@ export function registerMediaApi(app: Hono, rt: Runtime): void {
       simulated: demo(),
       connected: demo(),
       imported: have,
-      available: demo() ? demoCatalog().filter((i) => i.fuente === "higgsfield").length : null,
+      available: demo()
+        ? demoCatalog().filter((i) => i.fuente === "higgsfield").length || null
+        : null,
     });
   });
 

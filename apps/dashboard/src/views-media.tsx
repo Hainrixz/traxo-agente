@@ -213,7 +213,7 @@ export function Biblioteca({ ctx, onUse }: { ctx: Ctx; onUse: (a: MediaAsset) =>
               </strong>
               <span className="caption">
                 {hf?.simulated
-                  ? `Demo: no se llama a Higgsfield ni se gastan créditos. ${hf.imported} de ${hf.available ?? 0} importados.`
+                  ? `Demo: no se llama a Higgsfield ni se gastan créditos. ${hf.available ? `${hf.imported} de ${hf.available} importados` : `${hf.imported} importados`}.`
                   : "Tus videos e imágenes ya generados (se conecta desde Claude)"}
               </span>
             </span>
