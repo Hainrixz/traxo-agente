@@ -2,7 +2,10 @@
   "name": "traxo",
   "version": "0.1.0",
   "description": "Traxo: asistente logístico con IA para tiendas en Colombia. Cotiza y elige transportadora, genera guías, hace tracking, atiende novedades y prepara marketing y seguimiento de clientes. Open source.",
-  "author": { "name": "Traxo contributors" },
+  "author": {
+    "name": "Traxo contributors",
+    "url": "https://github.com/Hainrixz/traxo-agente"
+  },
   "license": "MIT",
   "keywords": [
     "ecommerce",
@@ -12,5 +15,7 @@
     "tiendanube",
     "contraentrega",
     "whatsapp"
-  ]
+  ],
+  "homepage": "https://github.com/Hainrixz/traxo-agente",
+  "repository": "https://github.com/Hainrixz/traxo-agente"
 }
