@@ -17,6 +17,7 @@ export function mountDashboard(app: Hono): boolean {
   }
   const root = relative(process.cwd(), DIST) || ".";
   app.use("/assets/*", serveStatic({ root }));
+  app.use("/paginas/*", serveStatic({ root })); // capturas de las páginas construidas
   app.get("/favicon.svg", serveStatic({ root }));
   // Rutas de la SPA (el dashboard usa hash, pero por si acaso): todo lo que no sea API ni webhook devuelve index.html.
   app.get("*", (c) => {

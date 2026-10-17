@@ -15,6 +15,8 @@ import type { Context, Hono } from "hono";
 import { z } from "zod";
 import { askClaude } from "./ai.ts";
 import { storeOf } from "./auth.ts";
+import { BUILT_PAGES, checkEmbeddable } from "./built-pages.ts";
+import { isDemo } from "./mode.ts";
 import type { Runtime } from "./runtime.ts";
 
 const PLATFORMS = ["shopify", "tiendanube", "woocommerce", "otra"] as const;
@@ -137,6 +139,20 @@ export function registerBuilderApi(app: Hono, rt: Runtime): void {
       platforms: PLATFORMS,
     }),
   );
+
+  // Páginas ya construidas de referencia: solo la cuenta de ejemplo en modo demo; el resto ve la lista vacía.
+  app.get("/api/builder/pages", (c) =>
+    c.json(isDemo() && sid(c) === rt.storeId ? BUILT_PAGES : []),
+  );
+
+  app.get("/api/builder/pages/:id/embeddable", async (c) => {
+    const page =
+      isDemo() && sid(c) === rt.storeId
+        ? BUILT_PAGES.find((p) => p.id === c.req.param("id"))
+        : undefined;
+    if (!page) return c.json({ ok: false, message: "No encuentro esa página." }, 404);
+    return c.json({ embeddable: await checkEmbeddable(page.url) });
+  });
 
   app.get("/api/builder", async (c) =>
     c.json(

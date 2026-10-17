@@ -190,4 +190,24 @@ describe("constructor de tienda", () => {
     expect(Object.keys(bundle.files).sort()).toEqual(["LEEME.md", "diseno.json", "index.html"]);
     expect(bundle.files["LEEME.md"]).toContain("no admite todavía un tema automático");
   });
+
+  it("las páginas construidas de referencia salen solo en la cuenta de ejemplo; una cuenta nueva ve la lista vacía", async () => {
+    const nueva = await signup();
+    expect(await (await call(nueva, "/api/builder/pages")).json()).toEqual([]);
+    const r = await app.request("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ email: "admin@traxo.demo", password: "traxo-demo" }),
+      headers: { "content-type": "application/json", "x-forwarded-for": "10.7.8.9" },
+    });
+    const admin = (r.headers.get("set-cookie") ?? "").split(";")[0] ?? "";
+    const pages = (await (await call(admin, "/api/builder/pages")).json()) as Array<{
+      id: string;
+      url: string;
+      kind: string;
+    }>;
+    expect(pages.map((p) => p.id)).toEqual(["claudio-dogs"]);
+    expect(pages[0]?.url).toBe("https://claudio-dogs.vercel.app");
+    expect(pages[0]?.kind).toBe("referencia");
+    expect((await app.request("/api/builder/pages")).status).toBe(401);
+  });
 });
