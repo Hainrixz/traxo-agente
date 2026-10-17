@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" width="1280" height="520" role="img" aria-labelledby="t d">
-  <title id="t">Traxo: tu e-commerce en Colombia, operado desde Claude</title>
-  <desc id="d">Un pedido pasa por cinco pasos que el agente hace solo: valida la dirección, cotiza transportadoras, confirma por WhatsApp, genera la guía y vigila el envío.</desc>
+  <title id="t">Traxo: your e-commerce, run from Claude</title>
+  <desc id="d">An order goes through five steps the agent does on its own: validates the address, quotes carriers, confirms on WhatsApp, creates the label and tracks the parcel.</desc>
   <style>
     :root { --bg:#111111; --panel:#1a1a1a; --line:#2c2c2c; --ink:#F5F2EA; --muted:#A8A39A; --gold:#FFC800; }
     text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
@@ -57,40 +57,40 @@
 
   <!-- Titular -->
   <g class="rise d2">
-    <text x="64" y="190" font-size="44" font-weight="800" fill="var(--ink)" letter-spacing="-1.4">Tu e-commerce en Colombia,</text>
-    <text x="64" y="244" font-size="44" font-weight="800" fill="var(--gold)" letter-spacing="-1.4">operado desde Claude.</text>
+    <text x="64" y="190" font-size="48" font-weight="800" fill="var(--ink)" letter-spacing="-1.5">Your e-commerce,</text>
+    <text x="64" y="244" font-size="48" font-weight="800" fill="var(--gold)" letter-spacing="-1.5">run from Claude.</text>
   </g>
   <g class="rise d3">
-    <text x="64" y="296" font-size="20" fill="var(--muted)">Cotiza transportadoras, genera la guía, rastrea el envío,</text>
-    <text x="64" y="326" font-size="20" fill="var(--muted)">atiende las novedades y vende por WhatsApp. Open source.</text>
+    <text x="64" y="296" font-size="20" fill="var(--muted)">Quotes carriers, creates the label, tracks the parcel,</text>
+    <text x="64" y="326" font-size="20" fill="var(--muted)">handles delivery issues and sells on WhatsApp. Open source.</text>
   </g>
 
   <!-- Etiquetas -->
   <g class="rise d4" font-size="15" font-weight="600">
-    <g transform="translate(64 372)"><g><rect width="196" height="38" rx="19" fill="#1f1f1f" stroke="#333"/><circle cx="20" cy="19" r="4" fill="var(--gold)" class="blink"/><text x="34" y="24.5" fill="var(--ink)">Plugin de Claude Code</text></g></g>
-    <g transform="translate(272 372)"><g><rect width="170" height="38" rx="19" fill="#1f1f1f" stroke="#333"/><text x="85" y="24.5" fill="var(--ink)" text-anchor="middle">Local o Railway</text></g></g>
+    <g transform="translate(64 372)"><g><rect width="196" height="38" rx="19" fill="#1f1f1f" stroke="#333"/><circle cx="20" cy="19" r="4" fill="var(--gold)" class="blink"/><text x="34" y="24.5" fill="var(--ink)">Claude Code plugin</text></g></g>
+    <g transform="translate(272 372)"><g><rect width="170" height="38" rx="19" fill="#1f1f1f" stroke="#333"/><text x="85" y="24.5" fill="var(--ink)" text-anchor="middle">Local or cloud</text></g></g>
     <g transform="translate(454 372)"><g><rect width="96" height="38" rx="19" fill="#1f1f1f" stroke="#333"/><text x="48" y="24.5" fill="var(--ink)" text-anchor="middle">MIT</text></g></g>
   </g>
   <g class="rise d5">
-    <text x="64" y="466" font-size="15" class="mono" fill="#7d7a73">/traxo:instalar  ·  12 skills  ·  4 agentes  ·  41 herramientas MCP</text>
+    <text x="64" y="466" font-size="15" class="mono" fill="#7d7a73">/traxo:instalar  ·  12 skills  ·  4 agents  ·  41 MCP tools</text>
   </g>
 
   <!-- Tarjeta del pedido -->
   <g class="rise d3">
     <rect x="690" y="64" width="526" height="392" rx="22" fill="var(--panel)" stroke="#2f2f2f"/>
-    <text x="722" y="108" font-size="15" class="mono" fill="var(--muted)">PEDIDO #1042 · PEREIRA</text>
-    <text x="722" y="140" font-size="26" font-weight="800" fill="var(--ink)">Contraentrega $ 89.900</text>
+    <text x="722" y="108" font-size="15" class="mono" fill="var(--muted)">ORDER #1042 · PEREIRA</text>
+    <text x="722" y="140" font-size="26" font-weight="800" fill="var(--ink)">Cash on delivery $ 89,900</text>
     <rect x="722" y="160" width="462" height="6" rx="3" fill="#2b2b2b"/>
     <rect class="bar" x="722" y="160" width="462" height="6" rx="3" fill="var(--gold)"/>
 
     <g font-size="19" fill="var(--ink)">
-      <g class="row r1" transform="translate(722 206)"><circle class="dot" cx="14" cy="0" r="13" fill="#3a3a3a"/><path class="tick" d="M8 0l5 5 9-10" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="42" y="6">Valida la dirección (DANE)</text></g>
-      <g class="row r2" transform="translate(722 252)"><circle class="dot" cx="14" cy="0" r="13" fill="#3a3a3a"/><path class="tick" d="M8 0l5 5 9-10" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="42" y="6">Cotiza varias vías y elige la mejor</text></g>
-      <g class="row r3" transform="translate(722 298)"><circle class="dot" cx="14" cy="0" r="13" fill="#3a3a3a"/><path class="tick" d="M8 0l5 5 9-10" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="42" y="6">Confirma por WhatsApp</text></g>
-      <g class="row r4" transform="translate(722 344)"><circle class="dot" cx="14" cy="0" r="13" fill="#3a3a3a"/><path class="tick" d="M8 0l5 5 9-10" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="42" y="6">Genera la guía y la escribe en tu tienda</text></g>
-      <g class="row r5" transform="translate(722 390)"><circle class="dot" cx="14" cy="0" r="13" fill="#3a3a3a"/><path class="tick" d="M8 0l5 5 9-10" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="42" y="6">Vigila el envío y avisa al cliente</text></g>
+      <g class="row r1" transform="translate(722 206)"><circle class="dot" cx="14" cy="0" r="13" fill="#3a3a3a"/><path class="tick" d="M8 0l5 5 9-10" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="42" y="6">Validates the address</text></g>
+      <g class="row r2" transform="translate(722 252)"><circle class="dot" cx="14" cy="0" r="13" fill="#3a3a3a"/><path class="tick" d="M8 0l5 5 9-10" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="42" y="6">Quotes carriers, picks the best</text></g>
+      <g class="row r3" transform="translate(722 298)"><circle class="dot" cx="14" cy="0" r="13" fill="#3a3a3a"/><path class="tick" d="M8 0l5 5 9-10" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="42" y="6">Confirms on WhatsApp</text></g>
+      <g class="row r4" transform="translate(722 344)"><circle class="dot" cx="14" cy="0" r="13" fill="#3a3a3a"/><path class="tick" d="M8 0l5 5 9-10" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="42" y="6">Creates the label, writes it to your store</text></g>
+      <g class="row r5" transform="translate(722 390)"><circle class="dot" cx="14" cy="0" r="13" fill="#3a3a3a"/><path class="tick" d="M8 0l5 5 9-10" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="42" y="6">Tracks the parcel, updates the customer</text></g>
     </g>
-    <text x="722" y="436" font-size="13" fill="#7d7a73">Tú solo apruebas lo que el agente no decide solo.</text>
+    <text x="722" y="436" font-size="13" fill="#7d7a73">You only approve what the agent should not decide alone.</text>
   </g>
 
   <!-- Canales flotando -->

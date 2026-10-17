@@ -4,6 +4,10 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). E
 
 ## [Sin publicar]
 
+### Cambiado
+- README principal en inglés y `README.es.md`; hero y About en ambos idiomas.
+- Posicionamiento: «Colombia primero, global por diseño». Nuevas guías [`docs/mercados.md`](docs/mercados.md) y [`docs/ROADMAP.md`](docs/ROADMAP.md).
+
 ## [0.1.0] · 2026-10
 Primera versión para la comunidad.
 

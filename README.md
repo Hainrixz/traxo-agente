@@ -1,259 +1,247 @@
 <p align="center">
-  <img src="docs/hero.svg" alt="Traxo: tu e-commerce en Colombia, operado desde Claude" width="100%">
+  <img src="docs/hero.svg" alt="Traxo: your e-commerce, run from Claude" width="100%">
 </p>
 
 <p align="center">
   <a href="https://github.com/Hainrixz/traxo-agente/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Hainrixz/traxo-agente/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="LICENSE"><img alt="Licencia MIT" src="https://img.shields.io/badge/licencia-MIT-FFC800"></a>
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-FFC800"></a>
   <img alt="Node 24" src="https://img.shields.io/badge/node-%E2%89%A524-111111">
-  <img alt="Plugin de Claude Code" src="https://img.shields.io/badge/plugin-Claude%20Code-111111">
-  <img alt="PRs bienvenidos" src="https://img.shields.io/badge/PRs-bienvenidos-FFC800">
+  <img alt="Claude Code plugin" src="https://img.shields.io/badge/plugin-Claude%20Code-111111">
+  <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-FFC800">
 </p>
 
 <p align="center">
-  <b>ES</b> · <a href="#english">English</a> ·
-  <a href="#instálalo-con-un-asistente-2-comandos-y-una-conversación">Instalar</a> ·
-  <a href="#qué-hay-en-el-panel">Panel</a> ·
-  <a href="#en-la-nube-railway--postgres">Railway</a> ·
-  <a href="CONTRIBUTING.md">Contribuir</a>
+  <b>English</b> · <a href="README.es.md">Español</a> ·
+  <a href="#install-with-the-guided-wizard">Install</a> ·
+  <a href="#whats-in-the-panel">Panel</a> ·
+  <a href="#supported-markets">Markets</a> ·
+  <a href="#run-it-in-the-cloud">Cloud</a> ·
+  <a href="CONTRIBUTING.md">Contribute</a>
 </p>
 
-## Acerca de Traxo
+## About Traxo
 
 <p align="center">
-  <img src="docs/about.svg" alt="Qué hace Traxo: logística, tracking, marketing, mensajes, uso agéntico y constructor de tienda" width="100%">
+  <img src="docs/about.svg" alt="What Traxo does: logistics, tracking, marketing, messaging, agent usage and a store builder" width="100%">
 </p>
 
-Traxo es un agente **open source** que opera tu e-commerce en Colombia desde Claude. Cuando entra un pedido cotiza entre transportadoras, elige la mejor (y te explica por qué), confirma por WhatsApp las contraentregas de riesgo, genera la guía, la escribe en tu tienda, vigila el envío y atiende las novedades. También audita tu tienda, arma anuncios con tus propios videos UGC y fotos de producto, te dice qué anuncio trajo qué venta, cuida a tus clientes con su consentimiento y te muestra cuánto trabajó el agente y cuánto costó. **Todo lo que pasa en tu negocio queda en un solo lugar, y tiene un agente al que le puedes preguntar.**
+Traxo is an **open-source agent that runs your e-commerce from inside Claude**. When an order comes in it quotes carriers, picks the best one (and explains why), confirms risky cash-on-delivery orders over WhatsApp, creates the shipping label, writes it back to your store, tracks the parcel and handles delivery incidents. It also audits your store, builds ads from your own UGC videos and product photos, tells you which ad brought which sale, looks after your customers with their consent, and shows you what the agent did and what it cost. **Everything that happens in your business lives in one place, with an agent you can ask.**
 
-- **Es tuyo:** corre en tu computador o en tu Railway. Tus datos y tus llaves no salen de tu servidor.
-- **Es honesto:** lo que no se puede medir sale como `N/A`; lo que gasta, publica o borra espera tu sí; las campañas nacen en pausa.
-- **Es para la comunidad:** MIT, sin cuentas ni servicios propios que pagar. [Contribuye](CONTRIBUTING.md), abre un issue o cuéntanos cómo lo usas.
+- **Yours:** runs on your computer or your own cloud. Your data and keys never leave your server.
+- **Honest:** what can't be measured shows as `N/A`; anything that spends, publishes or deletes waits for your yes; campaigns are born paused.
+- **Global by design, Colombia first:** the first fully supported market is Colombia (COP, DANE codes, Colombian carriers). The architecture is built so anyone can add their country: see [Supported markets](#supported-markets).
+- **Community-owned:** MIT, no paid service of ours in the middle. [Contribute](CONTRIBUTING.md), open an issue, or tell us how you use it.
 
-## Instálalo con un asistente (2 comandos y una conversación)
+## Install with the guided wizard
 
-Necesitas [Claude Code](https://claude.com/claude-code), [Node 24](https://nodejs.org) y [git](https://git-scm.com). El resto lo hace el asistente.
+You need [Claude Code](https://claude.com/claude-code), [Node 24](https://nodejs.org) and [git](https://git-scm.com). The wizard does the rest.
 
 ```bash
 claude plugin marketplace add Hainrixz/traxo-agente
 claude plugin install traxo@traxo
 ```
 
-Abre `claude` y escribe:
+Open `claude` and type:
 
 ```
 /traxo:instalar
 ```
 
-El asistente te **hace las preguntas** y se encarga de todo, paso a paso, verificando cada uno:
+The wizard **asks you questions** and handles everything step by step, verifying each one:
 
-1. Clona el proyecto, instala dependencias y compila el panel.
-2. Te pregunta **dónde quieres correrlo** (en tu computador o en Railway), **qué plataforma usa tu tienda** (Shopify, Tiendanube, WooCommerce), **con qué envías**, tu correo de acceso, tu dirección de despacho y **qué más activar** (WhatsApp/Instagram/Messenger con Zernio, cobro previo con Wompi, IA con tu llave de Claude).
-3. Crea tu archivo `.env` con lo que no es secreto, **genera por ti** los secretos propios (sesiones, token de `/mcp`, contraseña de administrador) y te dice **dónde conseguir cada llave** de terceros. **Tú las pegas en el `.env`: nunca pasan por el chat ni las ve el modelo.**
-4. Corre `pnpm doctor`, que revisa todo (✓ / ✗ / –) y prueba las conexiones sin mostrar ningún valor.
-5. Lo arranca en local, o lo sube a Railway (proyecto, Postgres, variables, volumen y dominio) con tu confirmación.
-6. Te da las direcciones de **webhook** para tu tienda, Envia.com, Zernio y Wompi, conecta Claude con las herramientas de Traxo y te deja con el primer día listo.
+1. Clones the project, installs dependencies and builds the panel.
+2. Asks **where to run it** (your computer or a cloud like Railway), **which platform your store uses** (Shopify, Tiendanube, WooCommerce), **who you ship with**, your login email, your dispatch address and **what else to turn on** (WhatsApp/Instagram/Messenger through Zernio, prepayment with Wompi, AI with your own Claude key).
+3. Creates your `.env` with the non-secret values, **generates the internal secrets for you** (sessions, `/mcp` token, admin password) and tells you **where to get each third-party key**. **You paste those into `.env` yourself: they never go through the chat or reach the model.**
+4. Runs `pnpm doctor`, which checks everything (✓ / ✗ / –) and tests connections without ever printing a value.
+5. Starts it locally, or deploys it to Railway (project, Postgres, variables, volume and domain) with your confirmation.
+6. Gives you the **webhook** URLs for your store, Envia.com, Zernio and Wompi, connects Claude to Traxo's tools and leaves you ready for day one.
 
-Si algo falla, el asistente lo explica y lo arregla antes de seguir. Puedes volver a correr `/traxo:instalar` cuando quieras: no pisa lo que ya configuraste.
+If something fails, the wizard explains it and fixes it before moving on. You can re-run `/traxo:instalar` any time: it never overwrites what you already configured. The wizard talks in Spanish today; English is on the [roadmap](docs/ROADMAP.md).
 
 <details>
-<summary>Instalación manual (sin el asistente)</summary>
+<summary>Manual install (without the wizard)</summary>
 
 ```bash
 git clone https://github.com/Hainrixz/traxo-agente.git && cd traxo-agente
 corepack enable && pnpm install
 pnpm build
-node scripts/setup.mjs --answers '{"adminEmail":"tu@correo.co","platform":"shopify","storeDomain":"tutienda.myshopify.com","envia":true}'
-# abre .env y pega tus llaves (la lista de pendientes sale en el comando anterior)
-pnpm doctor           # revisa que todo esté bien
-pnpm start            # http://localhost:8787  (entra con el correo y la contraseña de tu .env)
+node scripts/setup.mjs --answers '{"adminEmail":"you@example.com","platform":"shopify","storeDomain":"yourstore.myshopify.com","envia":true}'
+# open .env and paste your keys (the pending list is printed by the command above)
+pnpm doctor           # checks that everything is fine
+pnpm start            # http://localhost:8787  (sign in with the email and password in your .env)
 claude mcp add --scope user traxo -- pnpm --silent --dir "$PWD" exec tsx apps/worker/src/mcp-stdio.ts
 ```
 
-`node scripts/setup.mjs` (o `pnpm configurar`) y `pnpm doctor` no imprimen nunca el valor de una variable. Las plantillas de todas las variables están en [`.env.example`](.env.example).
+`node scripts/setup.mjs` (or `pnpm configurar`) and `pnpm doctor` never print a variable's value. Templates for every variable are in [`.env.example`](.env.example).
 </details>
 
-## Qué hay en el panel
+## What's in the panel
 
-El menú de la izquierda tiene lo que usas a diario. Lo que se configura vive en **tu perfil** (abajo a la izquierda): ajustes, límites de autonomía, conexiones, tema y cerrar sesión.
+The left menu has what you use daily. What you configure lives in **your profile** (bottom left): settings, autonomy limits, connections, theme and sign out. The panel is in Spanish today; the translation layer is the first step of the [roadmap](docs/ROADMAP.md).
 
-| Sección | Qué hace |
+| Section | What it does |
 |---|---|
-| **Inicio** | Cómo va el día, dónde está cada pedido y lo que el agente hizo hoy |
-| **Agente** | Un chat con tu negocio: «¿cuánto vendí esta semana?», «¿qué anuncio funciona y cuál no?», «¿dónde está el #1186?». Responde con tus datos reales, con las fuentes, y no inventa cifras (un dato que falta sale como N/A) |
-| **Pedidos** | Cada pedido con su recorrido, cómo se eligió la transportadora (costo con recaudo, días, confiabilidad) y la línea de tiempo de la guía |
-| **Envíos** | Comparador de transportadoras con tus propios envíos, recogidas y cancelación |
-| **Aprobaciones** | Lo que el agente no decide solo: dirección dudosa, guía por encima del tope, contraentrega sin respuesta |
-| **Mensajes** | Bandeja tipo chat con contactos: **WhatsApp, Instagram y Messenger** en un solo lugar, con filtro por canal, búsqueda y ficha del cliente |
-| **Clientes** | Segmentos (recompra, nuevos, inactivos), audiencias, mensajes con consentimiento, baja con «BAJA», exportar o borrar datos (Ley 1581) |
-| **Marketing** | Campañas con ROAS real, creativos, **biblioteca de tus videos UGC y fotos de producto**, asistente de campañas (copy dentro de los límites de cada plataforma) y qué empujar según margen |
-| **Tienda y SEO** | Auditoría de SEO, visibilidad en IA y diseño. El puntaje se calcula **sobre los checks que se pudieron medir** (los N/A no cuentan) |
-| **Reportes** | Ventas, qué anuncio trajo qué venta, logística por transportadora y recaudo |
-| **Constructor** | Diseña tu tienda: genera un **tema de Shopify** (Online Store 2.0, en español, accesible) con tu catálogo real, vista previa en computador y celular, descarga en .zip y flujo hacia GitHub privado y Shopify **sin publicar** |
-| **Uso agéntico** | Cuánto trabajó el agente (acciones, horas de trabajo manual evitadas, estimadas), cuánto costó (IA y créditos) y por canal de mensajes; con presupuesto opcional |
-| **Más → Actividad y Conexiones** | Todo lo que hace el agente, en orden, y qué está conectado (tienda, transportadoras, Zernio, anuncios) |
+| **Home** | How the day is going, where every order is, and what the agent did today |
+| **Agent** | A chat with your business: "how much did I sell this week?", "which ad works and which doesn't?", "where is #1186?". Answers with your real data and sources, and never invents numbers (a missing figure shows as N/A) |
+| **Orders** | Every order with its journey, how the carrier was chosen (cost with collection fee, days, reliability) and the label's timeline |
+| **Shipments** | Carrier comparison using your own shipments, pickups and cancellation |
+| **Approvals** | What the agent won't decide alone: doubtful address, label above your cap, unanswered cash on delivery |
+| **Messages** | A chat-style inbox with contacts: **WhatsApp, Instagram and Messenger** in one place, with channel filter, search and customer card |
+| **Customers** | Segments (repeat, new, inactive), audiences, consent-based messages, opt-out with "BAJA", export or delete data |
+| **Marketing** | Campaigns with real ROAS, creatives, a **library of your UGC videos and product photos**, a campaign assistant (copy within each platform's limits) and what to push by margin |
+| **Store & SEO** | SEO, AI-visibility and design audits. The score is computed **over the checks that could be measured** (N/A doesn't count) |
+| **Reports** | Sales, which ad brought which sale, logistics per carrier and collections |
+| **Builder** | Generates a **Shopify theme** (Online Store 2.0, accessible) from your real catalog, with desktop/phone preview, .zip download and a flow to a private GitHub repo and Shopify **without publishing** |
+| **Agent usage** | What the agent did (actions, manual hours saved: estimated), what it cost (AI and credits) and messages per channel, with an optional budget |
+| **More → Activity and Connections** | Everything the agent does, in order, and what is connected (store, carriers, Zernio, ads) |
 
-## Cómo funciona el seguimiento
+## How tracking works
 
-1. **Entra un pedido**. Traxo valida la dirección (DANE), puntúa el riesgo de la contraentrega y cotiza en todas las vías a la vez.
-2. **Elige y explica**: la transportadora con mejor costo total (flete + comisión de recaudo), tiempo y confiabilidad. Si el riesgo es alto, **antes de gastar en una guía** le escribe al cliente: confirma, paga ahora con descuento o cambia la dirección. Sin respuesta en 24 h te lo pasa a ti.
-3. **Genera la guía** (si está dentro de tu tope) y la escribe en Shopify, Tiendanube o WooCommerce.
-4. **Vigila cada guía**: recibe los eventos de la transportadora (webhook o consulta periódica), actualiza la línea de tiempo y avisa al cliente «llega hoy, ten $ X listos».
-5. **Atiende las novedades**: si la entrega falla, le escribe al cliente por su canal; «Sí, mañana estoy» reprograma sola, una dirección nueva te llega a Aprobaciones.
-6. **Todo queda registrado**: Actividad (lo que hizo el agente), Mensajes (lo que se dijo) y Pedidos (el recorrido). El **Agente** del panel te lo resume cuando preguntes.
+1. **An order arrives.** Traxo validates the address, scores the cash-on-delivery risk and quotes every route at once.
+2. **It picks and explains:** the carrier with the best total cost (freight + collection fee), time and reliability. If the risk is high, **before spending on a label** it messages the customer: confirm, pay now with a discount, or change the address. No answer in 24 h and it comes to you.
+3. **It creates the label** (if within your cap) and writes it to Shopify, Tiendanube or WooCommerce.
+4. **It watches every parcel:** receives carrier events (webhook or polling), updates the timeline and tells the customer "arrives today, have $ X ready".
+5. **It handles incidents:** if delivery fails it writes to the customer on their channel; "yes, I'm home tomorrow" reschedules by itself, a new address goes to Approvals.
+6. **Everything is recorded:** Activity (what the agent did), Messages (what was said) and Orders (the journey). The panel's **Agent** summarizes it whenever you ask.
 
-## Anuncios con tus propios videos UGC y fotos
+## Ads from your own UGC videos and photos
 
-En **Marketing → Biblioteca** subes tus videos UGC y fotos de producto (arrastrando archivos; jpg, png, mp4, mov, hasta 60 MB) o los traes de Higgsfield. Al armar una campaña eliges de la biblioteca: **no cuesta créditos**. Si falta algo, Traxo propone el prompt y el costo en créditos, y **no genera nada hasta que lo confirmes**. Las campañas siempre nacen en borrador o en pausa.
+In **Marketing → Library** you upload your UGC videos and product photos (drag and drop; jpg, png, mp4, mov, up to 60 MB) or bring them from Higgsfield. When you build a campaign you pick from the library: **it costs no credits**. If something is missing, Traxo proposes the prompt and the credit cost, and **generates nothing until you confirm**. Campaigns are always born as drafts or paused.
 
-Desde Claude, la skill `/traxo:campana` mira primero tu biblioteca (`listar_biblioteca`), usa lo que ya tienes como referencia y registra lo que se genere (`agregar_a_biblioteca`). Tus archivos viven en tu servidor y no se publican en ninguna plataforma sin tu aprobación.
+From Claude, the `/traxo:campana` skill checks your library first (`listar_biblioteca`), uses what you already have as reference and records whatever is generated (`agregar_a_biblioteca`). Your files live on your server and are never published to any platform without your approval.
 
-## Mensajería y anuncios con un solo conector: Zernio
+## Messaging and ads through one connector: Zernio
 
-[Zernio](https://zernio.com) conecta WhatsApp, Instagram, Messenger, Facebook y cuentas de Google Ads y TikTok Ads con una sola llave. En Traxo:
+[Zernio](https://zernio.com) connects WhatsApp, Instagram, Messenger, Facebook and Google Ads / TikTok Ads accounts with a single key. In Traxo:
 
-1. Crea tu cuenta en Zernio y conecta tus páginas.
-2. Pon `ZERNIO_API_KEY` y `ZERNIO_WEBHOOK_SECRET` en tu `.env` (o en las variables de Railway).
-3. Apunta el webhook de Zernio a `https://TU-DOMINIO/webhooks/messaging`.
+1. Create your Zernio account and connect your pages.
+2. Set `ZERNIO_API_KEY` and `ZERNIO_WEBHOOK_SECRET` in your `.env` (or your cloud variables).
+3. Point Zernio's webhook to `https://YOUR-DOMAIN/webhooks/messaging`.
 
-Los mensajes aparecen en **Mensajes** y el agente los atiende. Traxo también es un servidor MCP, así que desde Claude puedes usar junto a él cualquier otro conector (Meta Ads, Google Ads, TikTok) o cualquier API.
+Messages show up in **Messages** and the agent handles them. Traxo is also an MCP server, so from Claude you can use any other connector next to it (Meta Ads, Google Ads, TikTok) or any API.
 
-## Úsalo dentro de Claude
+## Use it inside Claude
 
-Con el plugin instalado tienes **12 skills** (`instalar`, `constructor`, `start`, `conectar`, `pedidos`, `envios`, `seguimiento`, `marketing`, `campana`, `clientes`, `tienda`, `reportes`), **4 agentes** y un servidor MCP con **41 herramientas** en español. Las que escriben, gastan o borran piden `confirm: true`; sin él devuelven un borrador. Pídele lo que quieras: «audita mi tienda», «qué anuncio funciona», «arma una campaña con mis videos UGC», «diseña mi tienda» (`/traxo:constructor`), «cuánto ha trabajado el agente».
+With the plugin installed you get **12 skills** (`instalar`, `constructor`, `start`, `conectar`, `pedidos`, `envios`, `seguimiento`, `marketing`, `campana`, `clientes`, `tienda`, `reportes`), **4 agents** and an MCP server with **41 tools**. Tools that write, spend or delete require `confirm: true`; without it they return a draft. Ask anything: "audit my store", "which ad works", "build a campaign with my UGC videos", "design my store" (`/traxo:constructor`), "how much has the agent worked". Skill and tool names are in Spanish today.
 
-## IA con tu llave de Claude (opcional) y seguridad
+## Optional AI with your own Claude key, and security
 
-Con `ANTHROPIC_API_KEY` en tu `.env` o en las variables de Railway, Traxo usa Claude en tres lugares. **La llave vive solo en el servidor: nunca viaja al navegador ni sale en ninguna respuesta.**
+With `ANTHROPIC_API_KEY` in your `.env` or cloud variables, Traxo uses Claude in three places. **The key lives only on the server: it never reaches the browser or any response.**
 
-| Dónde | Qué hace con IA | Si falla o no hay cupo |
+| Where | What AI does | If it fails or no quota |
 |---|---|---|
-| **Agente** del panel | Responde en lenguaje libre y recuerda el hilo de la conversación, con tus cifras reales | Responde con reglas sobre tus datos |
-| **Respuestas del cliente** | Entiende texto libre tras una novedad («pues ni modo, pasen mañana»). Solo reprograma con confianza ≥ 80 %; si no, lo pasa a una persona con un **borrador de respuesta que no se envía solo** | Lo ve una persona |
-| **Campañas** | «Mejorar el copy con IA» reescribe títulos y textos **dentro de los límites de cada plataforma** | Queda tu copy |
+| **Agent** in the panel | Free-language answers that remember the conversation, with your real figures | Answers with rules over your data |
+| **Customer replies** | Understands free text after an incident ("fine, drop it tomorrow"). Reschedules only at ≥ 80 % confidence; otherwise hands it to a person with a **draft reply that is never sent by itself** | A person sees it |
+| **Campaigns** | "Improve copy with AI" rewrites titles and texts **within each platform's limits** | Your copy stays |
 
-**Frenos de gasto:** por tienda 6 consultas por minuto y 40 al día, y 500 al día en toda la instalación (`TRAXO_AI_PER_MIN`, `TRAXO_AI_PER_STORE_DAILY`, `TRAXO_AI_GLOBAL_DAILY`). `TRAXO_AI=off` la apaga. El texto de terceros (clientes, páginas) va marcado como dato, nunca como instrucción.
+**Spend limits:** per store 6 requests per minute and 40 per day, and 500 per day per installation (`TRAXO_AI_PER_MIN`, `TRAXO_AI_PER_STORE_DAILY`, `TRAXO_AI_GLOBAL_DAILY`). `TRAXO_AI=off` turns it off. Third-party text (customers, web pages) is marked as data, never as instructions.
 
-**Qué queda expuesto y cómo se protege:** cabeceras de seguridad en todo; límite de peticiones por IP (`TRAXO_RATE_PER_MIN`); cuerpo máximo de 1 MB (60 MB solo al subir archivos); `/mcp` cerrado sin `TRAXO_MCP_TOKEN` salvo desde tu computador; webhooks con firma; sesiones firmadas y aisladas por tienda; y una tienda real sin `TRAXO_ADMIN_EMAIL`/`TRAXO_ADMIN_PASSWORD` solo responde desde tu propio computador.
+**What is exposed and how it is protected:** security headers everywhere; per-IP rate limit (`TRAXO_RATE_PER_MIN`); 1 MB body cap (60 MB only for file uploads); `/mcp` closed without `TRAXO_MCP_TOKEN` except from your own computer; signed webhooks; signed, per-store-isolated sessions; and a real store without `TRAXO_ADMIN_EMAIL`/`TRAXO_ADMIN_PASSWORD` only answers from your own computer. Report vulnerabilities privately: [`SECURITY.md`](SECURITY.md).
 
-## En la nube: Railway + Postgres
+## Run it in the cloud
 
-El asistente lo hace por ti (`/traxo:instalar` → Railway). Si prefieres hacerlo a mano:
+The wizard does it for you (`/traxo:instalar` → cloud). Railway is the documented target (Postgres included); any host that runs Node 24 and Postgres works. By hand:
 
-**Con el panel de Railway**
+**Railway dashboard**
 
-1. En [railway.com](https://railway.com): **New Project → Deploy from GitHub repo** y elige tu fork de este repo (`railway.json` ya trae el build y el healthcheck `/health`).
-2. En el mismo proyecto: **New → Database → PostgreSQL**.
-3. En el servicio de la app → **Variables**: `DATABASE_URL` = `${{Postgres.DATABASE_URL}}`, y las de tu `.env` (`TRAXO_SESSION_SECRET`, `TRAXO_ADMIN_EMAIL`, `TRAXO_ADMIN_PASSWORD`, `TRAXO_MCP_TOKEN`, tu tienda, envíos, etc.).
-4. **Settings → Networking → Generate Domain**. El panel, la API, los webhooks y `/mcp` salen del mismo servicio.
-5. Para conservar los videos y fotos de la biblioteca: un **Volume** montado en `/data` y `TRAXO_MEDIA_DIR=/data/media`.
+1. On [railway.com](https://railway.com): **New Project → Deploy from GitHub repo** and pick your fork (`railway.json` already has the build and the `/health` healthcheck).
+2. In the same project: **New → Database → PostgreSQL**.
+3. In the app service → **Variables**: `DATABASE_URL` = `${{Postgres.DATABASE_URL}}`, plus the ones from your `.env` (`TRAXO_SESSION_SECRET`, `TRAXO_ADMIN_EMAIL`, `TRAXO_ADMIN_PASSWORD`, `TRAXO_MCP_TOKEN`, your store, carriers…).
+4. **Settings → Networking → Generate Domain**. The panel, API, webhooks and `/mcp` all come from the same service.
+5. To keep library videos and photos: a **Volume** mounted at `/data` and `TRAXO_MEDIA_DIR=/data/media`.
 
-**Con la CLI**
+**Railway CLI**
 
 ```bash
 npm i -g @railway/cli && railway login
 railway init && railway add --database postgres
 railway up
-node scripts/railway-vars.mjs --service <tu-servicio>   # sube tu .env sin imprimir valores
+node scripts/railway-vars.mjs --service <your-service>   # pushes your .env without printing values
 railway domain
 ```
 
-Conecta Claude a tu servidor en la nube:
+Connect Claude to your cloud server:
 
 ```bash
-claude mcp add --transport http traxo https://TU-DOMINIO/mcp --header "Authorization: Bearer $TRAXO_MCP_TOKEN"
+claude mcp add --transport http traxo https://YOUR-DOMAIN/mcp --header "Authorization: Bearer $TRAXO_MCP_TOKEN"
 ```
 
-### Webhooks (para que Traxo se entere en vivo)
+### Webhooks (so Traxo hears things live)
 
-| De | Dirección | Evento |
+| From | Address | Event |
 |---|---|---|
-| Tu tienda | `https://TU-DOMINIO/webhooks/commerce/shopify` (o `tiendanube`, `woocommerce`) | Pedido creado |
-| Envia.com | `https://TU-DOMINIO/webhooks/carriers/envia-com` | Tracking |
-| Zernio | `https://TU-DOMINIO/webhooks/messaging` | Mensajes entrantes |
-| Wompi | `https://TU-DOMINIO/webhooks/payments/wompi` | Transacción actualizada |
+| Your store | `https://YOUR-DOMAIN/webhooks/commerce/shopify` (or `tiendanube`, `woocommerce`) | Order created |
+| Envia.com | `https://YOUR-DOMAIN/webhooks/carriers/envia-com` | Tracking |
+| Zernio | `https://YOUR-DOMAIN/webhooks/messaging` | Incoming messages |
+| Wompi | `https://YOUR-DOMAIN/webhooks/payments/wompi` | Transaction updated |
 
-## Variables de entorno
+## Environment variables
 
-| Variable | Para qué |
+| Variable | Purpose |
 |---|---|
-| `TRAXO_ADMIN_EMAIL` / `TRAXO_ADMIN_PASSWORD` | Cuenta que entra al panel |
-| `TRAXO_SESSION_SECRET` | Firma de sesiones (fíjala en la nube) |
-| `TRAXO_MCP_TOKEN` / `TRAXO_API_TOKEN` | Protegen `/mcp` y la API para scripts |
-| `TRAXO_STORE_NAME` / `TRAXO_STORE_URL` | Nombre y URL de tu tienda |
-| `DATABASE_URL` | Postgres. Vacío = PGlite local en `.traxo-data/pg` |
-| `SHOPIFY_*`, `TIENDANUBE_*`, `WOOCOMMERCE_*` | Tienda |
-| `ENVIA_TOKEN`, `ENVIA_ENV`, `ENVIA_WEBHOOK_SECRET` | Envia.com (cotizar, guías, tracking) |
-| `ZERNIO_API_KEY`, `ZERNIO_WEBHOOK_SECRET` | WhatsApp, Instagram, Messenger y anuncios |
-| `WOMPI_PRIVATE_KEY`, `WOMPI_ENV`, `WOMPI_EVENTS_SECRET` | Link de pago para el prepago de contraentrega |
-| `ORIGIN_*` | Dirección de origen de los envíos |
-| `ANTHROPIC_API_KEY`, `TRAXO_AGENT_MODEL` | Opcional: IA para el agente, las respuestas de clientes y el copy de campañas |
-| `TRAXO_AI`, `TRAXO_AI_PER_MIN`, `TRAXO_AI_PER_STORE_DAILY`, `TRAXO_AI_GLOBAL_DAILY` | Frenos de gasto de la IA |
-| `TRAXO_AI_USD_PER_MTOK_IN`, `TRAXO_AI_USD_PER_MTOK_OUT`, `TRAXO_USD_PER_CREDIT`, `TRAXO_USD_COP`, `TRAXO_HOUR_COP`, `TRAXO_AI_BUDGET_USD_MONTH` | Estimados del panel de Uso agéntico: precios de IA, créditos, dólar, valor de la hora y presupuesto mensual opcional |
-| `TRAXO_RATE_PER_MIN` | Peticiones por minuto y por IP |
-| `TRAXO_MEDIA_DIR` | Dónde se guardan los archivos de la biblioteca |
-| `TRAXO_AUDIT_LIVE=1` | Permite auditar URLs públicas reales |
-| `TRAXO_DEMO=1` | **Solo pruebas**: datos de ejemplo y registro abierto ([`docs/modo-demo.md`](docs/modo-demo.md)). No lo uses con datos reales |
+| `TRAXO_ADMIN_EMAIL` / `TRAXO_ADMIN_PASSWORD` | Account that signs in to the panel |
+| `TRAXO_SESSION_SECRET` | Session signing (pin it in the cloud) |
+| `TRAXO_MCP_TOKEN` / `TRAXO_API_TOKEN` | Protect `/mcp` and the API for scripts |
+| `TRAXO_STORE_NAME` / `TRAXO_STORE_URL` | Your store's name and URL |
+| `DATABASE_URL` | Postgres. Empty = local PGlite in `.traxo-data/pg` |
+| `SHOPIFY_*`, `TIENDANUBE_*`, `WOOCOMMERCE_*` | Store |
+| `ENVIA_TOKEN`, `ENVIA_ENV`, `ENVIA_WEBHOOK_SECRET` | Envia.com (quotes, labels, tracking) |
+| `ZERNIO_API_KEY`, `ZERNIO_WEBHOOK_SECRET` | WhatsApp, Instagram, Messenger and ads |
+| `WOMPI_PRIVATE_KEY`, `WOMPI_ENV`, `WOMPI_EVENTS_SECRET` | Payment link for cash-on-delivery prepayment |
+| `ORIGIN_*` | Origin address of your shipments |
+| `ANTHROPIC_API_KEY`, `TRAXO_AGENT_MODEL` | Optional: AI for the agent, customer replies and campaign copy |
+| `TRAXO_AI`, `TRAXO_AI_PER_MIN`, `TRAXO_AI_PER_STORE_DAILY`, `TRAXO_AI_GLOBAL_DAILY` | AI spend limits |
+| `TRAXO_AI_USD_PER_MTOK_IN`, `TRAXO_AI_USD_PER_MTOK_OUT`, `TRAXO_USD_PER_CREDIT`, `TRAXO_USD_COP`, `TRAXO_HOUR_COP`, `TRAXO_AI_BUDGET_USD_MONTH` | Estimates for the Agent usage panel: AI prices, credits, exchange rate, value of an hour and optional monthly budget |
+| `TRAXO_RATE_PER_MIN` | Requests per minute per IP |
+| `TRAXO_MEDIA_DIR` | Where library files are stored |
+| `TRAXO_AUDIT_LIVE=1` | Allows auditing real public URLs |
+| `TRAXO_DEMO=1` | **Testing only**: sample data and open sign-up ([`docs/modo-demo.md`](docs/modo-demo.md)). Never use with real data |
 
-Lo que falta probar contra servicios reales está en [`docs/credenciales-pendientes.md`](docs/credenciales-pendientes.md).
+What still needs testing against real services is in [`docs/credenciales-pendientes.md`](docs/credenciales-pendientes.md).
 
-## Qué funciona hoy y qué depende de tus credenciales
+## Supported markets
 
-**Funciona sin credenciales:** el pipeline de pedidos, el Constructor de tienda (genera el tema de Shopify), el panel de Uso agéntico, el selector de transportadora, la confirmación de contraentrega con prepago, el seguimiento y las novedades, las aprobaciones, el agente del panel, la bandeja de mensajes, la biblioteca de creativos, el asistente de campañas, audiencias, las auditorías (con protección contra SSRF), los reportes, el plugin y el servidor MCP.
+| Market | Status | What it includes |
+|---|---|---|
+| 🇨🇴 **Colombia** | Supported (first market) | COP, DANE city codes, +57 phones, Ley 1581 consent, cash on delivery, Envia.com carriers (Coordinadora, Servientrega, Interrapidísimo, TCC…), Wompi |
+| 🌎 **More countries** | [Planned](docs/ROADMAP.md) | Mexico is the natural next one (same language; Envia.com already ships there) |
 
-**El código existe pero falta probarlo contra el servicio real** (necesita tus credenciales): Shopify, Tiendanube, WooCommerce, Envia.com (sandbox), Zernio y Wompi.
+The market-specific pieces (currency, phone format, address model, privacy law, carriers, payments) are being isolated behind a `Market` interface so adding a country means adding a package, not rewriting the agent. The plan and how to contribute a market are in [`docs/mercados.md`](docs/mercados.md) and [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
-**Todavía no tienen adapter real:** 99envios (sin documentación pública) y Coordinadora, Servientrega, Interrapidísimo y Envía directas (requieren contrato). Corren simuladas; detalle en [`docs/integraciones/`](docs/integraciones/).
+## What works today and what needs your credentials
 
-**Se hace desde Claude:** crear campañas reales en Meta (en pausa y verificadas), subir audiencias y generar creativos con Higgsfield (cuesta créditos: se cotiza y se confirma antes).
+**Works without credentials:** the order pipeline, the Builder (generates the Shopify theme), the Agent usage panel, carrier selection, cash-on-delivery confirmation with prepayment, tracking and incidents, approvals, the panel agent, the messages inbox, the creative library, the campaign assistant, audiences, audits (with SSRF protection), reports, the plugin and the MCP server.
 
-## Arquitectura
+**Code exists but is untested against the real service** (needs your credentials): Shopify, Tiendanube, WooCommerce, Envia.com (sandbox), Zernio and Wompi.
 
-![Arquitectura de Traxo](docs/arquitectura.png)
+**No real adapter yet:** 99envios (no public docs) and direct Coordinadora, Servientrega, Interrapidísimo and Envía (they require a contract). They run simulated; details in [`docs/integraciones/`](docs/integraciones/).
 
-Versión vectorial: [`docs/arquitectura.svg`](docs/arquitectura.svg).
+**Done from Claude:** creating real Meta campaigns (paused and verified), uploading audiences and generating creatives with Higgsfield (costs credits: quoted and confirmed first).
 
-## Estructura
+## Architecture
+
+![Traxo architecture](docs/arquitectura.png)
+
+Vector version: [`docs/arquitectura.svg`](docs/arquitectura.svg).
+
+## Structure
 
 ```
-.claude-plugin/ skills/ agents/             Plugin de Claude Code (incluye el asistente /traxo:instalar)
-scripts/                                    setup, doctor y railway-vars (sin imprimir secretos)
-apps/worker        API, sesiones, webhooks, agente del panel, tracking, /mcp  (Hono)
-apps/mcp-server    Herramientas MCP
+.claude-plugin/ skills/ agents/             Claude Code plugin (includes the /traxo:instalar wizard)
+scripts/                                    setup, doctor and railway-vars (never print secrets)
+apps/worker        API, sessions, webhooks, panel agent, tracking, /mcp  (Hono)
+apps/mcp-server    MCP tools
 apps/dashboard     Panel (Vite + React)
 packages/          core · db (Prisma 7) · commerce · carriers · messaging · payments · audit · storefront · geo-co
-docs/              integraciones, credenciales pendientes, arquitectura
+docs/              integrations, pending credentials, architecture, markets, roadmap
 ```
 
-Desarrollo: `pnpm test` · `pnpm lint` · `pnpm typecheck` · `pnpm dev` (API) y `pnpm dev:ui` (panel con recarga).
+Development: `pnpm test` · `pnpm lint` · `pnpm typecheck` · `pnpm dev` (API) and `pnpm dev:ui` (panel with reload).
 
-## Contribuir, seguridad y licencia
+## Contributing, security and license
 
-- [`CONTRIBUTING.md`](CONTRIBUTING.md): entorno de desarrollo y reglas. [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
-- Vulnerabilidades: [`SECURITY.md`](SECURITY.md) (en privado, no en un issue).
-- Cambios: [`CHANGELOG.md`](CHANGELOG.md). Modo demo y material de ejemplo: [`docs/modo-demo.md`](docs/modo-demo.md).
-- Licencia [MIT](LICENSE).
-
----
-
-## English
-
-Traxo is an open-source agent that runs your Colombian e-commerce from inside Claude: it quotes carriers and picks the best one (explaining why), confirms risky cash-on-delivery orders over WhatsApp, creates the label, writes it back to your store, tracks the parcel and handles delivery incidents. It also audits your store, builds ads from your own UGC videos and product photos, tells you which ad brought which sale and looks after your customers with their consent.
-
-**Install with the guided wizard** (needs Claude Code, Node 24 and git):
-
-```bash
-claude plugin marketplace add Hainrixz/traxo-agente
-claude plugin install traxo@traxo
-claude        # then type: /traxo:instalar
-```
-
-The wizard asks where to run it (your computer or Railway), which store platform you use, your carriers, WhatsApp/Instagram/Messenger (Zernio), Wompi and an optional Claude key. It writes your `.env`, generates the internal secrets, tells you where to get each third-party key (you paste them into `.env` yourself: secrets never go through the chat), runs `pnpm doctor`, starts or deploys it, and gives you the webhook URLs. Manual install is in the Spanish section above.
-
-**Panel:** Home, Agent (chat with your business data), Orders, Shipments, Approvals, Messages (WhatsApp, Instagram and Messenger in one inbox), Customers, Marketing (campaigns, creatives, UGC library), Store & SEO, Reports, **Builder** (generates a Shopify theme from your catalog; never publishes it) and **Agent usage** (what the agent did, what it cost, hours saved: estimates). Settings, limits and connections live in the profile menu (bottom left).
-
-**Cloud:** Railway + Postgres (`railway.json`); `node scripts/railway-vars.mjs` pushes your `.env` without printing values. **AI:** optional `ANTHROPIC_API_KEY`, server-side only, with spend limits. **Security:** security headers, per-IP rate limits, 1 MB body cap, `/mcp` closed without a token, signed webhooks, per-store isolation.
-
-**Status:** works without credentials: the order pipeline, carrier selection, COD confirmation, tracking, approvals, the panel agent, the inbox, the creative library, campaigns, audits and reports. Code exists but is untested against live services: Shopify, Tiendanube, WooCommerce, Envia.com, Zernio, Wompi. No real adapter yet: 99envios and direct Coordinadora / Servientrega / Interrapidísimo / Envía (simulators).
-
-**Contributing:** see [CONTRIBUTING.md](CONTRIBUTING.md) · **Security:** [SECURITY.md](SECURITY.md) · MIT licensed.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md): dev environment and rules. [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
+- Vulnerabilities: [`SECURITY.md`](SECURITY.md) (privately, not in a public issue).
+- Changes: [`CHANGELOG.md`](CHANGELOG.md). Demo mode and sample data: [`docs/modo-demo.md`](docs/modo-demo.md).
+- Where it's going: [`docs/ROADMAP.md`](docs/ROADMAP.md). Adding a country: [`docs/mercados.md`](docs/mercados.md).
+- [MIT](LICENSE) license.

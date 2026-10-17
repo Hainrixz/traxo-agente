@@ -7,10 +7,10 @@
     {
       "name": "traxo",
       "source": "./",
-      "description": "Agente open source que opera tu e-commerce en Colombia: envíos, tracking, marketing y clientes."
+      "description": "Open-source agent that runs your e-commerce from Claude (shipping, tracking, marketing, customers). Colombia first. / Agente open source que opera tu e-commerce. Colombia primero."
     }
   ],
   "metadata": {
-    "description": "Traxo: agente open source que opera tu e-commerce en Colombia (envíos, tracking, marketing y clientes) dentro de Claude."
+    "description": "Traxo: open-source agent that runs your e-commerce from inside Claude. Colombia first, built to go global."
   }
 }

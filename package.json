@@ -2,7 +2,7 @@
   "name": "traxo",
   "version": "0.1.0",
   "private": true,
-  "description": "Traxo: agente open source que opera tu e-commerce en Colombia (envíos, tracking, marketing y clientes) dentro de Claude.",
+  "description": "Traxo: open-source agent that runs your e-commerce from Claude (shipping, tracking, marketing, customers). Colombia first, built to go global.",
   "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@12.14.0",
@@ -41,15 +41,18 @@
     "url": "https://github.com/Hainrixz/traxo-agente/issues"
   },
   "keywords": [
-    "ecommerce",
+    "agent",
+    "claude-code",
     "colombia",
+    "contraentrega",
+    "ecommerce",
+    "latam",
     "logistica",
+    "logistics",
+    "mcp",
+    "shipping",
     "shopify",
     "tiendanube",
-    "contraentrega",
-    "whatsapp",
-    "claude-code",
-    "mcp",
-    "agent"
+    "whatsapp"
   ]
 }

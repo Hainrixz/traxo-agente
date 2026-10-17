@@ -1,19 +1,24 @@
 {
   "name": "traxo",
   "version": "0.1.0",
-  "description": "Traxo: asistente logístico con IA para tiendas en Colombia. Cotiza y elige transportadora, genera guías, hace tracking, atiende novedades y prepara marketing y seguimiento de clientes. Open source.",
+  "description": "Traxo: open-source agent that runs your e-commerce from Claude: quotes carriers and picks the best, creates labels, tracks parcels, handles incidents and prepares marketing and customer follow-up. Colombia first (Envia.com, WhatsApp via Zernio). / Agente open source que opera tu e-commerce desde Claude. Colombia primero.",
   "author": {
     "name": "Traxo contributors",
     "url": "https://github.com/Hainrixz/traxo-agente"
   },
   "license": "MIT",
   "keywords": [
-    "ecommerce",
+    "agent",
     "colombia",
+    "contraentrega",
+    "ecommerce",
+    "latam",
     "logistica",
+    "logistics",
+    "mcp",
+    "shipping",
     "shopify",
     "tiendanube",
-    "contraentrega",
     "whatsapp"
   ],
   "homepage": "https://github.com/Hainrixz/traxo-agente",

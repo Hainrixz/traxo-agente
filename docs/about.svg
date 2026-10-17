@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 560" width="1280" height="560" role="img" aria-labelledby="t d">
-  <title id="t">Qué hace Traxo</title>
-  <desc id="d">Seis capacidades: logística, tracking, marketing con tus propios creativos, mensajes en WhatsApp, Instagram y Messenger, uso agéntico y constructor de tienda.</desc>
+  <title id="t">What Traxo does</title>
+  <desc id="d">Six capabilities: logistics, tracking, marketing with your own creatives, WhatsApp, Instagram and Messenger messaging, agent usage and a store builder.</desc>
   <style>
     text { font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
     .rise { opacity: 0; animation: rise .8s cubic-bezier(.23,1,.32,1) forwards; }
@@ -15,34 +15,34 @@
   </style>
   <rect width="1280" height="560" rx="28" fill="#111"/>
   <rect x=".5" y=".5" width="1279" height="559" rx="28" fill="none" stroke="#2c2c2c"/>
-  <text x="64" y="84" font-size="15" font-weight="700" fill="#FFC800" letter-spacing="2">QUÉ HACE TRAXO</text>
-  <text x="64" y="132" font-size="38" font-weight="800" fill="#F5F2EA" letter-spacing="-1">Todo el ciclo de tu tienda, en un solo lugar.</text>
+  <text x="64" y="84" font-size="15" font-weight="700" fill="#FFC800" letter-spacing="2">WHAT TRAXO DOES</text>
+  <text x="64" y="132" font-size="38" font-weight="800" fill="#F5F2EA" letter-spacing="-1">Your whole store cycle, in one place.</text>
 
   <g transform="translate(64 168)">
     <g transform="translate(0 0)"><g class="rise c1"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
       <g transform="translate(26 26)"><g class="ico p1"><rect width="44" height="44" rx="12" fill="#FFC800"/><path d="M12 24h20M26 17l7 7-7 7" stroke="#111" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g>
-      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Logística</text>
-      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Cotiza, elige transportadora y genera la guía.</text></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Logistics</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Quotes, picks the carrier, creates the label.</text></g></g>
     <g transform="translate(392 0)"><g class="rise c2"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
       <g transform="translate(26 26)"><g class="ico p2"><rect width="44" height="44" rx="12" fill="#FFC800"/><circle cx="22" cy="22" r="8" fill="none" stroke="#111" stroke-width="3"/><path d="M22 6v6M22 32v6M6 22h6M32 22h6" stroke="#111" stroke-width="3" stroke-linecap="round"/></g></g>
-      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Tracking y novedades</text>
-      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Vigila cada guía y resuelve lo que falla.</text></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Tracking and incidents</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Watches every parcel and fixes what fails.</text></g></g>
     <g transform="translate(784 0)"><g class="rise c3"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
       <g transform="translate(26 26)"><g class="ico p3"><rect width="44" height="44" rx="12" fill="#FFC800"/><path d="M11 29V15l22-5v24z" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/></g></g>
-      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Marketing con lo tuyo</text>
-      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Anuncios con tus videos UGC. Nacen en pausa.</text></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Marketing with your assets</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Ads from your UGC videos. Born paused.</text></g></g>
     <g transform="translate(0 174)"><g class="rise c4"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
       <g transform="translate(26 26)"><g class="ico p4"><rect width="44" height="44" rx="12" fill="#FFC800"/><path d="M11 12h22v16H20l-7 5v-5h-2z" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/></g></g>
-      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Mensajes</text>
-      <text x="26" y="130" font-size="15.5" fill="#A8A39A">WhatsApp, Instagram y Messenger juntos.</text></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Messaging</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">WhatsApp, Instagram and Messenger together.</text></g></g>
     <g transform="translate(392 174)"><g class="rise c5"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
       <g transform="translate(26 26)"><g class="ico p5"><rect width="44" height="44" rx="12" fill="#FFC800"/><path d="M24 8L13 25h8l-2 11 11-17h-8z" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/></g></g>
-      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Uso agéntico</text>
-      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Cuánto trabajó el agente y cuánto costó.</text></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Agent usage</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">What the agent did and what it cost.</text></g></g>
     <g transform="translate(784 174)"><g class="rise c6"><rect width="368" height="150" rx="20" fill="#1a1a1a" stroke="#2f2f2f"/>
       <g transform="translate(26 26)"><g class="ico p6"><rect width="44" height="44" rx="12" fill="#FFC800"/><path d="M10 12h24v20H10zM10 19h24M18 19v13" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/></g></g>
-      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Constructor de tienda</text>
-      <text x="26" y="130" font-size="15.5" fill="#A8A39A">Un tema de Shopify con tu catálogo real.</text></g></g>
+      <text x="26" y="104" font-size="22" font-weight="800" fill="#F5F2EA">Store builder</text>
+      <text x="26" y="130" font-size="15.5" fill="#A8A39A">A Shopify theme from your real catalog.</text></g></g>
   </g>
   <line class="flow" x1="64" y1="524" x2="1216" y2="524" stroke="#FFC800" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
 </svg>
