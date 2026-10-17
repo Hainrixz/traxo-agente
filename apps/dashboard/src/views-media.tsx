@@ -51,17 +51,62 @@ export function MediaThumb({ a, big = false }: { a: MediaAsset; big?: boolean })
   );
 }
 
+type HfStatus = {
+  simulated: boolean;
+  connected: boolean;
+  imported: number;
+  available: number | null;
+};
+
+/** Productos distintos de la biblioteca (los creativos sin producto van aparte). */
+const productsOf = (all: MediaAsset[]): string[] =>
+  [...new Set(all.map((a) => a.product).filter((p): p is string => Boolean(p)))].sort();
+
+function ProductSelect({
+  value,
+  onChange,
+  products,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  products: string[];
+}) {
+  return (
+    <select
+      className="input sm"
+      aria-label="Filtrar por producto"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
+      <option value="todos">Todos los productos</option>
+      {products.map((p) => (
+        <option key={p} value={p}>
+          {p}
+        </option>
+      ))}
+      <option value="_sin">Sin producto</option>
+    </select>
+  );
+}
+
 export function Biblioteca({ ctx, onUse }: { ctx: Ctx; onUse: (a: MediaAsset) => void }) {
   const res = useResource<MediaAsset[]>("/api/media", ctx.tick);
   const all = res.data ?? [];
   const [role, setRole] = useState<MediaAsset["role"] | "todos">("todos");
+  const [prod, setProd] = useState("todos");
+  const hf = useResource<HfStatus>("/api/media/higgsfield", ctx.tick).data;
   const [uploadRole, setUploadRole] = useState<MediaAsset["role"]>("ugc");
   const [busy, setBusy] = useState<string>();
   const [over, setOver] = useState(false);
   const [open, setOpen] = useState<MediaAsset>();
   const [gen, setGen] = useState(false);
   const input = useRef<HTMLInputElement>(null);
-  const list = all.filter((a) => role === "todos" || a.role === role);
+  const products = productsOf(all);
+  const list = all.filter(
+    (a) =>
+      (role === "todos" || a.role === role) &&
+      (prod === "todos" || (prod === "_sin" ? !a.product : a.product === prod)),
+  );
   const sample = all.some((a) => a.sample);
 
   const upload = async (files: FileList | File[]) => {
@@ -86,8 +131,16 @@ export function Biblioteca({ ctx, onUse }: { ctx: Ctx; onUse: (a: MediaAsset) =>
     if (e.dataTransfer.files.length) void upload(e.dataTransfer.files);
   };
   const importHf = async () => {
-    const r = await post<{ ok: boolean; message?: string }>("/api/media/import-higgsfield");
-    ctx.toast(r.ok ? "Traje ejemplos desde Higgsfield (simulado)" : (r.message ?? "No se pudo"));
+    const r = await post<{ ok: boolean; message?: string; imported?: number; total?: number }>(
+      "/api/media/import-higgsfield",
+    );
+    ctx.toast(
+      r.ok
+        ? r.imported
+          ? `Traje ${r.imported} creativos de Higgsfield (conexión simulada)`
+          : `Ya tienes los ${r.total} creativos de Higgsfield (conexión simulada)`
+        : (r.message ?? "No se pudo"),
+    );
     res.reload();
   };
   const remove = async (a: MediaAsset) => {
@@ -154,8 +207,15 @@ export function Biblioteca({ ctx, onUse }: { ctx: Ctx; onUse: (a: MediaAsset) =>
               <Icon name="plug" size={18} />
             </span>
             <span>
-              <strong>Traer de Higgsfield</strong>
-              <span className="caption">Tus videos e imágenes ya generados</span>
+              <strong>
+                Traer de Higgsfield{" "}
+                {hf?.simulated && <span className="badge tone-attention">Conexión simulada</span>}
+              </strong>
+              <span className="caption">
+                {hf?.simulated
+                  ? `Demo: no se llama a Higgsfield ni se gastan créditos. ${hf.imported} de ${hf.available ?? 0} importados.`
+                  : "Tus videos e imágenes ya generados (se conecta desde Claude)"}
+              </span>
             </span>
           </button>
           <button type="button" className="agent-card" onClick={() => setGen(true)}>
@@ -193,7 +253,12 @@ export function Biblioteca({ ctx, onUse }: { ctx: Ctx; onUse: (a: MediaAsset) =>
             </button>
           ))}
         </div>
-        {sample && <SampleTag />}
+        <div className="row" style={{ gap: 8 }}>
+          {products.length > 0 && (
+            <ProductSelect value={prod} onChange={setProd} products={products} />
+          )}
+          {sample && <SampleTag />}
+        </div>
       </div>
 
       {list.length === 0 ? (
@@ -329,6 +394,8 @@ export function MediaPicker({
   const all = (useResource<MediaAsset[]>("/api/media", tick).data ?? []).filter(
     (a) => a.role !== "referencia",
   );
+  const [role, setRole] = useState<MediaAsset["role"] | "todos">("todos");
+  const [prod, setProd] = useState("todos");
   if (all.length === 0)
     return (
       <p className="caption" style={{ margin: 0 }}>
@@ -338,28 +405,60 @@ export function MediaPicker({
     );
   const toggle = (id: string) =>
     onChange(picked.includes(id) ? picked.filter((x) => x !== id) : [...picked, id]);
+  const shown = all.filter(
+    (a) =>
+      (role === "todos" || a.role === role) &&
+      (prod === "todos" || (prod === "_sin" ? !a.product : a.product === prod)),
+  );
+  const products = productsOf(all);
   return (
-    <div className="pick-grid" role="group" aria-label="Creativos de tu biblioteca">
-      {all.map((a) => (
-        <button
-          key={a.id}
-          type="button"
-          className="pick"
-          aria-pressed={picked.includes(a.id)}
-          onClick={() => toggle(a.id)}
-          title={a.title}
-        >
-          <span className="media-frame">
-            <MediaThumb a={a} />
-            {picked.includes(a.id) && (
-              <span className="pick-ok">
-                <Icon name="check" size={14} />
+    <div className="stack tight">
+      <div className="row between" style={{ gap: 8, flexWrap: "wrap" }}>
+        <div className="chips" role="tablist" aria-label="Tipo de creativo">
+          {ROLES.filter(([k]) => k !== "referencia").map(([k, label]) => (
+            <button
+              key={k}
+              type="button"
+              role="tab"
+              className="chip"
+              aria-selected={role === k}
+              onClick={() => setRole(k)}
+            >
+              {label}
+              <span className="n">
+                {k === "todos" ? all.length : all.filter((a) => a.role === k).length}
               </span>
-            )}
-          </span>
-          <span className="caption break">{a.title}</span>
-        </button>
-      ))}
+            </button>
+          ))}
+        </div>
+        {products.length > 0 && (
+          <ProductSelect value={prod} onChange={setProd} products={products} />
+        )}
+      </div>
+      {shown.length === 0 && <p className="caption">No hay creativos con ese filtro.</p>}
+      <div className="pick-grid" role="group" aria-label="Creativos de tu biblioteca">
+        {shown.map((a) => (
+          <button
+            key={a.id}
+            type="button"
+            className="pick"
+            aria-pressed={picked.includes(a.id)}
+            onClick={() => toggle(a.id)}
+            title={a.title}
+          >
+            <span className="media-frame">
+              <MediaThumb a={a} />
+              {picked.includes(a.id) && (
+                <span className="pick-ok">
+                  <Icon name="check" size={14} />
+                </span>
+              )}
+            </span>
+            <span className="caption break">{a.title}</span>
+            {a.product && <span className="caption pick-prod break">{a.product}</span>}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

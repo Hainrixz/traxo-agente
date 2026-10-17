@@ -3747,3 +3747,10 @@ body.touring .sheet .body {
 .swatches {
   margin-bottom: 4px;
 }
+.pick-prod {
+  opacity: 0.8;
+  font-size: 12px;
+}
+.chip-tabs-wrap {
+  min-width: 0;
+}
