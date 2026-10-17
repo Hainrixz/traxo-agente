@@ -22,7 +22,8 @@
     "doctor": "node scripts/doctor.mjs",
     "railway:vars": "node scripts/railway-vars.mjs",
     "serve": "pnpm build && pnpm start",
-    "configurar": "node scripts/setup.mjs"
+    "configurar": "node scripts/setup.mjs",
+    "demo:media": "node scripts/cargar-demo-media.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

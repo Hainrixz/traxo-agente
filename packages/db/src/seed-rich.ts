@@ -159,7 +159,7 @@ export type RichSeedResult = {
 };
 
 /** Sube cuando cambian los datos de ejemplo: las bases que ya existen (p. ej. en Railway) se vuelven a sembrar solas. */
-export const RICH_VERSION = 5;
+export const RICH_VERSION = 6;
 
 /**
  * Cuenta admin de la demo: 90 días de operación de "Café de Origen". TODO es de ejemplo y la interfaz lo dice.
@@ -185,7 +185,7 @@ export async function seedRich(
   await p.approval.deleteMany({ where: { storeId } });
   await p.campaignDraft.deleteMany({ where: { storeId } });
   await p.audience.deleteMany({ where: { storeId } });
-  await p.mediaAsset.deleteMany({ where: { storeId } });
+  await p.mediaAsset.deleteMany({ where: { storeId, sample: true } });
   await p.usageEvent.deleteMany({ where: { storeId } });
   await p.storeAudit.deleteMany({ where: { storeId } });
   await p.order.deleteMany({ where: { storeId } });
@@ -1236,73 +1236,7 @@ export async function seedRich(
           : now.getTime() - last > 60 * DAY;
     }).length;
   // Biblioteca de creativos de ejemplo: ilustraciones, no archivos reales (los de verdad se suben o se traen de Higgsfield).
-  const lib: Array<[string, string, string, string, string, number | null]> = [
-    [
-      "video",
-      "UGC · Valentina prueba el Kit degustación",
-      "ugc",
-      "higgsfield",
-      "Kit degustación x3",
-      28,
-    ],
-    ["video", "UGC · Unboxing del pedido (15 s)", "ugc", "subido", "Kit degustación x3", 15],
-    [
-      "video",
-      "UGC · Cómo preparo mi café en casa",
-      "ugc",
-      "higgsfield",
-      "Café Huila 340 g (grano)",
-      22,
-    ],
-    [
-      "video",
-      "Reel · del grano a la taza",
-      "lifestyle",
-      "generado",
-      "Café Nariño 340 g (molido)",
-      12,
-    ],
-    [
-      "image",
-      "Foto de producto · Café Huila",
-      "producto",
-      "subido",
-      "Café Huila 340 g (grano)",
-      null,
-    ],
-    [
-      "image",
-      "Foto de producto · Kit degustación",
-      "producto",
-      "generado",
-      "Kit degustación x3",
-      null,
-    ],
-    [
-      "image",
-      "Lifestyle · mañana en la cocina",
-      "lifestyle",
-      "subido",
-      "Café Nariño 340 g (molido)",
-      null,
-    ],
-    ["image", "Referencia · anuncio que rinde en tu categoría", "referencia", "subido", "", null],
-  ];
-  await db.prisma.mediaAsset.createMany({
-    data: lib.map(([kind, title, role, source, product, durationS], n) => ({
-      id: `media_rich_${n + 1}`,
-      storeId,
-      kind,
-      title,
-      source,
-      role,
-      product: product || null,
-      seed: `lib-${n}`,
-      durationS,
-      sample: true,
-      createdAt: at((n + 1) * 2 * DAY),
-    })),
-  });
+  // La biblioteca de creativos no se siembra con ilustraciones: se llena con material real (scripts/cargar-demo-media.mjs).
   await db.prisma.audience.createMany({
     data: [
       {

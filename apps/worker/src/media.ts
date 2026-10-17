@@ -11,12 +11,13 @@ import { extname, join } from "node:path";
 import { Readable } from "node:stream";
 import type { Context, Hono } from "hono";
 import { storeOf } from "./auth.ts";
+import { demoCatalog, loadDemoMedia } from "./demo-media.ts";
 import { isDemo } from "./mode.ts";
 import type { Runtime } from "./runtime.ts";
 import { reportUsage } from "./usage.ts";
 
 const MAX_BYTES = 60 * 1024 * 1024;
-const TYPES: Record<string, { kind: "image" | "video"; mime: string }> = {
+export const TYPES: Record<string, { kind: "image" | "video"; mime: string }> = {
   ".jpg": { kind: "image", mime: "image/jpeg" },
   ".jpeg": { kind: "image", mime: "image/jpeg" },
   ".png": { kind: "image", mime: "image/png" },
@@ -26,23 +27,6 @@ const TYPES: Record<string, { kind: "image" | "video"; mime: string }> = {
   ".webm": { kind: "video", mime: "video/webm" },
 };
 const ROLES = new Set(["ugc", "producto", "lifestyle", "referencia"]);
-
-/** Ejemplos que "importa" la demo (no hay conexión real con Higgsfield en la demo). */
-const HIGGSFIELD_SAMPLES = [
-  { kind: "video", title: "UGC · Reseña en la cocina (Higgsfield)", role: "ugc", durationS: 24 },
-  {
-    kind: "image",
-    title: "Foto de producto · fondo limpio (Higgsfield)",
-    role: "producto",
-    durationS: null,
-  },
-  {
-    kind: "video",
-    title: "Reel · del grano a la taza (Higgsfield)",
-    role: "lifestyle",
-    durationS: 12,
-  },
-] as const;
 
 export const mediaDir = (): string => {
   const d = process.env.TRAXO_MEDIA_DIR ?? ".traxo-data/media";
@@ -85,6 +69,21 @@ export function registerMediaApi(app: Hono, rt: Runtime): void {
     const role = ROLES.has(c.req.header("x-role") ?? "")
       ? (c.req.header("x-role") as string)
       : "ugc";
+    // Solo en modo demo: título y origen vienen del catálogo del material de ejemplo, y repetir la carga no duplica.
+    const demoTitle =
+      demo() && c.req.header("x-title")
+        ? decodeURIComponent(c.req.header("x-title") as string).slice(0, 80)
+        : null;
+    const demoSource =
+      demo() && ["higgsfield", "subido", "generado"].includes(c.req.header("x-source") ?? "")
+        ? (c.req.header("x-source") as string)
+        : "subido";
+    if (demoTitle) {
+      const dup = await db.prisma.mediaAsset.findFirst({
+        where: { storeId: sid(c), title: demoTitle },
+      });
+      if (dup) return c.json({ ok: true, duplicate: true, asset: view(dup) });
+    }
     const buf = Buffer.from(await c.req.arrayBuffer());
     if (buf.length === 0) return c.json({ ok: false, message: "El archivo está vacío." }, 400);
     if (buf.length > MAX_BYTES)
@@ -97,8 +96,8 @@ export function registerMediaApi(app: Hono, rt: Runtime): void {
         id,
         storeId: sid(c),
         kind: type.kind,
-        title: name.replace(/\.[^.]+$/, "").slice(0, 80),
-        source: "subido",
+        title: demoTitle ?? name.replace(/\.[^.]+$/, "").slice(0, 80),
+        source: demoSource,
         role,
         product: c.req.header("x-product")
           ? decodeURIComponent(c.req.header("x-product") as string)
@@ -151,7 +150,20 @@ export function registerMediaApi(app: Hono, rt: Runtime): void {
     return c.json({ ok: true, asset: view(row) });
   });
 
-  // Importa de Higgsfield. En la demo agrega ejemplos; con una cuenta real lo hace Claude con el conector (skill /traxo:campana).
+  // Estado de la conexión con Higgsfield. En la demo es SIMULADA: no se llama a Higgsfield ni se gastan créditos.
+  app.get("/api/media/higgsfield", async (c) => {
+    const have = await db.prisma.mediaAsset.count({
+      where: { storeId: sid(c), source: "higgsfield" },
+    });
+    return c.json({
+      simulated: demo(),
+      connected: demo(),
+      imported: have,
+      available: demo() ? demoCatalog().filter((i) => i.fuente === "higgsfield").length : null,
+    });
+  });
+
+  // Trae a la biblioteca los creativos de Higgsfield. En la demo carga los del material de ejemplo (simulado); con una cuenta real lo hace Claude con el conector.
   app.post("/api/media/import-higgsfield", async (c) => {
     if (!demo())
       return c.json({
@@ -159,30 +171,17 @@ export function registerMediaApi(app: Hono, rt: Runtime): void {
         message:
           "Pídele a Claude: «trae mis videos UGC de Higgsfield» (skill /traxo:campana). Así se conecta con tu cuenta.",
       });
+    const r = await loadDemoMedia(db, sid(c), { only: "higgsfield" });
     const have = await db.prisma.mediaAsset.count({
       where: { storeId: sid(c), source: "higgsfield" },
     });
-    const next = HIGGSFIELD_SAMPLES.slice(have % 3)
-      .concat(HIGGSFIELD_SAMPLES.slice(0, have % 3))
-      .slice(0, 2);
-    const rows = [];
-    for (const [i, s] of next.entries())
-      rows.push(
-        await db.prisma.mediaAsset.create({
-          data: {
-            id: `media_${randomUUID().slice(0, 12)}`,
-            storeId: sid(c),
-            kind: s.kind,
-            title: s.title,
-            source: "higgsfield",
-            role: s.role,
-            seed: `hf-${have + i}`,
-            durationS: s.durationS,
-            sample: true,
-          },
-        }),
-      );
-    return c.json({ ok: true, assets: rows.map(view) });
+    return c.json({
+      ok: true,
+      simulated: true,
+      imported: r.imported,
+      total: have,
+      missing: r.missing,
+    });
   });
 
   app.delete("/api/media/:id", async (c) => {
