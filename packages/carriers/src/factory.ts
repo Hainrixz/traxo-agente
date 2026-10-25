@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { EnviaComProvider } from "./envia.ts";
 import { type MockCarrierProvider, mockProviders } from "./mock.ts";
 import type { CarrierProvider } from "./types.ts";

@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { type Customer, newId, type Order, type Product } from "@traxo/core";
 import { findCity, normalizePhone, normalizeStreet } from "@traxo/geo-co";
 import { header, hmac, safeEqual } from "./hmac.ts";

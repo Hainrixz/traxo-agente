@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { randomBytes } from "node:crypto";
 // Asistente de configuración de Traxo (no interactivo: lo maneja /traxo:instalar o tú con --answers).
 // Crea el .env con lo que NO es secreto ya puesto, genera los secretos propios (sesión, token de MCP, contraseña de admin)

@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 /** Municipios principales con su código DANE de 5 dígitos. Lista parcial: se amplía con el DIVIPOLA completo. */
 export type City = { name: string; dane: string; department: string };
 

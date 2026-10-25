@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 /**
  * Claude dentro de Traxo, con la llave siempre en el servidor (ANTHROPIC_API_KEY) y con freno de gasto:
  *  - por tienda: pocas por minuto y un tope diario,

@@ -2,6 +2,7 @@
 name: conectar
 description: Guía para conectar la tienda (Shopify, Tiendanube, WooCommerce), la plataforma de envíos (Envia.com, 99envios) y WhatsApp (Zernio) sin pegar llaves en el chat. Úsala si dicen "conecta mi Shopify", "no ve mi tienda", "me da error" o "dónde pongo la API key".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Conectar la tienda y los envíos
 

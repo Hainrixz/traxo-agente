@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { sampleAudit } from "@traxo/audit";
 import { BASE_DAYS, BASE_FREIGHT, CARRIER_PROFILES, weightFactor, zoneFor } from "@traxo/carriers";
 import { DEMO_PRODUCTS, DEMO_STORE, rng } from "@traxo/commerce";

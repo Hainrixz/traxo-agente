@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { crc32, deflateRawSync } from "node:zlib";
 
 /** Zip mínimo (método deflate) sin dependencias: lo que Shopify acepta en «Subir archivo zip». */

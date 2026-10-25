@@ -2,6 +2,7 @@
 name: tienda
 description: Audita la tienda (SEO, visibilidad en IA, diseño y conversión) y dice qué arreglar primero, con el puntaje sobre los checks que sí se pudieron medir. Úsala si dicen "audita mi tienda", "cómo está mi SEO", "por qué no vendo", "revisa mi página" o "qué le falta a mi tienda".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Auditoría de tienda (SEO y diseño)
 

@@ -270,3 +270,10 @@ Development: `pnpm test` · `pnpm lint` · `pnpm typecheck` · `pnpm dev` (API) 
 - Changes: [`CHANGELOG.md`](CHANGELOG.md). Demo mode and sample data: [`docs/modo-demo.md`](docs/modo-demo.md).
 - Where it's going: [`docs/ROADMAP.md`](docs/ROADMAP.md). Adding a country: [`docs/mercados.md`](docs/mercados.md).
 - [MIT](LICENSE) license.
+
+<!-- marca-agua:inicio -->
+
+---
+
+<sub>Hecho por **Enrique Rocha (@soyenriquerocha)** · [tododeia.com](https://www.tododeia.com)⁠​‌‌​​‌​‌​‌‌‌​​‌​​​‌​‌‌​‌​‌‌​​‌‌​​‌‌​​‌‌​​​‌‌​‌‌​​‌‌​​​​‌​‌‌​​​​‌​​‌‌​‌‌‌​​‌‌​‌​‌​‌‌​​‌​​⁠</sub>
+<!-- marca-agua:fin -->

@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 /**
  * Páginas construidas de referencia (solo modo demo, cuenta de ejemplo). Es el ÚNICO lugar donde se definen:
  * para sumar otra, agrega un objeto a BUILT_PAGES y deja su captura en apps/dashboard/public/paginas/.

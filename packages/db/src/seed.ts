@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { DEMO_PRODUCTS, DEMO_STORE, demoCustomers, demoHistory } from "@traxo/commerce";
 import { StoreSettingsSchema } from "@traxo/core";
 import type { Db } from "./client.ts";

@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 export type AuditKind = "seo" | "diseno";
 export type CheckStatus = "pass" | "warn" | "fail" | "na";
 export type Impact = "alto" | "medio" | "bajo";

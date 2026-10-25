@@ -2,6 +2,7 @@
 name: campana
 description: Arma una campaña de anuncios (brief, copy, creativos y borrador en pausa) para Meta, Google o TikTok a partir de un producto real de la tienda, con costo de créditos antes de generar. Úsala si dicen "arma la campaña", "hazme los anuncios", "genera las imágenes del anuncio" o "lanza una campaña".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Campaña de anuncios (borrador y en pausa)
 

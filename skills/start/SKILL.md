@@ -2,6 +2,7 @@
 name: start
 description: Empieza con Traxo: revisa qué está conectado, explica si corre local o en la nube, importa la tienda y entrevista al dueño una sola vez. Úsala si dicen "empezar con Traxo", "configurar Traxo", "qué puede hacer Traxo" o "conectar mi tienda".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Empezar con Traxo
 

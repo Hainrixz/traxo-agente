@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { zoneFor } from "@traxo/carriers";
 import { formatCOP, type Order, type RiskResult, riskScore, type StoreSettings } from "@traxo/core";
 import { createApproval, orderFromRow, storeNameOf } from "@traxo/db";

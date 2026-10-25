@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { useState } from "react";
 import { useResource } from "./api.ts";
 import { HBars, LineChart, Spark } from "./charts.tsx";

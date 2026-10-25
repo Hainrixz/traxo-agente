@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import type { CommerceAdapter } from "@traxo/commerce";
 import { newId } from "@traxo/core";
 import { type Db, saveOrder } from "@traxo/db";

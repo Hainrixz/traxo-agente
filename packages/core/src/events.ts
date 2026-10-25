@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 /** Eventos que el agente emite. Alimentan el feed del dashboard (SSE) y la tabla agent_runs. */
 export type AgentEventKind =
   | "order.received"

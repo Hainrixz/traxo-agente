@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 /** Cómo el servidor MCP habla con el worker de Traxo. Local (en proceso) o remoto (Railway). */
 export interface TraxoClient {
   get<T = unknown>(path: string): Promise<T>;

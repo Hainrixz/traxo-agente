@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { MockMessaging } from "./mock.ts";
 import type { MessagingProvider } from "./types.ts";
 import { ZernioMessaging } from "./zernio.ts";

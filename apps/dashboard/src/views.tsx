@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { useEffect, useRef, useState } from "react";
 import { get, post, useResource } from "./api.ts";
 import { EmptyState, OrderJourney, Pipeline, QuoteBars, Sheet } from "./components.tsx";

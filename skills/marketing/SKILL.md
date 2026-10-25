@@ -2,6 +2,7 @@
 name: marketing
 description: Estrategia de marketing a partir del catálogo real y del negocio: qué productos empujar, mensajes y ángulos, con datos de ventas y márgenes. Úsala si dicen "qué anuncio hago", "qué vendo más", "plan de marketing" o "a quién le vendo".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Marketing desde los datos de la tienda
 

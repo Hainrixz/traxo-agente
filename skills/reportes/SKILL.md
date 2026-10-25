@@ -2,6 +2,7 @@
 name: reportes
 description: Reportes de ventas, de qué anuncio trajo qué venta (ROAS) y de logística por transportadora, con lo que no se puede saber marcado como N/A. Úsala si dicen "cómo voy", "qué anuncio funciona", "cuánto gasté en ads", "qué transportadora es mejor" o "dame el reporte".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Reportes
 

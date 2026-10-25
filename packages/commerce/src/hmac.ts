@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 export function hmac(secret: string, body: string, encoding: "hex" | "base64"): string {

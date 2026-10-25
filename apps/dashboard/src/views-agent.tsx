@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { Fragment, type ReactNode, useEffect, useRef, useState } from "react";
 import { get, post } from "./api.ts";
 import { AgentMark, Button, Icon, ToneBadge } from "./ui.tsx";

@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 // Carga el material de demo (demo-media/) en la Biblioteca de la cuenta admin de ejemplo, en local o en una URL de Railway.
 //   node scripts/cargar-demo-media.mjs [URL] [--dir demo-media]
 // Solo funciona con el servidor en modo demo (TRAXO_DEMO=1). Es idempotente: correrlo dos veces no duplica.

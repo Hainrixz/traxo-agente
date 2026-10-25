@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 // Revisa que Traxo esté bien instalado y configurado. Muestra ✓ / ✗ / – por cosa; nunca imprime valores de variables.
 //   node scripts/doctor.mjs            (o: pnpm doctor)      --json para máquina · --offline para no probar conexiones
 import { existsSync } from "node:fs";

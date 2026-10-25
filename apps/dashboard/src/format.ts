@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 /** Formatos del sistema: `$ 125.000`, `16 oct 2026`, `9:42 a. m.`, `+57 300 123 4567`. */
 export const cop = (n: number): string =>
   `${n < 0 ? "−" : ""}$ ${Math.round(Math.abs(n))

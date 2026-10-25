@@ -2,6 +2,7 @@
 name: instalar
 description: Asistente de instalación de Traxo. Te hace unas preguntas, deja todo configurado (local o en Railway), revisa que funcione y te lleva de la mano hasta el primer pedido real. Úsalo si dicen "instalar Traxo", "configurar Traxo", "empezar de cero", "montar Traxo en Railway" o "me falla la instalación".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Instalar Traxo (asistente)
 

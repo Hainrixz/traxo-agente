@@ -2,6 +2,7 @@
 name: pedidos
 description: Ver pedidos, cotizar el envío, confirmar contraentregas de riesgo, generar o cancelar la guía y resolver lo que el agente dejó esperando aprobación. Úsala si dicen "qué pedidos hay", "envía este pedido", "cotiza", "genera la guía", "cancela la guía" o "qué tengo pendiente".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Pedidos y guías
 

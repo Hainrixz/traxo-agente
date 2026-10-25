@@ -2,6 +2,7 @@
 name: constructor
 description: Diseña la tienda e-commerce de la persona (tema de Shopify u otra plataforma) con su catálogo real, la refina con herramientas de diseño, la sube a GitHub privado y a Shopify sin publicar. Úsala cuando pida "diseña mi tienda", "crea el tema", "constructor" o "page builder".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Constructor de tienda
 

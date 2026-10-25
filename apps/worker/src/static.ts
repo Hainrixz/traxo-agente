@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { existsSync, readFileSync } from "node:fs";
 import { relative } from "node:path";
 import { serveStatic } from "@hono/node-server/serve-static";

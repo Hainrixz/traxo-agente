@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { afterAll, describe, expect, it } from "vitest";
 import { type Db, openDb, seedRich } from "../src/index.ts";
 

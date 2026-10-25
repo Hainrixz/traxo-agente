@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { CampaignDraftInputSchema, formatCOP } from "@traxo/core";
 import { z } from "zod";

@@ -2,6 +2,7 @@
 name: clientes
 description: Seguimiento comercial de clientes por WhatsApp: segmentos (recompra, nuevos, inactivos), audiencias para anuncios, mensajes con consentimiento, baja y datos personales (Ley 1581). Úsala si dicen "escríbeles a mis clientes", "recupera ventas", "quién no ha vuelto", "borra a este cliente" o "audiencia para Meta".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Seguimiento de clientes
 

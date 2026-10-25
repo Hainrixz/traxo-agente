@@ -2,6 +2,7 @@
 name: seguimiento
 description: Tracking de guías y novedades: ver dónde va un paquete, qué hizo el agente, marcar una novedad y escribirle al cliente por WhatsApp. Úsala si dicen "dónde va el pedido", "hay novedades", "avísale al cliente" o "qué pasó con la guía".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Seguimiento y novedades
 

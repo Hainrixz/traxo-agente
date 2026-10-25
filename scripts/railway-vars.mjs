@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 // Sube a Railway las variables de tu .env (sin imprimir ningún valor). Requiere la CLI de Railway con sesión y el proyecto enlazado.
 //   node scripts/railway-vars.mjs --service traxo-app [--dry-run]
 import { spawnSync } from "node:child_process";

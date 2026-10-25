@@ -1,3 +1,6 @@
+// Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors
+// SPDX-License-Identifier: MIT
+// id: er-ff6aa75d
 import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { newId, StoreSettingsSchema } from "@traxo/core";
 import type { Db } from "./client.ts";

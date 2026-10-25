@@ -2,6 +2,7 @@
 name: envios
 description: Explica y ajusta cómo Traxo elige transportadora (costo, velocidad, confiabilidad, contraentrega) y cuánta autonomía tiene. Úsala si dicen "por qué eligió esa transportadora", "quiero lo más barato", "que las guías salgan solas" o "pon un tope".
 ---
+<!-- Portions Copyright (c) 2026 Enrique Rocha (@soyenriquerocha) - see LICENSE for original authors · tododeia.com · id er-ff6aa75d -->
 
 # Envíos y autonomía
 
