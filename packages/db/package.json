@@ -13,7 +13,7 @@
   "dependencies": {
     "@traxo/core": "workspace:*",
     "@traxo/commerce": "workspace:*",
-    "@electric-sql/pglite": "^0.5.10",
+    "@electric-sql/pglite": "^0.5.13",
     "@prisma/client": "7.10.1",
     "@prisma/adapter-pg": "7.10.1",
     "pglite-prisma-adapter": "^0.7.2",
