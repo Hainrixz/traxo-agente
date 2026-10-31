@@ -26,10 +26,10 @@
     "demo:media": "node scripts/cargar-demo-media.mjs"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.15",
-    "@types/node": "^24.0.0",
+    "@biomejs/biome": "2.6.3",
+    "@types/node": "^26.6.6",
     "tsx": "^4.23.15",
-    "typescript": "~6.0.3",
+    "typescript": "~7.0.2",
     "vitest": "^5.0.5"
   },
   "homepage": "https://github.com/Hainrixz/traxo-agente#readme",
