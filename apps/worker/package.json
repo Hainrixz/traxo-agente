@@ -19,7 +19,7 @@
     "@traxo/messaging": "workspace:*",
     "@traxo/geo-co": "workspace:*",
     "@hono/node-server": "^1.14.0",
-    "hono": "^4.13.13",
+    "hono": "^4.13.14",
     "tsx": "^4.23.15",
     "@traxo/mcp-server": "workspace:*",
     "@modelcontextprotocol/sdk": "1.32.1",
