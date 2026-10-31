@@ -296,8 +296,8 @@ importers:
   packages/db:
     dependencies:
       '@electric-sql/pglite':
-        specifier: ^0.5.10
-        version: 0.5.10
+        specifier: ^0.5.13
+        version: 0.5.13
       '@prisma/adapter-pg':
         specifier: 7.10.1
         version: 7.10.1
@@ -324,7 +324,7 @@ importers:
         version: 8.23.1
       pglite-prisma-adapter:
         specifier: ^0.7.2
-        version: 0.7.2(@electric-sql/pglite@0.5.10)(@prisma/client@7.10.1(prisma@7.10.1(@types/node@24.19.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@6.0.3))(typescript@6.0.3))
+        version: 0.7.2(@electric-sql/pglite@0.5.13)(@prisma/client@7.10.1(prisma@7.10.1(@types/node@24.19.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@6.0.3))(typescript@6.0.3))
     devDependencies:
       '@types/pg':
         specifier: ^8.11.0
@@ -430,8 +430,8 @@ packages:
   '@electric-sql/pglite@0.4.3':
     resolution: {integrity: sha512-ichuWTgtd4mOM1G4SpyGJa5trT03lWbMypDV0fUXUCXg5hiHqVAz/bZyV68NqmkLB7WcYmj1RMJVSp8HV/v/ZQ==}
 
-  '@electric-sql/pglite@0.5.10':
-    resolution: {integrity: sha512-tXc/25U3ulOkiRQuTFdwIv+JhBqtMdAF7Gvo6CfZZWtSB4+hgC4Wr2vwK5ngvvN5PJfAAEGIsfyCVy1JhCOBYw==}
+  '@electric-sql/pglite@0.5.13':
+    resolution: {integrity: sha512-4rZuxK1k07w6sSpJzjMri0B9+HuXuC7V9pxVB51pR0T9KPqXg6TD0mdaEwBA9rkcL4jdht4tGDf/wYzAiGhT7g==}
 
   '@esbuild/aix-ppc64@0.28.2':
     resolution: {integrity: sha512-XExcO+dvLKvVtNTibSTBej1NCAbaGhWn9Ww1ZPx80qsahhPFe/8jgWP0IchNe0F3HwkU7n8ejhH8bjonqht8mQ==}
@@ -1993,7 +1993,7 @@ snapshots:
 
   '@electric-sql/pglite@0.4.3': {}
 
-  '@electric-sql/pglite@0.5.10': {}
+  '@electric-sql/pglite@0.5.13': {}
 
   '@esbuild/aix-ppc64@0.28.2':
     optional: true
@@ -3038,9 +3038,9 @@ snapshots:
     optionalDependencies:
       pg-cloudflare: 1.4.1
 
-  pglite-prisma-adapter@0.7.2(@electric-sql/pglite@0.5.10)(@prisma/client@7.10.1(prisma@7.10.1(@types/node@24.19.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@6.0.3))(typescript@6.0.3)):
+  pglite-prisma-adapter@0.7.2(@electric-sql/pglite@0.5.13)(@prisma/client@7.10.1(prisma@7.10.1(@types/node@24.19.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@6.0.3))(typescript@6.0.3)):
     dependencies:
-      '@electric-sql/pglite': 0.5.10
+      '@electric-sql/pglite': 0.5.13
       '@prisma/client': 7.10.1(prisma@7.10.1(@types/node@24.19.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@6.0.3))(typescript@6.0.3)
       '@prisma/driver-adapter-utils': 7.2.0
       postgres-array: 3.0.4
